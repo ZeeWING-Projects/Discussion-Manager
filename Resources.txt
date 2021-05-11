@@ -1,0 +1,30 @@
+# Web-Engineering-2021-Project-ProjectDiscussionManager
+
+Following are the list of resources which we have used to learn abour REACT, NdoeJs and Express Applications.
+
+Resources:
+
+	1.Creating simple node js express application (This will be our API ) : https://www.sitepoint.com/create-new-express-js-apps-with-express-generator/
+	2.How To Connect React JS With Node JS | Node JS Tutorial For Beginners | What Is Node JS | : https://www.youtube.com/watch?v=fnpmR6Q5lEc
+	3.React Getting Started : https://www.w3schools.com/react/react_getstarted.asp
+Command:
+	
+	For creating REACT Application
+		->npm install -g create-react-app
+		->npx create-react-app myfirstreact
+		->cd myfirstreact
+		->npm start
+
+	For creating Node js express Application
+		->npm install express-generator -g
+		->express myapp
+		->cd myapp
+		->npm install
+		->npm start
+		->Then browse to http://localhost:3000 in your browser.
+
+	For enabling the cross origin communication of REACT with API
+		->npm install --save cors
+		Note: 
+				in react then declarre cors = require('cors')			
+				in react then add app.user(cors())
