@@ -8,6 +8,7 @@ Resources:
 	2.How To Connect React JS With Node JS | Node JS Tutorial For Beginners | What Is Node JS | : https://www.youtube.com/watch?v=fnpmR6Q5lEc
 	3.React Getting Started : https://www.w3schools.com/react/react_getstarted.asp
 	4.Main basic concept of creating resp API along with creation of END POINTS of an API. : https://www.youtube.com/watch?v=pKd0Rpw7O48
+	5.Conneting commands for connecting express application to server : https://www.w3schools.com/nodejs/nodejs_mysql.asp
 Command:
 	
 	For creating REACT Application
