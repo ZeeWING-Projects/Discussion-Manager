@@ -2,13 +2,20 @@
 
 Following are the list of resources which we have used to learn abour REACT, NdoeJs and Express Applications.
 
-Resources:
+	Firebase account email: ApplicationProgramInterface0.1@gmail.com and pass : api_version0.1
 
+Resources:
+	
 	1.Creating simple node js express application (This will be our API ) : https://www.sitepoint.com/create-new-express-js-apps-with-express-generator/
 	2.How To Connect React JS With Node JS | Node JS Tutorial For Beginners | What Is Node JS | : https://www.youtube.com/watch?v=fnpmR6Q5lEc
 	3.React Getting Started : https://www.w3schools.com/react/react_getstarted.asp
 	4.Main basic concept of creating resp API along with creation of END POINTS of an API. : https://www.youtube.com/watch?v=pKd0Rpw7O48
 	5.Conneting commands for connecting express application to server : https://www.w3schools.com/nodejs/nodejs_mysql.asp
+	6.Methods for firebase authentication : https://firebase.google.com/docs/auth/web/password-auth?authuser=5
+	7.Reference for idea : https://github.com/ThisIsRudigo/firebaseauth
+	8.For Google Sin in default authentication and other options : https://github.com/firebase/firebaseui-web
+	9.For Google Sin in default authentication and other options (Video ): https://www.youtube.com/watch?v=hb85pYZSJaI
+
 Command:
 	
 	For creating REACT Application
