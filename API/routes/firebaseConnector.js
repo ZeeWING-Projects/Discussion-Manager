@@ -1,4 +1,6 @@
 const firebase = require('firebase');
+const admin = require('firebase-admin');
+
 var firebaseConfig = {
     apiKey: "AIzaSyBBkLsQDhZ3U1uWYap63SrmVjvZZkdEZeA",
     authDomain: "discussion-manager.firebaseapp.com",
@@ -9,5 +11,5 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
+ 
 module.exports=firebase;

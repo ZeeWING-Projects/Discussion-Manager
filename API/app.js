@@ -16,7 +16,7 @@ var chatService = require('./routes/chat')
 var postsService = require('./routes/posts')
 var profileService = require('./routes/profile')
 var statisticsService = require('./routes/statistics')
-var accountsService = require('./routes/accounts')
+const {infoRouter,createAccountWithEmailRouter} = require('./routes/accounts')
 
 
 
@@ -38,7 +38,11 @@ app.use('/postsService',postsService)
 app.use('/profileService',profileService)
 app.use('/statisticsService',statisticsService)
 app.use('/chatService',chatService)
-app.use('/accountService',accountsService)
+
+app.use('/accountsService',createAccountWithEmailRouter)
+app.use('/accountsService',infoRouter)
+
+
 
 
 app.use(function(req, res, next) {
@@ -55,8 +59,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 
 module.exports = app;
