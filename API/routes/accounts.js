@@ -1,36 +1,14 @@
 var express = require("express");
 const connectionToMySql = require("./databaseConnector");
+var firebaseConnection = require('./firebaseConnector')
 
 var infoRouter = express.Router();
 var createAccountWithEmailRouter = express.Router()
 
-var mySqlConnection = require('./databaseConnector')
-var firebaseConnection = require('./firebaseConnector')
-
-
-
-
-// createAccountWithEmailRouter.post("/createAccountWithEmail",function(req,res,next){
-    
-
-//     // firebase.auth().createUserWithEmailAndPassword("zeeshmedd0010@gmail.com", "zee1234")
-//     // .then((userCredential) => {
-//     //   var user = userCredential.user;
-//     //   res.send("Created the account")
-      
-//     // })
-//     // .catch((error) => {
-//     //   var errorCode = error.code;
-//     //   var errorMessage = error.message;
-//     //   res.send(errorMessage)
-//     //     });
-  
-//     res.send("Created the account")
-// })
 
 module.exports = {
     
-    infoRouter: 
+    infoAccounts: 
     infoRouter.get("/info",function(req,res,next){
         res.send("You have called accounts service..! And its working properly!")
     })
@@ -76,5 +54,6 @@ module.exports = {
     }   
 
     })
+    
 
 };
