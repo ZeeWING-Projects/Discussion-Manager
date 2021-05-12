@@ -38,7 +38,7 @@ app.use('/postsService',postsService)
 app.use('/profileService',profileService)
 app.use('/statisticsService',statisticsService)
 app.use('/chatService',chatService)
-app.use('/accountsService',accountsService)
+app.use('/accountService',accountsService)
 
 
 app.use(function(req, res, next) {

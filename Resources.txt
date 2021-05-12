@@ -44,3 +44,5 @@ Command:
 		->npm i joi
 		->npm uninstall --save @hapi/joi
 		->npm install --save @hapi/joi@15.0.3
+	For MYSQL connection
+		->npm install mysql
