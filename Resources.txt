@@ -46,3 +46,5 @@ Command:
 		->npm install --save @hapi/joi@15.0.3
 	For MYSQL connection
 		->npm install mysql
+	For firebase
+		->npm i -g firebase
