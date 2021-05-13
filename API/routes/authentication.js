@@ -3,7 +3,7 @@ var inforAuthentication = express.Router();
 var loginRouter = express.Router();
 
 const connectionToMySql = require("./databaseConnector");
-var firebaseConnection = require('./firebaseConnector')
+const {firebase,admin} = require('./firebaseConnector')
 
 
 module.exports={
@@ -21,8 +21,9 @@ module.exports={
     loginRouter.post("/login",function(req,res){
     if(req.body.email!=null && req.body.password!=null)  
     {
+        
         try{
-        firebaseConnection.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
         .then((userCredential) => {
          // Signed in
         var user = userCredential.user;

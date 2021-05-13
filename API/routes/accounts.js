@@ -1,6 +1,6 @@
 var express = require("express");
 const connectionToMySql = require("./databaseConnector");
-var firebaseConnection = require('./firebaseConnector')
+const {firebase,admin} = require('./firebaseConnector')
 
 var infoRouter = express.Router();
 var createAccountWithEmailRouter = express.Router()
@@ -22,31 +22,29 @@ module.exports = {
     createAccountWithEmailRouter:
     createAccountWithEmailRouter.post("/createAccountWithEmail",function(req,res,next){
     
-    if(req.body.email!=null && req.body.password!=null && connectionToMySql)    
+    if(req.body.email!=null && req.body.password!=null  && connectionToMySql)    
     {
-        firebaseConnection.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
-        .then((userCredential) => {
-               var user = userCredential.user;
-               
-               var sql = `INSERT INTO users (name,email, password) VALUES ('${req.body.name}', '${req.body.email}','${req.body.password}')`;
-               connectionToMySql.query(sql, function (err, result) {
-                 if (err)
-                 {
-                    res.status(400).send(err.message) 
-                 }
-                 else
-                 {
-                    
-
-                     res.status(200).send("Created Account Successfully")
-                 }
-               });
-
-         }).catch((error) => {
-                 var errorCode = error.code;
-                 var errorMessage = error.message;
-                 res.send(errorMessage)
-       });
+        admin
+        .auth()
+        .createUser({
+          email: req.body.email,
+          phoneNumber: req.body.phoneNumber,
+          password: req.body.password,
+          displayName: req.body.nameToDisplay,
+          address:req.body.address,
+          onlineStatus:req.body.onlineStatus,
+          profileURL: null,
+          disabled: false,
+        })
+        .then((userRecord) => {
+          // See the UserRecord reference doc for the contents of userRecord.
+          console.log('Successfully created new user:', userRecord.email);
+          res.status(200).send(`Successfully created new user:uid ${userRecord.uid} with email ${userRecord.email}`)
+        })
+        .catch((error) => {
+          console.log('Error creating new user:', error);
+          res.status(400).send(`Error creating new user: `)
+        });
     }
     else
     {
