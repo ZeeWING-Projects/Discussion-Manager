@@ -11,13 +11,13 @@ module.exports = {
     
     infoAccounts: 
     infoRouter.get("/info",function(req,res,next){
-        res.send("You have called accounts service..! And its working properly!")
+        res.send({responseMessage:"You have called accounts service..! And its working properly!"})
     })
     ,
 
     createAccountWithEmailRouter:
     createAccountWithEmailRouter.get("/createAccountWithEmail",function(req,res,next){
-        res.send("This is an post method please provice the jason object in body.")
+        res.send({resposeMessage:"This is an post method please provice the jason object in body."})
     })
     ,
     createAccountWithEmailRouter:
@@ -44,38 +44,53 @@ module.exports = {
           .then((userCredential) => {
            // Signed in
           var user = userCredential.user;
-
           var userL = firebase.auth().currentUser;
             userL.sendEmailVerification().then(function() {
                // Email sent.
-               res.status(200).send(`Successfully created new user:uid ${userRecord.uid} with email ${userRecord.email} and sent email`)
+               res.status(200).send({
+                   responseMessage:"Verification email has been sent",
+                   responseCode:1,
+                   userId:user.uid
+               })  
             }).catch(function(error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                res.status(400).send(errorMessage)  
+                res.status(400).send({
+                    responseMessage:errorMessage,
+                    responseCode:2
+                })  
             }); 
           }) .catch((error) => {
                       var errorCode = error.code;
                       var errorMessage = error.message;
-                      res.status(400).send(errorMessage)  
+                      res.status(400).send({
+                        responseMessage:errorMessage,
+                        responseCode:3
+                    })  
           });
           console.log('Successfully created new user:', userRecord.email);
         })
         .catch((error) => {
           console.log('Error creating new user:', error);
-          res.status(400).send(`Error creating new user: `)
+          res.status(400).send({
+            responseMessage:error,
+            responseCode:4
+        })
         });
     }
     else
     {
-        res.status(400).send("Please provide valid parameters")
+        res.status(400).send({
+            responseMessage:"Please provide valid input",
+            responseCode:5
+        })
     }   
 
     })
     ,
     restMyPasswordWithEmailLinkRouter:
     restMyPasswordWithEmailLinkRouter.get("/restMyPasswordWithEmailLink",function(req,res){
-        res.send("This is an post method of accounts service, please provide the body in json")
+        res.send({responseMessage:"This is an post method of accounts service, please provide the body in json"})
     })
     ,
     restMyPasswordWithEmailLinkRouter:
@@ -85,16 +100,27 @@ module.exports = {
         var auth = firebase.auth();
         auth.sendPasswordResetEmail(req.body.email).then(function() 
         {
-            res.status(200).send("Sent")
-        }).catch(function(error) {
+            res.status(200).send({
+                responseMessage:"Reset password email is sent",
+                responseCode:1
+            })
+        }).catch(function(error) 
+        {
             var errorCode = error.code;
             var errorMessage = error.message;
-            res.status(404).send(errorMessage)
+            res.status(404).send({
+                responseMessage:errorMessage,
+                responseCode:2
+               
+            })
         });
     }
     else
     {
-        res.status(406).send("Please provide a vaild email")
+        res.status(406).send({
+            responseMessage:"Please provide valid email",
+            responseCode:3
+        })
     }
 
     })
