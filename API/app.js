@@ -14,12 +14,19 @@ var app = express();
 const {inforAuthentication,loginRouter} = require('./routes/authentication')
 var chatService = require('./routes/chat')
 var postsService = require('./routes/posts')
-var profileService = require('./routes/profile')
+
 var statisticsService = require('./routes/statistics')
+const {
+      infoProfile,
+      uploadProfileImageRouter,
+      loadProfileRouter
+      } = require('./routes/profile')
+
 const {
       infoAccounts,
       createAccountWithEmailRouter,
-      restMyPasswordWithEmailLinkRouter
+      restMyPasswordWithEmailLinkRouter,
+      getTheFireBaseConfugrationRotuer
       } = require('./routes/accounts')
 
 
@@ -41,14 +48,19 @@ app.use('/authenticationService',inforAuthentication)
 app.use('/authenticationService',loginRouter)
 
 app.use('/postsService',postsService)
-app.use('/profileService',profileService)
 app.use('/statisticsService',statisticsService)
 app.use('/chatService',chatService)
+
+
+app.use('/profileService',infoProfile)
+app.use('/profileService',uploadProfileImageRouter)
+app.use('/profileService',loadProfileRouter)
 
 
 app.use('/accountsService',infoAccounts)
 app.use('/accountsService',createAccountWithEmailRouter)
 app.use('/accountsService',restMyPasswordWithEmailLinkRouter)
+app.use('/accountsService',getTheFireBaseConfugrationRotuer)
 
 
 

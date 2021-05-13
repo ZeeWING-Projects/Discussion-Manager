@@ -3,7 +3,7 @@ var inforAuthentication = express.Router();
 var loginRouter = express.Router();
 
 const connectionToMySql = require("./databaseConnector");
-const {firebase,admin} = require('./firebaseConnector')
+const {firebase,admin,firebaseConfig} = require('./firebaseConnector')
 
 module.exports={
     inforAuthentication:

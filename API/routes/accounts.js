@@ -1,10 +1,10 @@
 var express = require("express");
 const connectionToMySql = require("./databaseConnector");
-const {firebase,admin} = require('./firebaseConnector')
-
+const {firebase,admin,firebaseConfig} = require('./firebaseConnector')
 var infoRouter = express.Router();
 var createAccountWithEmailRouter = express.Router()
 var restMyPasswordWithEmailLinkRouter = express.Router()
+var getTheFireBaseConfugrationRotuer = express.Router()
 
 
 module.exports = {
@@ -32,10 +32,10 @@ module.exports = {
           phoneNumber: req.body.phoneNumber,
           password: req.body.password,
           emailVerified: false,
-          displayName: req.body.nameToDisplay,
+          displayName: req.body.displayName,
           address:req.body.address,
           onlineStatus:req.body.onlineStatus,
-          profileURL: null,
+          photoUrl:'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada',
           disabled: false,
         })
         .then((userRecord) => {
@@ -124,5 +124,18 @@ module.exports = {
     }
 
     })
-
+    ,
+    getTheFireBaseConfugrationRotuer:
+    getTheFireBaseConfugrationRotuer.get("/getTheFireBaseConfugration",function(req,res){
+res.send({
+      apiKey: firebaseConfig.apiKey,
+      authDomain:firebaseConfig.authDomain,
+      databaseURL: firebaseConfig.databaseURL,
+      projectId: firebaseConfig.projectId,
+      storageBucket: firebaseConfig.storageBucket,
+      messagingSenderId: firebaseConfig.messagingSenderId,
+      appId: firebaseConfig.appId
+        })
+    })
+   
 };
