@@ -16,7 +16,11 @@ var chatService = require('./routes/chat')
 var postsService = require('./routes/posts')
 var profileService = require('./routes/profile')
 var statisticsService = require('./routes/statistics')
-const {infoAccounts,createAccountWithEmailRouter} = require('./routes/accounts')
+const {
+      infoAccounts,
+      createAccountWithEmailRouter,
+      restMyPasswordWithEmailLinkRouter
+      } = require('./routes/accounts')
 
 
 
@@ -41,8 +45,10 @@ app.use('/profileService',profileService)
 app.use('/statisticsService',statisticsService)
 app.use('/chatService',chatService)
 
-app.use('/accountsService',createAccountWithEmailRouter)
+
 app.use('/accountsService',infoAccounts)
+app.use('/accountsService',createAccountWithEmailRouter)
+app.use('/accountsService',restMyPasswordWithEmailLinkRouter)
 
 
 

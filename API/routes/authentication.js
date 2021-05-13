@@ -21,31 +21,35 @@ module.exports={
     loginRouter.post("/login",function(req,res){
     if(req.body.email!=null && req.body.password!=null)  
     {
-        
         try{
         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
         .then((userCredential) => {
          // Signed in
         var user = userCredential.user;
-        res.status(200).send("Loged in")
+        if(user.emailVerified)
+        {
+            res.status(200).send("Loged in")
+        }
+        else
+        {
+            res.status(200).send("not verified email")
+        }
+
         }) .catch((error) => {
                     var errorCode = error.code;
                     var errorMessage = error.message;
-        res.status(400).send(errorMessage)  
-
+                    res.status(400).send(errorMessage)  
         });
         }
         catch(t)
         {
             es.status(400).send(t.message)  
         }
-
     }  
     else
     {
         res.status(400).send("Please provide valid parameters")
     }
-
     })
-
+    
 }
