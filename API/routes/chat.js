@@ -3,6 +3,7 @@ const connectionToMySql = require("./databaseConnector");
 var router = express.Router();
 var addInContactListrouter = express.Router();
 var loadAllContactsRouter = express.Router();
+var sendMessageRouter = express.Router();
 
 
 module.exports={
@@ -66,7 +67,38 @@ module.exports={
           });
        
     })
+    ,
+    sendMessageRouter:
+    sendMessageRouter.get("/sendMessage",function(req,res){
+        res.send({responseMessage:"you have call a method of chat service and this is a post method so please provide the json"})          
+    })
+    ,
     
+    sendMessageRouter:
+    sendMessageRouter.post("/sendMessage",function(req,res){
+        var sql = `INSERT INTO sentmessages (userUid,recieverUid,messageType,messageContent,messageStatus,messageSendTime) VALUES 
+        ('${req.body.userUid}', '${req.body.recieverUid}','${req.body.messageType}','${req.body.messageContent}','${req.body.messageStatus}','${req.body.messageSendTime}')`;
+        connectionToMySql.query(sql, function (err, result) {
+        if (err)
+        {
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            res.status(400).send({
+                responseMessage:errorMessage,
+                responseCode:1
+            })  
+        }
+        else
+        {
+            res.status(200).send({
+                responseMessage:"Message Sent",
+                responseCode:1
+            })
+        }
+        
+        });     
+    })
+
 }
 
 
