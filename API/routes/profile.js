@@ -3,6 +3,7 @@ const { use } = require("./chat");
 var infoRouter = express.Router();
 var uploadProfileImageRouter = express.Router();
 var loadProfileRouter = express.Router();
+var loadProfileWithUidRouter = express.Router();
 
 const {firebase,admin,firebaseConfig} = require('./firebaseConnector')
 
@@ -90,4 +91,27 @@ module.exports={
     }
       
     }),
+    loadProfileWithUidRouter:
+    loadProfileWithUidRouter.get("/loadProfileWithUid",function(req,res){
+        res.send({responseMessage:"You have called profile service and this is an post method please provide json"})
+    })
+    ,
+    loadProfileWithUidRouter:
+    loadProfileWithUidRouter.post("/loadProfileWithUid",function(req,res){
+    if(req.body.uid!=null)  
+    {
+    admin
+   .auth()
+   .getUser(req.body.uid)
+   .then((userRecord) => {
+    // See the UserRecord reference doc for the contents of userRecord.
+    console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+    res.status(200).send(userRecord.toJSON())
+   })
+   .catch((error) => {
+    console.log('Error fetching user data:', error);
+    });
+    }
+      
+    })   
 }

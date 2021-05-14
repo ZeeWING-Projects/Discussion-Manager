@@ -26,7 +26,7 @@ module.exports={
             var errorMessage = err.message;
             res.status(400).send({
                 responseMessage:errorMessage,
-                responseCode:3
+                responseCode:1
             })  
         }
         else

@@ -25,7 +25,8 @@ const {
 const {
       infoProfile,
       uploadProfileImageRouter,
-      loadProfileRouter
+      loadProfileRouter,
+      loadProfileWithUidRouter
       } = require('./routes/profile')
 
 const {
@@ -65,6 +66,7 @@ app.use('/chatService',addInContactListrouter)
 app.use('/profileService',infoProfile)
 app.use('/profileService',uploadProfileImageRouter)
 app.use('/profileService',loadProfileRouter)
+app.use('/profileService',loadProfileWithUidRouter)
 
 
 app.use('/accountsService',infoAccounts)
