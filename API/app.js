@@ -19,13 +19,17 @@ var statisticsService = require('./routes/statistics')
 
 const {
       chatInfo,
-      addInContactListrouter
+      addInContactListrouter,
+      loadAllContactsRouter,
+      sendMessageRouter,
+      loadChatRouter
       } = require('./routes/chat')
 
 const {
       infoProfile,
       uploadProfileImageRouter,
-      loadProfileRouter
+      loadProfileRouter,
+      loadProfileWithUidRouter
       } = require('./routes/profile')
 
 const {
@@ -33,7 +37,8 @@ const {
       createAccountWithEmailRouter,
       restMyPasswordWithEmailLinkRouter,
       getTheFireBaseConfugrationRotuer
-      } = require('./routes/accounts')
+      } = require('./routes/accounts');
+const { send } = require('process');
 
 
 
@@ -60,11 +65,15 @@ app.use('/authenticationService',loginRouter)
 
 app.use('/chatService',chatInfo)
 app.use('/chatService',addInContactListrouter)
+app.use('/chatService',loadAllContactsRouter)
+app.use('/chatService',sendMessageRouter)
+app.use('/chatService',loadChatRouter)
 
 
 app.use('/profileService',infoProfile)
 app.use('/profileService',uploadProfileImageRouter)
 app.use('/profileService',loadProfileRouter)
+app.use('/profileService',loadProfileWithUidRouter)
 
 
 app.use('/accountsService',infoAccounts)
