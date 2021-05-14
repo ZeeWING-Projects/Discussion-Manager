@@ -1,9 +1,11 @@
+const { json } = require("express");
 var express = require("express");
 const connectionToMySql = require("./databaseConnector");
 var router = express.Router();
 var addInContactListrouter = express.Router();
 var loadAllContactsRouter = express.Router();
 var sendMessageRouter = express.Router();
+var loadChatRouter = express.Router();
 
 
 module.exports={
@@ -90,6 +92,7 @@ module.exports={
         }
         else
         {
+                            
             res.status(200).send({
                 responseMessage:"Message Sent",
                 responseCode:1
@@ -98,7 +101,61 @@ module.exports={
         
         });     
     })
+    ,
+    loadChatRouter:
+    loadChatRouter.get("/loadChat",function(req,res){
+        res.send({responseMessage:"you have call a method of chat service and this is a post method so please provide the json"})          
+    })
+    ,
+    loadChatRouter:
+    loadChatRouter.post("/loadChat",function(req,res){
 
+        connectionToMySql.query(`SELECT * from sentmessages
+         WHERE userUid='${req.body.userUid}' and recieverUid='${req.body.recieverUid}' 
+         or recieverUid='${req.body.userUid}' and userUid='${req.body.recieverUid}' 
+         ORDER BY serialNumber DESC LIMIT ${req.body.numberOfMessages} OFFSET ${req.body.messageOffset}`, function (err, result) {
+            if (err)
+            { 
+                var errorCode = err.code;
+                var errorMessage = err.message;
+                res.status(400).send({
+                    responseMessage:errorMessage,
+                    responseCode:1
+                })  
+            }
+            else
+            {
+                for(var attributename in result){
+                    console.log(result[attributename].serialNumber)
+                    if(result[attributename].messageStatus==='New')
+                    {
+                        var sql =  `UPDATE sentmessages SET messageStatus = 'Seen' WHERE serialNumber = '${result[attributename].serialNumber}'`;
+                        connectionToMySql.query(sql, function (err, result) {
+                          if (err){
+                            var errorCode = err.code;
+                            var errorMessage = err.message;
+                            res.status(400).send({
+                                responseMessage:errorMessage,
+                                responseCode:1
+                            })  
+                          }
+                          else
+                          {
+                            console.log("Updated to seen");    
+                          }
+                          
+                        });
+                    }
+                }
+
+                res.status(200).send(result)
+            }
+          });
+       
+
+              
+    })
+    
 }
 
 
