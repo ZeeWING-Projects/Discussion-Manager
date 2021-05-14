@@ -2,6 +2,7 @@ var express = require("express");
 const connectionToMySql = require("./databaseConnector");
 var router = express.Router();
 var addInContactListrouter = express.Router();
+var loadAllContactsRouter = express.Router();
 
 
 module.exports={
@@ -39,6 +40,31 @@ module.exports={
         
         });
         
+    })
+    ,
+    loadAllContactsRouter:
+    loadAllContactsRouter.get("/loadAllContacts",function(req,res){
+        res.send({responseMessage:"you have call a method of chat service and this is a post method so please provide the json"})  
+    })
+    ,
+    loadAllContactsRouter:
+    loadAllContactsRouter.post("/loadAllContacts",function(req,res){
+        connectionToMySql.query(`SELECT * FROM contactslist WHERE userUid = '${req.body.uid}'`, function (err, result) {
+            if (err)
+            { 
+                var errorCode = err.code;
+                var errorMessage = err.message;
+                res.status(400).send({
+                    responseMessage:errorMessage,
+                    responseCode:1
+                })  
+            }
+            else
+            {
+                res.status(200).send(result)
+            }
+          });
+       
     })
     
 }

@@ -19,7 +19,8 @@ var statisticsService = require('./routes/statistics')
 
 const {
       chatInfo,
-      addInContactListrouter
+      addInContactListrouter,
+      loadAllContactsRouter
       } = require('./routes/chat')
 
 const {
@@ -61,6 +62,7 @@ app.use('/authenticationService',loginRouter)
 
 app.use('/chatService',chatInfo)
 app.use('/chatService',addInContactListrouter)
+app.use('/chatService',loadAllContactsRouter)
 
 
 app.use('/profileService',infoProfile)
