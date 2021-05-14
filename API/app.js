@@ -12,10 +12,16 @@ var app = express();
 
 //These are the service which will be use by our discussion manager app
 const {inforAuthentication,loginRouter} = require('./routes/authentication')
-var chatService = require('./routes/chat')
+
 var postsService = require('./routes/posts')
 
 var statisticsService = require('./routes/statistics')
+
+const {
+      chatInfo,
+      addInContactListrouter
+      } = require('./routes/chat')
+
 const {
       infoProfile,
       uploadProfileImageRouter,
@@ -44,12 +50,16 @@ app.use(cors())//NOTE-----------------------------------------------------------
 
 //Using services ... From cleint side we will use these prefixe before we use any service.
 
+app.use('/postsService',postsService)
+app.use('/statisticsService',statisticsService)
+
+
 app.use('/authenticationService',inforAuthentication)
 app.use('/authenticationService',loginRouter)
 
-app.use('/postsService',postsService)
-app.use('/statisticsService',statisticsService)
-app.use('/chatService',chatService)
+
+app.use('/chatService',chatInfo)
+app.use('/chatService',addInContactListrouter)
 
 
 app.use('/profileService',infoProfile)
@@ -61,7 +71,6 @@ app.use('/accountsService',infoAccounts)
 app.use('/accountsService',createAccountWithEmailRouter)
 app.use('/accountsService',restMyPasswordWithEmailLinkRouter)
 app.use('/accountsService',getTheFireBaseConfugrationRotuer)
-
 
 
 
