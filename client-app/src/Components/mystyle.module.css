@@ -1,0 +1,26 @@
+.startDiscussionBtn {
+   background-color: #16189ee7; /* Green */
+   border: none;
+   color: white;
+   padding: 10px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 20px;
+   margin: 4px 2px;
+   width: 30%;
+   height: max-content;
+   cursor: pointer;
+   border-radius: 7%;
+  }
+  .startDiscussionDiv {
+   margin-top: 30%;
+  }
+   
+  .navBrand{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: bolder;
+    background-color: rgba(137, 43, 226, 0.534);
+    color: rgb(0, 0, 0);
+  }

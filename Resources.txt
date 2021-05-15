@@ -16,6 +16,7 @@ Resources:
 	8.For Google Sin in default authentication and other options : https://github.com/firebase/firebaseui-web
 	9.For Google Sin in default authentication and other options (Video ): https://www.youtube.com/watch?v=hb85pYZSJaI
 	10.For Admin auth API : https://firebase.google.com/docs/admin/setup
+	11.For learnig concept of React router DOM : https://www.youtube.com/watch?v=1N_Vh0bRK3c
 Command:
 	
 	For creating REACT Application
