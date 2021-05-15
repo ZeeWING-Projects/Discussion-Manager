@@ -7,7 +7,7 @@ function WebMainHomePageBody()
 
     return(
        <div fluid className={styles.startDiscussionDiv}>
-          <button type="button" className={styles.startDiscussionBtn} >Start Discussion</button>
+          <button type="button" className={styles.startDiscussionBtn}>Manage your Discussion</button>
        </div>
     );
 }

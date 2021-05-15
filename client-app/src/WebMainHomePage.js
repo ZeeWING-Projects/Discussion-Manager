@@ -36,7 +36,7 @@ function WebMainHomePage()
         }}
         >
              {nav}
-            <WebMainHomePageBody />
+             <WebMainHomePageBody />
 
       </div>
   
