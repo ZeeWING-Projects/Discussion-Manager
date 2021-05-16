@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import "react-loadingmask/dist/react-loadingmask.css";
+import LoadingMask from "react-loadingmask";
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Form,Nav} from 'react-bootstrap'
 
@@ -12,6 +15,17 @@ const SinUpToAccount = (props) => {
   } = props;
 
   const [modal, setModal] = useState(false);
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [address, setAddress] = useState('')
+  
+  const [erroMeeage, setErroMeeage] = useState('');
+  const [loadingSpinner, setloadingSpinner] = useState(false);
+  
+
 
   const toggle = ()=>{
       setModal(!modal)
@@ -25,7 +39,75 @@ const SinUpToAccount = (props) => {
     {
       btn =  <Nav.Item><button  className="btn btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>
     }
+  
     
+    function sinup()
+    {
+      setErroMeeage('')
+      setloadingSpinner(true)
+      let data =
+      {
+        displayName:name,
+        email:email,
+        password:password,
+        phoneNumber:phoneNumber,
+        onlineStatus:"Active",
+        address:address
+      }
+      
+    fetch("http://localhost:8000/accountsService/createAccountWithEmail",
+    {
+      method: 'POST',
+      headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+      },
+         body: JSON.stringify(data)
+    }).then(
+    response => 
+    {
+      return response.json()
+    },
+    error=>
+    {
+      //on error
+      setloadingSpinner(false)
+      console.log(error)
+      setErroMeeage(<span>Server is not responding please try later</span>)
+    }
+    ).then(data=>{
+      //On success.
+      setloadingSpinner(false)
+     
+      try{
+         
+        // {
+        //   "responseMessage": "Verification email has been sent",
+        //   "responseCode": 1,
+        //   "userId": "pgAjluAdwrSWoSmrHOMxrx6lwYH2"
+        // }
+  
+      console.log(data.responseCode)
+      if(data.responseCode===4)
+      {
+        setErroMeeage(<span>{data.responseMessage.message}</span>) 
+      }
+      else if(data.responseCode===5)
+      {
+        setErroMeeage(<span>{data.responseMessage}</span>) 
+      }
+      else if(data.responseCode===1)
+      {
+        setErroMeeage(<span>{data.responseMessage}</span>) 
+      } 
+      else
+      {
+        setErroMeeage(<span>{data.responseMessage}</span>) 
+      }
+      
+      }catch(e){}
+    })
+  }  
+      
   return (
     <div>
       {btn}
@@ -33,41 +115,68 @@ const SinUpToAccount = (props) => {
         toggle={toggle} className={className}  centered>
         <ModalHeader toggle={toggle}>Create Account</ModalHeader>
         <ModalBody>
-           
-        <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Name" />
 
-                    <Form.Label>Phone number</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your phone number" />
-                    
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                                   We'll never share your email with anyone else.
-                    </Form.Text>
+          <Form>
+             <Form.Group controlId="formBasicEmail">
+                 <Form.Label>Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter Name" onChange={event =>
+                {
+                  setName(event.target.value)
+                  event.preventDefault();   
+                }
+                }  />
 
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                    <Form.Text className="text-muted">
-                            Please do not enter the password of email, enter new password
-                    </Form.Text>
+                <Form.Label>Phone number</Form.Label>
+                <Form.Control type="text" placeholder="+923053206993 Must include country code" onChange={event =>
+                {
+                  setPhoneNumber(event.target.value)
+                  event.preventDefault();   
+                }
+                }  />
+        
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email"  onChange={event =>
+              {
+                  setEmail(event.target.value)
+                  event.preventDefault();   
+              }
+              } />
+              <Form.Text className="text-muted">
+                       We'll never share your email with anyone else.
+              </Form.Text>
 
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your address" />
-                    
-                </Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" onChange={event =>
+                {
+                  setPassword(event.target.value)
+                  event.preventDefault();   
+                }
+              } />
+              <Form.Text className="text-muted">
+                  Please do not enter the password of email, enter new password
+              </Form.Text>
 
+             <Form.Label>Address</Form.Label>
+             <Form.Control type="text" placeholder="Enter your address" onChange={event =>
+              {
+                  setAddress(event.target.value)
+                  event.preventDefault();   
+              }
+              }  />
+        
+              </Form.Group> 
+          </Form>
 
-                
-            </Form>
-            
         </ModalBody>
         <ModalFooter>
-          <Button color="primary"  type="submit" onClick={toggle}>Login</Button>{' '}
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
+          <LoadingMask loading={loadingSpinner} text={"loading..."}>
+              <div style={{ width: 50, height: 40 }}></div>
+          </LoadingMask>
+          <div>{erroMeeage}</div>
+          <Button color="primary" onClick={toggle}>Back</Button>{' '}
+            <Button color="secondary" onClick={sinup}>Create Account</Button>
         </ModalFooter>
+
       </Modal>
     </div>
   );
