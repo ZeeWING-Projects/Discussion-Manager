@@ -4,7 +4,7 @@ import {Route,Link} from 'react-router-dom'
 
 function UserMainDashBoard(){
     return(
-        <h1>GEre</h1>
+        <h1>DashBoard</h1>
     )
 }
 

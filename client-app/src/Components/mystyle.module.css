@@ -24,3 +24,22 @@
     background-color: rgba(137, 43, 226, 0.534);
     color: rgb(0, 0, 0);
   }
+
+ .mainWebHomePageBackground{
+    background-Image: url("https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/annie-spratt-QckxruozjRg-unsplash.jpg?alt=media&token=922ba71c-45dd-4f46-85ba-6030eb80cea9");
+   
+    background-size: cover;   
+    opacity:"80%";
+    height:650px;
+ } 
+.loginForm{
+  padding-top: 10%;
+  height: 80%;
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 3%;
+}
+.loadingSspinner{
+  width: 50;
+   height: 40 
+}

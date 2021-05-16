@@ -17,6 +17,10 @@ Resources:
 	9.For Google Sin in default authentication and other options (Video ): https://www.youtube.com/watch?v=hb85pYZSJaI
 	10.For Admin auth API : https://firebase.google.com/docs/admin/setup
 	11.For learnig concept of React router DOM : https://www.youtube.com/watch?v=1N_Vh0bRK3c
+	12.Using Hooks : https://www.youtube.com/watch?v=mxK8b99iJTg
+	13: Programatically routing concept : https://ultimatecourses.com/blog/programmatically-navigate-react-router
+	14: Using fetch method in client app for making an request to API
+
 Command:
 	
 	For creating REACT Application
@@ -51,3 +55,8 @@ Command:
 		->npm install --save firebase
 	For Admin Auth API : (USED)
 		->npm install firebase-admin --save
+
+	For REACT components
+		->npm install react-avatar --save
+		-> npm i --save react-loadingmask
+			->import LoadingMask from "react-loadingmask";
