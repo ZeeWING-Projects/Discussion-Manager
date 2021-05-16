@@ -6,6 +6,12 @@ import LoginToAccount from './Components/LoginToAccount'
 import {Route,Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faUsers,faUserCircle,faComments,faMailBulk,faCogs, faHome,faAddressBook } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUsers, faUserCircle, faComments,faMailBulk,faCogs,faHome,faAddressBook)
+
 function App() {
   localStorage.setItem("isLogedIn",false);
   return (

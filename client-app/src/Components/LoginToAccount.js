@@ -101,11 +101,18 @@ function login()
     }
 
     ).then(data=>{
+      //on sucess.
       setloadingSpinner(false)
       try{
       const {responseMessage,responseCode,userId}=data;
       console.log(responseMessage)
+      if(responseCode===1)
+      {
+        history.push('/UserMainDashBoard');
+      }
+     else{
       setErroMeeage(<span>{responseMessage}</span>)
+     }
       }catch(e)
       {
 
@@ -174,6 +181,7 @@ function login()
     } 
     else
     {
+      
       setErroMeeage(<span>{data.responseMessage}</span>) 
     }
     
