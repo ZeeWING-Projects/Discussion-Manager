@@ -8,6 +8,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Form,Nav} from 'react-bootstrap'
 
 const SinUpToAccount = (props) => {
+  
   const {
     buttonLabel,
     className,

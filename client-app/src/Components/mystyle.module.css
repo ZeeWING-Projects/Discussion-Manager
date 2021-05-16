@@ -24,6 +24,14 @@
     background-color: rgba(137, 43, 226, 0.534);
     color: rgb(0, 0, 0);
   }
+  .navBrandDashBoard
+  {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: bolder;
+  
+    color: rgb(255, 255, 255); 
+  }
 
  .mainWebHomePageBackground{
     background-Image: url("https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/annie-spratt-QckxruozjRg-unsplash.jpg?alt=media&token=922ba71c-45dd-4f46-85ba-6030eb80cea9");
@@ -39,7 +47,7 @@
   margin-left: 30%;
   margin-top: 3%;
 }
-.loadingSspinner{
-  width: 50;
-   height: 40 
+.navLink
+{
+  cursor: pointer;
 }
