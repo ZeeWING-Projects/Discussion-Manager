@@ -48,11 +48,46 @@ module.exports = {
           var userL = firebase.auth().currentUser;
             userL.sendEmailVerification().then(function() {
                // Email sent.
-               res.status(200).send({
-                   responseMessage:"Verification email has been sent",
-                   responseCode:1,
-                   userId:user.uid
-               })  
+
+               //Here we will create account in mysql local datbase aswell.
+
+               var sql = `INSERT INTO users (userUid,userName,userEmail,userMobileNumber) VALUES ('${user.uid}', '${req.body.displayName}','${req.body.email}','${req.body.phoneNumber}')`;
+               connectionToMySql.query(sql, function (error, result) {
+                    if (error) 
+                    {
+                        admin
+                        .auth()
+                        .deleteUser(user.uid)
+                        .then(() => {
+                            console.log('Successfully deleted user');
+                        })
+                        .catch((error) => {
+                            console.log('Error deleting user:', error);
+                        });
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        res.status(400).send({
+                            responseMessage:errorMessage,
+                            responseCode:6
+                        })  
+                    }
+                    else
+                    {
+                        console.log("Craeted new user")
+                        res.status(200).send({
+                            responseMessage:"Verification email has been sent",
+                            responseCode:1,
+                            userId:user.uid
+
+                            
+                        })
+
+                    }
+                    
+                    
+                    });
+
+                 
             }).catch(function(error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;

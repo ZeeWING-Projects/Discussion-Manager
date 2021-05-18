@@ -7,7 +7,6 @@ import Chats from "./Chats";
 import Home from "./Home";
 import Settings from "./Settings";
 import People from "./People";
-
 import styles from './mystyle.module.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Nav} from "react-bootstrap";
@@ -18,9 +17,9 @@ const Dash = props => {
         
                 <DashboardNavbar />
 
-                <Row>
+                <Row className="">
                     <Col md={2}>      
-                    <Nav  className="flex-column">
+                    <Nav  className="flex-column sticky-top">
                            <Nav.Item className={styles.navLink}
                            onClick={()=>{
                             setContentArea(<Profile/>)
@@ -50,7 +49,7 @@ const Dash = props => {
                           ><FontAwesomeIcon icon="cogs" size="4x" className="mt-4"/><div>Settings</div></Nav.Item>
                     </Nav> 
                     </Col>
-                    <Col className="bg-info">
+                    <Col >
                             {contentArea}
                     </Col> 
                 </Row>
