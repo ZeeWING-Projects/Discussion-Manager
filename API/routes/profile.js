@@ -1,5 +1,6 @@
 var express = require("express");
 const { use } = require("./chat");
+const connectionToMySql = require("./databaseConnector");
 var infoRouter = express.Router();
 var uploadProfileImageRouter = express.Router();
 var loadProfileRouter = express.Router();
@@ -31,7 +32,28 @@ module.exports={
          user.updateProfile({
             photoUrl: req.body.photoUrl
          }).then(function() {
-           res.status(200).send({responseMessage:"Uploaded Profile Image"})
+
+            var sql = `UPDATE users SET profileImage = '${req.body.photoUrl}' WHERE userEmail = '${req.body.email}'`;
+            connectionToMySql.query(sql, function (error, result) {
+              if (error)
+              {
+                  //Here add code which will remove the record from firebase in case there was issue in qur
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                res.status(400).send({
+                    responseMessage:errorMessage,
+                    responseCode:1
+                })  
+              }
+              else
+              {
+                res.status(200).send({responseMessage:"Uploaded Profile Image"})
+                console.log(result.affectedRows + " record(s) updated");
+              }
+            
+            });
+
+           
          }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
