@@ -83,9 +83,7 @@ const People = props => {
                     <Col lg={8}>
                         <div className={styles.peopleCardContent}>
                                 <h2>{record.userName}</h2>
-                                <p>has been the industry's stan and scrambled
-                                     it to make arised in the 1
-                                      960s with the release of Letraset sheets </p>
+                                <p>{record.statusStatement}</p>
                                 <Row>
                                     <Col lg={3}>
                                     <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
