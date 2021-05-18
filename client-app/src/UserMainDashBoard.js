@@ -8,18 +8,6 @@ import Dashboard from './Components/Dashboard'
 function UserMainDashBoard(){
     return(
         <Dashboard />
-    //  <Container>
-    //     <Row>
-    //       <Col>1 of 3</Col>
-    //     </Row>
-    //     <Row>
-    //       <Col>3 of 3</Col>
-    //       <Col>3 of 3</Col>
-    //     </Row>
-    //     <Row>
-    //       <Col>3 of 3</Col>
-    //     </Row>
-    //   </Container>
     )
 }
 
