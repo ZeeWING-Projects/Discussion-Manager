@@ -29,6 +29,3 @@
   });
 
   }    
-
-
-{"responseMessage":"Login Successfull","responseCode":1,"userId":"0TFdiLUfj8Vq0Qtoz14jAhNuGu03"}

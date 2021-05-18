@@ -25,7 +25,6 @@ module.exports = {
     
     if(req.body.email!=null && req.body.password!=null  && connectionToMySql)    
     {
-        let defaultProfile = "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada"
         admin
         .auth()
         .createUser({
@@ -36,7 +35,7 @@ module.exports = {
           displayName: req.body.displayName,
           address:req.body.address,
           onlineStatus:req.body.onlineStatus,
-          photoUrl:defaultProfile,
+          photoUrl:'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada',
           disabled: false,
         })
 
@@ -49,46 +48,11 @@ module.exports = {
           var userL = firebase.auth().currentUser;
             userL.sendEmailVerification().then(function() {
                // Email sent.
-
-               //Here we will create account in mysql local datbase aswell.
-
-               var sql = `INSERT INTO users (userUid,userName,userEmail,userMobileNumber,profileImage,statusStatement) VALUES ('${user.uid}', '${req.body.displayName}','${req.body.email}','${req.body.phoneNumber}','${defaultProfile}','Hello i am a new user')`;
-               connectionToMySql.query(sql, function (error, result) {
-                    if (error) 
-                    {
-                        admin
-                        .auth()
-                        .deleteUser(user.uid)
-                        .then(() => {
-                            console.log('Successfully deleted user');
-                        })
-                        .catch((error) => {
-                            console.log('Error deleting user:', error);
-                        });
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        res.status(400).send({
-                            responseMessage:errorMessage,
-                            responseCode:6
-                        })  
-                    }
-                    else
-                    {
-                        console.log("Craeted new user")
-                        res.status(200).send({
-                            responseMessage:"Verification email has been sent",
-                            responseCode:1,
-                            userId:user.uid
-
-                            
-                        })
-
-                    }
-                    
-                    
-                    });
-
-                 
+               res.status(200).send({
+                   responseMessage:"Verification email has been sent",
+                   responseCode:1,
+                   userId:user.uid
+               })  
             }).catch(function(error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;

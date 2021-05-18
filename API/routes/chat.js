@@ -1,13 +1,11 @@
 const { json } = require("express");
 var express = require("express");
-const {firebase,admin,firebaseConfig} = require('./firebaseConnector')
 const connectionToMySql = require("./databaseConnector");
 var router = express.Router();
 var addInContactListrouter = express.Router();
 var loadAllContactsRouter = express.Router();
 var sendMessageRouter = express.Router();
 var loadChatRouter = express.Router();
-var loadAllUsersListRouter = express.Router();
 
 
 module.exports={
@@ -70,25 +68,6 @@ module.exports={
             }
           });
        
-    })
-    ,
-    loadAllUsersListRouter:
-    loadAllUsersListRouter.get("/loadAllUsersList",function(req,res){
-        connectionToMySql.query(`SELECT * FROM users `, function (err, result) {
-            if (err)
-            { 
-                var errorCode = err.code;
-                var errorMessage = err.message;
-                res.status(400).send({
-                    responseMessage:errorMessage,
-                    responseCode:1
-                })  
-            }
-            else
-            {
-                res.status(200).send(result)  
-            }
-          });       
     })
     ,
     sendMessageRouter:

@@ -10,7 +10,7 @@ function DashboardNavbar()
 {
     return(
 
-    <Navbar collapseOnSelect expand="lg" className="bg-dark " variant="dark">
+    <Navbar collapseOnSelect expand="lg" className="bg-dark" variant="dark">
         <Navbar.Brand href="#home"><div className={styles.navBrandDashBoard}>Discussion Manager</div></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
