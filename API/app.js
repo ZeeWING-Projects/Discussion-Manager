@@ -22,7 +22,8 @@ const {
       addInContactListrouter,
       loadAllContactsRouter,
       sendMessageRouter,
-      loadChatRouter
+      loadChatRouter,
+      loadAllUsersListRouter
       } = require('./routes/chat')
 
 const {
@@ -68,6 +69,7 @@ app.use('/chatService',addInContactListrouter)
 app.use('/chatService',loadAllContactsRouter)
 app.use('/chatService',sendMessageRouter)
 app.use('/chatService',loadChatRouter)
+app.use('/chatService',loadAllUsersListRouter)
 
 
 app.use('/profileService',infoProfile)

@@ -25,6 +25,7 @@ module.exports = {
     
     if(req.body.email!=null && req.body.password!=null  && connectionToMySql)    
     {
+        let defaultProfile = "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada"
         admin
         .auth()
         .createUser({
@@ -35,7 +36,7 @@ module.exports = {
           displayName: req.body.displayName,
           address:req.body.address,
           onlineStatus:req.body.onlineStatus,
-          photoUrl:'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada',
+          photoUrl:defaultProfile,
           disabled: false,
         })
 
@@ -51,7 +52,7 @@ module.exports = {
 
                //Here we will create account in mysql local datbase aswell.
 
-               var sql = `INSERT INTO users (userUid,userName,userEmail,userMobileNumber) VALUES ('${user.uid}', '${req.body.displayName}','${req.body.email}','${req.body.phoneNumber}')`;
+               var sql = `INSERT INTO users (userUid,userName,userEmail,userMobileNumber,profileImage) VALUES ('${user.uid}', '${req.body.displayName}','${req.body.email}','${req.body.phoneNumber}','${defaultProfile}')`;
                connectionToMySql.query(sql, function (error, result) {
                     if (error) 
                     {
