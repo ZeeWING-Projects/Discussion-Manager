@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import home from './home.png'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container,Row,Col,Card,Button,Image} from 'react-bootstrap'
+import {Container,Row,Col,Card,Button,Image,Form} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -79,6 +79,19 @@ const ChatArea = props => {
 
                           </div>
                     </div>
+                </Row>
+                <Row className={styles.messageSendArea}>
+                    <Row>
+                        <Col md={2} className={styles.uploadFile}>
+                          <span><FontAwesomeIcon icon="upload" size="2x"/></span>  
+                        </Col>
+                        <Col md={6} className={styles.messageContextArea}>
+                        <Form.Control  type="text" placeholder="Small text" /> 
+                        </Col>
+                        <Col md={2} className={styles.messageSendBtn}>
+                             <Button variant="primary">Send</Button>
+                        </Col>
+                    </Row>
                 </Row>   
             </Container>
         );

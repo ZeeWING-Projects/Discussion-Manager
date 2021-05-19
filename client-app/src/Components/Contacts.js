@@ -73,6 +73,8 @@ const Contacts = props => {
                 </Card>
                 </div>
 
+                
+
         </Row>
 
             </Container>
