@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect,useState} from "react";
 import home from './home.png'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -12,6 +12,13 @@ const People = props => {
     
 
     const [peopleProfileCard,setPeopleProfileCard]=useState(<div><h1>Server is not reponding</h1></div>)
+
+
+    function sendConnectionRequest(userEmail)
+    {
+        console.log("this is "+userEmail)
+    }
+
 
     function loadContacts()
     {
@@ -38,25 +45,25 @@ const People = props => {
             {/* <Card.Header>Featured</Card.Header> */}
             <Card.Body>
                 <Row>
-                    <Col lg={4}>
+                    <Col md={4}>
                          <Image src={record.profileImage} style={{height:'auto',width:'60%'}}  roundedCircle  />
                     </Col>
-                    <Col lg={8}>
+                    <Col md={8}>
                         <div className={styles.peopleCardContent}>
                                 <h2>{record.userName}</h2>
                                 <p>{record.statusStatement}</p>
                                 <Row>
-                                    <Col lg={3}>
+                                    <Col md={3}>
                                     <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
                                     </Col>
-                                    <Col lg={3}>
+                                    <Col md={3}>
                                     <FontAwesomeIcon icon="comments" size="2x"/> 34
                                     </Col>
-                                    <Col lg={3}>
+                                    <Col md={3}>
                                         <span><Button variant="success">Profile</Button></span>
                                     </Col>
-                                    <Col lg={3}>
-                                        <span><Button variant="primary">Connect</Button></span>
+                                    <Col md={3}>
+                                        <span><Button variant="primary" onClick={sendConnectionRequest(record.userEmail)}>Connect</Button></span>
                                     </Col>
                                 </Row>      
                         </div>
@@ -80,11 +87,13 @@ const People = props => {
         }
           
         setPeopleProfileCard(data)
+
         })
        
     }
 
-    loadContacts();
+     loadContacts();
+
     return (
             <Container className={styles.peopleList}>
                 <Row>
@@ -92,7 +101,7 @@ const People = props => {
                 </Row>
                 <Row>
                     {/* All contacts cards */}
-                    <Row>
+                    <Row className={styles.peopleCardList}>
                          {peopleProfileCard}     
                     </Row>
                 </Row>

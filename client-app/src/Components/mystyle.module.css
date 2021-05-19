@@ -54,9 +54,35 @@
 .peopleList
 {
   width: 60%;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 .peopleCardContent{
  text-align: left;
-
+}
+.peopleCardList{
+  height: 440px;
+  width: 100%;
+ 
+  overflow-y: scroll;
+}
+.chatList{
+ 
+  width: 90%;
+  margin-top: 2%;
+  text-align: left;
+}
+.ContactsList{
+  height: 440px;
+  width: 100%;
+ 
+  overflow-y: scroll;
+}
+.statusText{
+  font-size: small;
+  text-align: end;
+}
+.contactsListRow{
+  width: 90%;
+  margin-top: 2%;
+  margin-left: 2%;
 }

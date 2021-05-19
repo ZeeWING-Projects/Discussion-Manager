@@ -1,13 +1,33 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import home from './home.png'
 import { Router,Link } from "react-router";
-
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Container,Row,Col,Card,Button,Image} from 'react-bootstrap'
+import styles from './mystyle.module.css'; 
+import TableScrollbar from 'react-table-scrollbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Contacts from './Contacts'
 const Chats = props => {
-   
+  
+    //Now here we will make a call to our API for fetching our the contacts information.
+
+
     return (
-        <h1>this is Chats</h1>
+            <Container className={styles.chatList}>
+                <Row>
+                   <Col md={4}>
+                       <Contacts />
+                   </Col>
+                   <Col md={5}>
+                        <h5>chat</h5>
+                   </Col>
+                   <Col md={3}>
+                       <h5>Profile</h5>
+                   </Col>
+                   
+                </Row>
+            </Container>
         );
   };
   export default Chats
-
 
