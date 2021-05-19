@@ -7,6 +7,7 @@ import styles from './mystyle.module.css';
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Contacts from './Contacts'
+import ChatArea from './ChatArea'
 const Chats = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
@@ -19,7 +20,7 @@ const Chats = props => {
                        <Contacts />
                    </Col>
                    <Col md={5}>
-                        <h5>chat</h5>
+                       <ChatArea />
                    </Col>
                    <Col md={3}>
                        <h5>Profile</h5>

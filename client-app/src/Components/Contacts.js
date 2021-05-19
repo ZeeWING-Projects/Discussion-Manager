@@ -13,9 +13,9 @@ const Contacts = props => {
 
     return (
     <Container >
-        <Row>
-        <h5>Contacts List</h5>   
-        <Form  inline>
+        <Row className={styles.chatCotactsListPortionHead}>
+        <h5 className={styles.chatCotactsListPortionTitle}>Contacts List</h5>   
+        <Form className={styles.searchBarOfContactsList} inline>
             <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
             <Button type="submit"><FontAwesomeIcon  icon="search" size="1x" /></Button>
         </Form>

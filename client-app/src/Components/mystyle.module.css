@@ -86,3 +86,68 @@
   margin-top: 2%;
   margin-left: 2%;
 }
+.chatCotactsListPortionHead{
+  border-style: solid;
+  border-color:rgb(201, 164, 164);
+  border-width: 1px;
+
+}
+.searchBarOfContactsList{
+  margin-bottom: 5%;
+  margin-top: 4%;
+  margin-left: 6%;
+}
+.chatCotactsListPortionTitle{
+  margin-left: 4%;
+  margin-top: 2%;
+}
+
+.chatArea{
+ 
+}
+.chatAreaHeader
+{
+  border-style: solid;
+  border-color:rgb(201, 164, 164);
+  border-width: 1px;
+  width: 100%;
+}
+.selectedChatContactName{
+  margin-top: 9%;
+  margin-left: 2%;
+  
+}
+.selectedChatContactLastSeen{
+  font-size: 10px;
+  margin-left: 2%;
+}
+.chatMessageArea{
+  margin-top: 5%;
+  width: 100%;
+}
+.listOfMessages{
+  height: 350px;
+  width: 100%;
+  overflow-y: scroll;
+}
+.recievedMessage{
+ 
+  text-align: left;
+  margin-top: 4%;
+
+  border: 1px solid rgb(50, 55, 117);
+  border-radius: 5px;
+}
+.sentMessage
+{
+  width: 100%;
+  text-align: right;
+  margin-right: 50%; 
+  margin-top: 4%;
+  border: 1px solid rgb(228, 7, 7);
+  border-radius: 5px;
+}
+.spaceSentMessage{
+  width: 50px;
+  visibility: hidden;
+}
