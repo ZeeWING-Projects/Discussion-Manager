@@ -12,6 +12,7 @@ const People = props => {
     
 
     const [peopleProfileCard,setPeopleProfileCard]=useState(<div><h1>Server is not reponding</h1></div>)
+
     function loadContacts()
     {
         fetch("http://localhost:8000/chatService/loadAllUsersList").then(
@@ -29,7 +30,7 @@ const People = props => {
         ).then(data=>{
           //on sucess.
      try{     
-     setPeopleProfileCard(data.map((record)=>{
+     data =   data.map((record)=>{
 
      let rec =
      <div>  
@@ -55,7 +56,7 @@ const People = props => {
                                         <span><Button variant="success">Profile</Button></span>
                                     </Col>
                                     <Col lg={3}>
-                                        <span><Button variant="primary">Contact</Button></span>
+                                        <span><Button variant="primary">Connect</Button></span>
                                     </Col>
                                 </Row>      
                         </div>
@@ -72,12 +73,13 @@ const People = props => {
        </div>    
 
             return rec
-          }) )
+          }) 
         }catch(e)
         {
             
         }
           
+        setPeopleProfileCard(data)
         })
        
     }
