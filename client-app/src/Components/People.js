@@ -9,15 +9,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const People = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
-    const [peopleProfileCard,setPeopleProfileCard]=useState(<div></div>)
+    const [peopleProfileCard,setPeopleProfileCard]=useState(<div>Servcer is not responding</div>)
 
     const [serverResponse,setServerResponse]=useState({})
 
     function sendConnectionRequest(userEmail)
     {
-        
-        console.log("this is "+userEmail)
-        
+        console.log("this is "+userEmail)   
     }
 
     function loadContacts()
@@ -49,6 +47,12 @@ const People = props => {
 
         })
        
+    }
+
+    function addToContact(e,a,b){
+    //  console.log(event.target.sibillings())
+    console.log(a)
+    e.preventDefault()
     }
 
     function setDataIntoList()
@@ -95,7 +99,11 @@ const People = props => {
                                         <span><Button variant="success">Profile</Button></span>
                                     </Col>
                                     <Col md={3}>
-                                        <span><Button variant="primary" onClick={sendConnectionRequest(record.userEmail)}>Connect</Button></span>
+                                        <span>
+                                        <div style={{display:"none"}}>{5}</div>    
+                                        <Button variant="primary" onClick={ e => addToContact(e,record.userEmail,record.userUid)}>Connect</Button>
+                                        
+                                        </span>
                                     </Col>
                                 </Row>      
                         </div>
@@ -108,49 +116,8 @@ const People = props => {
 
             return rec
           }) )
-        
-        // {
-        //  console.log("C")   
-        // let rec =
-   
-        // <div>  
-        //        <Card className="shadow mt-2">
-        //        {/* <Card.Header>Featured</Card.Header> */}
-        //        <Card.Body>
-        //            <Row>
-        //                <Col md={4}>
-        //                     <Image src={record.profileImage} style={{height:'auto',width:'60%'}}  roundedCircle  />
-        //                </Col>
-        //                <Col md={8}>
-        //                    <div className={styles.peopleCardContent}>
-        //                            <h2>{record.userName}</h2>
-        //                            <p>{record.statusStatement}</p>
-        //                            <Row>
-        //                                <Col md={3}>
-        //                                <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
-        //                                </Col>
-        //                                <Col md={3}>
-        //                                <FontAwesomeIcon icon="comments" size="2x"/> 34
-        //                                </Col>
-        //                                <Col md={3}>
-        //                                    <span><Button variant="success">Profile</Button></span>
-        //                                </Col>
-        //                                <Col md={3}>
-        //                                    <span><Button variant="primary" onClick={sendConnectionRequest(record.userEmail)}>Connect</Button></span>
-        //                                </Col>
-        //                            </Row>      
-        //                    </div>
-        //                </Col>
-        //            </Row>
-        //        </Card.Body>
-        //    </Card>
-   
-        //   </div>    
-   
-        //        return rec
-        //      }) )
-
     }
+
 
     useEffect(loadContacts,[]);
     useEffect(setDataIntoList,[serverResponse])
