@@ -9,10 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const People = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
-    
+    //
 
     const [peopleProfileCard,setPeopleProfileCard]=useState(<div><h1>Server is not reponding</h1></div>)
 
+    
 
     function sendConnectionRequest(userEmail)
     {
@@ -30,14 +31,15 @@ const People = props => {
         error=>
         {
           //on error
-         
+          
           console.log(error)
         }
     
         ).then(data=>{
           //on sucess.
      try{     
-     data =   data.map((record)=>{
+     data =   data.map((record)=>
+     {
 
      let rec =
      <div>  
@@ -92,7 +94,8 @@ const People = props => {
        
     }
 
-     loadContacts();
+    //Here ... use effect ...
+    useEffect(loadContacts,[]);
 
     return (
             <Container className={styles.peopleList}>

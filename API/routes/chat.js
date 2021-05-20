@@ -10,6 +10,7 @@ var loadChatRouter = express.Router();
 var loadAllUsersListRouter = express.Router();
 
 
+
 module.exports={
     chatInfo:
     router.get("/info",function(req,res,next)
@@ -74,6 +75,7 @@ module.exports={
     ,
     loadAllUsersListRouter:
     loadAllUsersListRouter.get("/loadAllUsersList",function(req,res){
+
         connectionToMySql.query(`SELECT * FROM users `, function (err, result) {
             if (err)
             { 
@@ -88,7 +90,13 @@ module.exports={
             {
                 res.status(200).send(result)  
             }
-          });       
+
+
+          }
+          
+          //.........
+          
+          );       
     })
     ,
     sendMessageRouter:
