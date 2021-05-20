@@ -7,7 +7,9 @@ import Chats from "./Chats";
 import Home from "./Home";
 import Settings from "./Settings";
 import People from "./People";
+import FriendRequests from './FriendRequests.js'
 import styles from './mystyle.module.css'; 
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Nav} from "react-bootstrap";
 const Dash = props => {
@@ -47,6 +49,13 @@ const Dash = props => {
                             setContentArea(<Settings/>)
                             }}
                           ><FontAwesomeIcon icon="cogs" size="3x" className="mt-4"/><div>Settings</div></Nav.Item>
+
+                          <Nav.Item className={styles.navLink}
+                           onClick={()=>{
+                            setContentArea(<FriendRequests/>)
+                            }}
+                          ><FontAwesomeIcon icon="bell" size="3x" className="mt-3"/><div>Request</div></Nav.Item>    
+
                     </Nav> 
                     </Col>
                     <Col >
