@@ -10,16 +10,17 @@ const People = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
     //
-
-    const [peopleProfileCard,setPeopleProfileCard]=useState(<div><h1>Server is not reponding</h1></div>)
-
     
+    const [peopleProfileCard,setPeopleProfileCard]=useState(<h5>Server not responding</h5>)
+
+    const [serverResponse,setServerResponse]=useState({})
 
     function sendConnectionRequest(userEmail)
     {
+        
         console.log("this is "+userEmail)
+        
     }
-
 
     function loadContacts()
     {
@@ -37,58 +38,55 @@ const People = props => {
     
         ).then(data=>{
           //on sucess.
-     try{     
-     data =   data.map((record)=>
+     try
      {
-
-     let rec =
-     <div>  
-            <Card className="shadow mt-2">
-            {/* <Card.Header>Featured</Card.Header> */}
-            <Card.Body>
-                <Row>
-                    <Col md={4}>
-                         <Image src={record.profileImage} style={{height:'auto',width:'60%'}}  roundedCircle  />
-                    </Col>
-                    <Col md={8}>
-                        <div className={styles.peopleCardContent}>
-                                <h2>{record.userName}</h2>
-                                <p>{record.statusStatement}</p>
-                                <Row>
-                                    <Col md={3}>
-                                    <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
-                                    </Col>
-                                    <Col md={3}>
-                                    <FontAwesomeIcon icon="comments" size="2x"/> 34
-                                    </Col>
-                                    <Col md={3}>
-                                        <span><Button variant="success">Profile</Button></span>
-                                    </Col>
-                                    <Col md={3}>
-                                        <span><Button variant="primary" onClick={sendConnectionRequest(record.userEmail)}>Connect</Button></span>
-                                    </Col>
-                                </Row>      
-                        </div>
-                    </Col>
-                </Row>
-            {/* <Card.Title>Special title treatment</Card.Title>
-            <Card.Text>
-                With supporting text below as a natural lead-in to additional content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button> */}
-            </Card.Body>
-        </Card>
-
-       </div>    
-
-            return rec
-          }) 
-        }catch(e)
+        setServerResponse(data)
+        setPeopleProfileCard(serverResponse.map((record)=>
+        {
+        let rec =
+   
+        <div>  
+               <Card className="shadow mt-2">
+               {/* <Card.Header>Featured</Card.Header> */}
+               <Card.Body>
+                   <Row>
+                       <Col md={4}>
+                            <Image src={record.profileImage} style={{height:'auto',width:'60%'}}  roundedCircle  />
+                       </Col>
+                       <Col md={8}>
+                           <div className={styles.peopleCardContent}>
+                                   <h2>{record.userName}</h2>
+                                   <p>{record.statusStatement}</p>
+                                   <Row>
+                                       <Col md={3}>
+                                       <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
+                                       </Col>
+                                       <Col md={3}>
+                                       <FontAwesomeIcon icon="comments" size="2x"/> 34
+                                       </Col>
+                                       <Col md={3}>
+                                           <span><Button variant="success">Profile</Button></span>
+                                       </Col>
+                                       <Col md={3}>
+                                           <span><Button variant="primary" onClick={sendConnectionRequest(record.userEmail)}>Connect</Button></span>
+                                       </Col>
+                                   </Row>      
+                           </div>
+                       </Col>
+                   </Row>
+               </Card.Body>
+           </Card>
+   
+          </div>    
+   
+               return rec
+             }) )
+     }catch(e)
         {
             
         }
           
-        setPeopleProfileCard(data)
+       
 
         })
        
