@@ -24,29 +24,29 @@ const Dash = props => {
                            onClick={()=>{
                             setContentArea(<Profile/>)
                            }}
-                           ><FontAwesomeIcon icon="user-circle" size="4x" className="mt-4"/><div>Profile</div></Nav.Item>
+                           ><FontAwesomeIcon icon="user-circle" size="3x" className="mt-4"/><div>Profile</div></Nav.Item>
                            <Nav.Item className={styles.navLink}
                             onClick={()=>{
                             setContentArea(<Home/>)
                             }}
-                           ><FontAwesomeIcon icon="home" size="4x" className="mt-4"/><div>Home</div></Nav.Item>
+                           ><FontAwesomeIcon icon="home" size="3x" className="mt-4"/><div>Home</div></Nav.Item>
 
                           <Nav.Item className={styles.navLink}
                            onClick={()=>{
                             setContentArea(<Chats/>)
                             }}
-                          ><FontAwesomeIcon icon="comments" size="4x" className="mt-4"/><div>Chat</div></Nav.Item>
+                          ><FontAwesomeIcon icon="comments" size="3x" className="mt-4"/><div>Chat</div></Nav.Item>
                           <Nav.Item className={styles.navLink}
                            onClick={()=>{
                             setContentArea(<People/>)
                             }}
-                          ><FontAwesomeIcon icon="users" size="4x" className="mt-4"/><div>Make contacts</div></Nav.Item>
+                          ><FontAwesomeIcon icon="users" size="3x" className="mt-4"/><div>Make contacts</div></Nav.Item>
           
                           <Nav.Item className={styles.navLink}
                            onClick={()=>{
                             setContentArea(<Settings/>)
                             }}
-                          ><FontAwesomeIcon icon="cogs" size="4x" className="mt-4"/><div>Settings</div></Nav.Item>
+                          ><FontAwesomeIcon icon="cogs" size="3x" className="mt-4"/><div>Settings</div></Nav.Item>
                     </Nav> 
                     </Col>
                     <Col >
