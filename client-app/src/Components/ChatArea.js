@@ -9,14 +9,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ChatArea = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
-
+    
 
     return (
             <Container className={styles.chatArea}>
                 <Row>
                     <div className={styles.chatAreaHeader}>
                         <div className={styles.selectedChatContactName}>
-                            <h3>Zeeshan</h3>
+                            <h3>{props.selectedUserName}</h3>
                         </div>
                         <div className={styles.selectedChatContactLastSeen}>
                             <h6>Last seen 15h ago Local timeMay 19, 9:12 PM</h6>

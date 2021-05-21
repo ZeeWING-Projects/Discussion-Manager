@@ -9,7 +9,100 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Contacts = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
+    const [peopleProfileCard,setPeopleProfileCard]=useState(<div>Servcer is not responding</div>)
 
+    const [serverResponse,setServerResponse]=useState({})
+
+    function sendConnectionRequest(userEmail)
+    {
+        console.log("this is "+userEmail)   
+    }
+
+    function loadContacts()
+    {
+        let data =
+        {
+            userUid:localStorage.getItem("userUid")
+        }
+        
+        fetch("http://localhost:8000/chatService/loadAllContacts",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+          return response.json();
+        },
+        error=>
+        {
+          //on error
+          
+          console.log(error)
+        }
+    
+        ).then(data=>{
+          //on sucess.
+     try
+     {
+        setServerResponse(data)
+        console.log(data)
+     }catch(e)
+        {
+            
+        }
+
+        })
+       
+    }
+
+   
+
+    function setDataIntoList()
+    {
+       const selectContact =  function (e,uid,profile,name)
+        {
+            props.chatAreaTrigger(uid,name,profile)
+        }  
+
+
+        let list=[]
+
+        console.log(Object.values(serverResponse))
+        Object.keys(serverResponse).map((rec)=>{
+            var record = serverResponse[rec];
+                list.push({
+                    userUid:record.contactUserUid,
+                    userName:record.contactUserName,
+                    contactUserUid:record.contactUserUid,
+                    profileImage:record.contactUserProfile,
+                    status:record.status
+                })
+        })
+
+     setPeopleProfileCard(list.map((record)=>
+     {
+      console.log(record.userName)
+     let rec =
+     <div>  
+            <Card className="shadow mt-2 w-100 h-20">
+                        {/* <Card.Header>Featured</Card.Header> */}
+                    <Card.Body style={{cursor:"pointer"}} onClick={e => selectContact(e,record.userUid,record.profileImage,record.userName)}>    
+                        <h5 >{record.userName}</h5>
+                        <div className={styles.statusText}>Status : Online</div>
+                    </Card.Body>
+            </Card>
+    </div> 
+            return rec
+          }) )
+    }
+
+
+    useEffect(loadContacts,[]);
+    useEffect(setDataIntoList,[serverResponse])
 
     return (
     <Container >
@@ -24,57 +117,8 @@ const Contacts = props => {
         <Row className={styles.ContactsList}>
                 
                 <div className={styles.contactsListRow}>
-                <Card className="shadow mt-2 w-100 h-20">
-                        {/* <Card.Header>Featured</Card.Header> */}
-                    <Card.Body >    
-                        <h5 >Zeeshan</h5>
-                        <div className={styles.statusText}>Status : Online</div>
-                    </Card.Body>
-                </Card>
-                </div>
-
-                <div className={styles.contactsListRow}>
-                <Card className="shadow mt-2 w-100 h-20">
-                        {/* <Card.Header>Featured</Card.Header> */}
-                    <Card.Body >    
-                        <h5 >Zeeshan</h5>
-                        <div className={styles.statusText}>Status : Online</div>
-                    </Card.Body>
-                </Card>
-                </div>
-
-                <div className={styles.contactsListRow}>
-                <Card className="shadow mt-2 w-100 h-20">
-                        {/* <Card.Header>Featured</Card.Header> */}
-                    <Card.Body >    
-                        <h5 >Zeeshan</h5>
-                        <div className={styles.statusText}>Status : Online</div>
-                    </Card.Body>
-                </Card>
-                </div>
-
-                <div className={styles.contactsListRow}>
-                <Card className="shadow mt-2 w-100 h-20">
-                        {/* <Card.Header>Featured</Card.Header> */}
-                    <Card.Body >    
-                        <h5 >Zeeshan</h5>
-                        <div className={styles.statusText}>Status : Online</div>
-                    </Card.Body>
-                </Card>
-                </div>
-
-                <div className={styles.contactsListRow}>
-                <Card className="shadow mt-2 w-100 h-20">
-                        {/* <Card.Header>Featured</Card.Header> */}
-                    <Card.Body >    
-                        <h5 >Zeeshan</h5>
-                        <div className={styles.statusText}>Status : Online</div>
-                    </Card.Body>
-                </Card>
-                </div>
-
-                
-
+                     {peopleProfileCard}
+                </div>                
         </Row>
 
             </Container>

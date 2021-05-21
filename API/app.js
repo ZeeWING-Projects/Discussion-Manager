@@ -23,7 +23,9 @@ const {
       loadAllContactsRouter,
       sendMessageRouter,
       loadChatRouter,
-      loadAllUsersListRouter
+      loadAllUsersListRouter,
+      loadAllNewFrndsListRouter,
+      acceptFrndRequestRouter
       } = require('./routes/chat')
 
 const {
@@ -70,6 +72,8 @@ app.use('/chatService',loadAllContactsRouter)
 app.use('/chatService',sendMessageRouter)
 app.use('/chatService',loadChatRouter)
 app.use('/chatService',loadAllUsersListRouter)
+app.use('/chatService',loadAllNewFrndsListRouter)
+app.use('/chatService',acceptFrndRequestRouter)
 
 
 app.use('/profileService',infoProfile)

@@ -6,62 +6,68 @@ import {Container,Row,Col,Card,Button,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-const People = props => {
+const FirendRequests = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
     const [peopleProfileCard,setPeopleProfileCard]=useState(<div>Servcer is not responding</div>)
 
     const [serverResponse,setServerResponse]=useState({})
 
-    function sendConnectionRequest(userEmail)
-    {
-        console.log("this is "+userEmail)   
-    }
+    const [approvedRequest,setApprovedRequest]=useState('')
 
     function loadContacts()
     {
-        fetch("http://localhost:8000/chatService/loadAllUsersList").then(
+        let data ={
+            userUid:localStorage.getItem("userUid")
+        }
+        fetch("http://localhost:8000/chatService/loadAllNewFrndsList",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
         response => 
         {
           return response.json();
         },
+    
         error=>
         {
           //on error
-          
+       
           console.log(error)
+          
         }
     
         ).then(data=>{
           //on sucess.
-     try
-     {
-        setServerResponse(data)
-
-     }catch(e)
-        {
-            
-        }
-
+        
+          try{
+          console.log(data)
+          setServerResponse(data)
+          }catch(e)
+          {
+    
+          }
         })
-       
+      
     }
 
    
 
     function setDataIntoList()
     {
-       const addToContactList =  function (e,uid,profile,name)
+       const approveRequest =  function (e,uid,profile,name)
         {
             let data =
             {
                 userUid:localStorage.getItem("userUid"),
-                contactUserUid:uid,
-                contactUserName:name,
-                contactUserProfile:profile
+                contactUserUid:uid
             }
             
-          fetch("http://localhost:8000/chatService/addInContactList",
+          fetch("http://localhost:8000/chatService/acceptFrndRequest",
           {
             method: 'POST',
             headers: {
@@ -76,13 +82,11 @@ const People = props => {
           error=>
           {
             //on error
-           
             console.log("Erro in sending connection request"+error)
           }
           ).then(data=>{
             //On success.
             
-           
             try{
                
               // {
@@ -90,15 +94,10 @@ const People = props => {
               //   "responseCode": 1,
               //   "userId": "pgAjluAdwrSWoSmrHOMxrx6lwYH2"
               // }
-              if(data.responseCode===1)
+              if(data.responseCode===0)
               {
-                e.target.innerText="Already Sent"   
+                  setApprovedRequest("Approved")
               }
-              else if(data.responseCode===0)
-              {
-                e.target.innerText="Sent Request"   
-              }
-              
             }catch(e){}
           })
 
@@ -110,20 +109,21 @@ const People = props => {
         console.log(Object.values(serverResponse))
         Object.keys(serverResponse).map((rec)=>{
             var record = serverResponse[rec];
-            if(record.userUid!=localStorage.getItem("userUid"))
-            {
+            console.log(record.contactUserName)
+        //     "userUid": "qA5RRMCCo5h6KD0s9aP8SuOzriH2",
+        // "contactUserUid": "fKctIlTHuqeVQt3XIGXC6Y2jT5X2",
+        // "contactUserName": "Tuba",
+        // "contactUserProfile": "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada",
+        // "status": "Not Approved"
             list.push({
-                userUid:record.userUid,
-                userName:record.userName,
-                userEmail:record.userEmail,
-                userMobileNumber:record.userMobileNumber,
-                profileImage:record.profileImage,
-                statusStatement:record.statusStatement
+                userUid:record.contactUserUid,
+                userName:record.contactUserName,
+                profileImage:record.contactUserProfile,
+                status:record.status
             })
-            }
         })
 
-        setPeopleProfileCard(list.map((record)=>
+    setPeopleProfileCard(list.map((record)=>
      {
      let rec =
 
@@ -138,22 +138,14 @@ const People = props => {
                     <Col md={8}>
                         <div className={styles.peopleCardContent}>
                                 <h2>{record.userName}</h2>
-                                <p>{record.statusStatement}</p>
                                 <Row>
-                                    <Col md={3}>
-                                    <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
-                                    </Col>
-                                    <Col md={3}>
-                                    <FontAwesomeIcon icon="comments" size="2x"/> 34
-                                    </Col>
-                                    <Col md={3}>
+                                    
+                                    <Col md={4}>
                                         <span><Button variant="success">Profile</Button></span>
                                     </Col>
-                                    <Col md={3}>
+                                    <Col md={4}>
                                         <span>
-                                        <div style={{display:"none"}}>{5}</div>    
-                                        <Button variant="primary" onClick={ e => addToContactList(e,record.userUid,record.profileImage,record.userName)}>Connect</Button>
-        
+                                        <Button variant="primary" onClick={ e => approveRequest(e,record.userUid,record.profileImage,record.userName)}>{record.status}</Button>
                                         </span>
                                     </Col>
                                 </Row>      
@@ -169,14 +161,13 @@ const People = props => {
           }) )
     }
 
-
-    useEffect(loadContacts,[]);
+    useEffect(loadContacts,[approvedRequest]);
     useEffect(setDataIntoList,[serverResponse])
 
     return (
             <Container className={styles.peopleList}>
                 <Row>
-                    <h1>Find the people</h1>
+                    <h1>Requests</h1>
                 </Row>
                 <Row>
                     {/* All contacts cards */}
@@ -188,5 +179,5 @@ const People = props => {
         );
     }
  
-  export default People
+  export default FirendRequests
 

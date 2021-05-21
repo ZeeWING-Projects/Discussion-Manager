@@ -108,6 +108,7 @@ function login()
       console.log(responseMessage)
       if(responseCode===1)
       {
+        localStorage.setItem("userUid",userId)
         history.push('/UserMainDashBoard');
       }
      else{
