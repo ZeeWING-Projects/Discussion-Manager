@@ -57,7 +57,7 @@ module.exports={
     ,
     loadAllContactsRouter:
     loadAllContactsRouter.post("/loadAllContacts",function(req,res){
-        connectionToMySql.query(`SELECT * FROM contactslist WHERE userUid = '${req.body.uid}' and status='Approved'`, function (err, result) {
+        connectionToMySql.query(`SELECT * FROM contactslist WHERE userUid = '${req.body.userUid}' and status='Approved'`, function (err, result) {
             if (err)
             { 
                 var errorCode = err.code;
@@ -69,6 +69,7 @@ module.exports={
             }
             else
             {
+                console.log(result)
                 res.status(200).send(result)
             }
           });

@@ -87,7 +87,6 @@ const FirendRequests = props => {
           ).then(data=>{
             //On success.
             
-           
             try{
                
               // {

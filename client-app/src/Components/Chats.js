@@ -12,16 +12,33 @@ import ChatProfileVeiwer from './ChatProfileViewer'
 const Chats = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
+    const [chatAreaHolder,setChatAreaHolder]=useState(<ChatArea selectedUserUid={"v"} selectedUserName={"Z"} selectedUserProfile={"v"}/>)
+    
+    function makeCallToChatArea()
+    {
+        console.log("YES")
+    }
+
+    const chatAreaTigger = (uid,name,profile)=>
+    {
+        
+        
+        setChatAreaHolder(<ChatArea selectedUserUid={uid} selectedUserName={name} selectedUserProfile={profile} />)
+        console.log("UID"+uid)
+    }
+    
+    // useEffect(makeCallToChatArea,[uid])
+
 
 
     return (
             <Container className={styles.chatList}>
                 <Row>
                    <Col md={4}>
-                       <Contacts />
+                       <Contacts chatAreaTrigger={chatAreaTigger} />
                    </Col>
                    <Col md={5}>
-                       <ChatArea />
+                       {chatAreaHolder}
                    </Col>
                    <Col md={3}>
                       <ChatProfileVeiwer />
