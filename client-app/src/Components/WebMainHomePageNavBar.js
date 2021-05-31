@@ -39,13 +39,14 @@ function WebMainHomePageNavBar()
             })}
       <div style={{
           position: 'absolute',
-          right: '10%',
+          right: '10%'
+        
        }}>
       <Form className="d-flex ms-4">
             <FormControl
             type="search"
             placeholder="Search"
-            className="mr-2"
+            className="mr-1"
             aria-label="Search"
            />
         <Button variant="outline-success">Search</Button>

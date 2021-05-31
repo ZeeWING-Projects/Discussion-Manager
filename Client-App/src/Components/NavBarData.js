@@ -6,7 +6,7 @@ import * as IoIcons from 'react-icons/io';
 export const NavBarData = [
   {
     title: 'Home',
-    path: '/',
+    path: '/Home',
     icon: <AiIcons.AiFillHome size={30}/>,
     cName: 'nav-text'
   },
@@ -29,9 +29,17 @@ export const NavBarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Support',
-    path: '/Support',
-    icon: <IoIcons.IoMdHelpCircle size={30}/>,
+    title: 'FriendRequests',
+    path: '/FriendRequests',
+    icon: <IoIcons.IoMdNotifications size={30}/>,
     cName: 'nav-text'
   }
+  // ,
+  // {
+  //   title: 'Support',
+  //   path: '/Support',
+  //   icon: <IoIcons.IoMdHelpCircle size={30}/>,
+  //   cName: 'nav-text'
+  // }
+  
 ];
