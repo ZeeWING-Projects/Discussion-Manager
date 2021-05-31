@@ -129,7 +129,9 @@ const Contacts = props => {
 
     return (
     <Container >
-        
+        <div>
+            
+        </div>
         <Row className={styles.ContactsList}>
                 
                 <div className={styles.contactsListRow}>
