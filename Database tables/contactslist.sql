@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2021 at 09:09 AM
+-- Generation Time: May 31, 2021 at 02:42 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -31,19 +31,16 @@ CREATE TABLE `contactslist` (
   `userUid` varchar(30) NOT NULL,
   `contactUserUid` varchar(30) NOT NULL,
   `contactUserName` varchar(30) NOT NULL,
-  `contactUserProfile` text NOT NULL
+  `contactUserProfile` text NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contactslist`
 --
 
-INSERT INTO `contactslist` (`userUid`, `contactUserUid`, `contactUserName`, `contactUserProfile`) VALUES
-('4KksC4PFIBe8JKDSDgwu0Q1R3Jv2', '0TFdiLUfj8Vq0Qtoz14jAhNuGu03', 'Zeeshan', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada'),
-('0TFdiLUfj8Vq0Qtoz14jAhNuGu03', '4KksC4PFIBe8JKDSDgwu0Q1R3Jv2', 'Shan', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada'),
-('0TFdiLUfj8Vq0Qtoz14jAhNuGu03', 'Apj5bwYRadRxNcjR3Wwm2urBSj22', 'Ahmed', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada'),
-('4KksC4PFIBe8JKDSDgwu0Q1R3Jv2', 'Apj5bwYRadRxNcjR3Wwm2urBSj22', 'Ahmed', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada'),
-('0TFdiLUfj8Vq0Qtoz14jAhNuGu03', 'LFu2IhjTGZb2YjflHY9kVrVzXFh2', 'Zee', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada');
+INSERT INTO `contactslist` (`userUid`, `contactUserUid`, `contactUserName`, `contactUserProfile`, `status`) VALUES
+('uLl4pRezO1VIGfmWRXSV2wWwoH13', '5U9wbAfe66RrFRibw07u9qBkDQJ2', 'tuba', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada', 'Approved');
 
 --
 -- Indexes for dumped tables

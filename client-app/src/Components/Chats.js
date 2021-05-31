@@ -28,24 +28,19 @@ const Chats = props => {
     }
     
     // useEffect(makeCallToChatArea,[uid])
-
-
-
     return (
-            <Container className={styles.chatList}>
+            <div className={styles.chatList}>
                 <Row>
                    <Col md={4}>
                        <Contacts chatAreaTrigger={chatAreaTigger} />
                    </Col>
-                   <Col md={5}>
+                   <Col md={8} >
                        {chatAreaHolder}
-                   </Col>
-                   <Col md={3}>
-                      <ChatProfileVeiwer />
-                   </Col>
+                    </Col> 
+                   
                    
                 </Row>
-            </Container>
+            </div>
         );
   };
   export default Chats

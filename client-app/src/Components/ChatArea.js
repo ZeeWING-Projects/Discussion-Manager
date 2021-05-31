@@ -12,88 +12,23 @@ const ChatArea = props => {
     
 
     return (
-            <Container className={styles.chatArea}>
+            <div>
                 <Row>
-                    <div className={styles.chatAreaHeader}>
+                    <Col md={2}>
+                     <div className={styles.chatAreaHeader}>
                         <div className={styles.selectedChatContactName}>
                             <h3>{props.selectedUserName}</h3>
                         </div>
-                        <div className={styles.selectedChatContactLastSeen}>
-                            <h6>Last seen 15h ago Local timeMay 19, 9:12 PM</h6>
-                        </div>
+                       
                     </div>
+                    </Col>
+                    <Col md={8}>
+                    </Col>
+                    <Col md={2}>
+                    </Col>
+                    
                 </Row>
-                <Row>
-                    <div className={styles.chatMessageArea}>
-                          <div className={styles.listOfMessages}>
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Heyy Zeeshan</h7>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Hello tuba</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>How is going on ?</h7>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Whats status?</h7>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Every this fine... </h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Working on chat module...</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>What about you</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Which module on which you are working???</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Fine ...Every thing is smooth...</h7>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Working on posts model</h7>
-                                </div>
-                                
-
-                          </div>
-                    </div>
-                </Row>
-                <Row className={styles.messageSendArea}>
-                    <Row>
-                        <Col md={2} className={styles.uploadFile}>
-                          <span><FontAwesomeIcon icon="upload" size="2x"/></span>  
-                        </Col>
-                        <Col md={6} className={styles.messageContextArea}>
-                        <Form.Control  type="text" placeholder="Small text" /> 
-                        </Col>
-                        <Col md={2} className={styles.messageSendBtn}>
-                             <Button variant="primary">Send</Button>
-                        </Col>
-                    </Row>
-                </Row>   
-            </Container>
+            </div>
         );
   };
   export default ChatArea

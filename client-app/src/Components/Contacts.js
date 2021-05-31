@@ -87,15 +87,38 @@ const Contacts = props => {
      {
       console.log(record.userName)
      let rec =
-     <div>  
-            <Card className="shadow mt-2 w-100 h-20">
-                        {/* <Card.Header>Featured</Card.Header> */}
-                    <Card.Body style={{cursor:"pointer"}} onClick={e => selectContact(e,record.userUid,record.profileImage,record.userName)}>    
-                        <h5 >{record.userName}</h5>
-                        <div className={styles.statusText}>Status : Online</div>
-                    </Card.Body>
-            </Card>
-    </div> 
+     <div> 
+         <div style={
+        {
+        cursor:"pointer",
+        width:"100%",
+        height:"90px",
+        borderStyle:"inset",
+        borderColor:"white",
+        borderWidth:"1px"
+        }} onClick={e => selectContact(e,record.userUid,record.profileImage,record.userName)}>
+                <h5 style={
+                    {
+                    paddingLeft:"10px",
+                    paddingTop:"10px",    
+                    textAlign:'left',
+                    fontSize:"25px",
+                    color:"white"
+                    }
+                    }>{record.userName}</h5>
+                <div style={
+                    {
+                        color:"white",
+                        fontSize:"14px",
+                        textAlign:"right",
+                        marginRight:"10px"
+                    }
+                }>Status : Online</div> 
+
+          </div> 
+
+           
+         </div> 
             return rec
           }) )
     }
@@ -106,14 +129,7 @@ const Contacts = props => {
 
     return (
     <Container >
-        <Row className={styles.chatCotactsListPortionHead}>
-        <h5 className={styles.chatCotactsListPortionTitle}>Contacts List</h5>   
-        <Form className={styles.searchBarOfContactsList} inline>
-            <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-            <Button type="submit"><FontAwesomeIcon  icon="search" size="1x" /></Button>
-        </Form>
-
-        </Row>
+        
         <Row className={styles.ContactsList}>
                 
                 <div className={styles.contactsListRow}>
