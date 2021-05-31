@@ -1,13 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import WebMainHomePage from './WebMainHomePage'
-import UserMainDashBoard from './UserMainDashBoard'
+
 import LoginToAccount from './Components/LoginToAccount'
 import Profile from './Components/Profile'
 import People from './Components/People'
 import Chats from './Components/Chats'
 import Home from './Components/Home'
 import Support from './Components/Support'
+import NewUserMainPage from './Components/NewUserMainPage'
 import WebMainHomePageNavBar from  './Components/WebMainHomePageNavBar'
 import {Route,Link, Router} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,11 +20,22 @@ import { faUsers,faUserCircle,faComments,faMailBulk,faCogs, faHome,faAddressBook
 library.add(faUsers, faUserCircle, faComments,faMailBulk,faCogs,faHome,faAddressBook,faThumbsUp,faSearch,faUpload,faBell)
 
 function App() {
-  localStorage.setItem("isLogedIn",false);
+  console.log("values  "+localStorage.getItem("isLogedIn"))
+  let main_page=<Route path="/" component={Home}></Route>
+  if(localStorage.getItem("isLogedIn")==null || localStorage.getItem("isLogedIn")==="false")
+  {
+    console.log("Here")
+    main_page=<Route path="/" component={NewUserMainPage}></Route>
+    
+  }
+  else
+  {
+    let main_page=<Route path="/" component={Home}></Route>
+  }
   return (
     <div className="App">
       <WebMainHomePageNavBar />
-      <Route path="/Home" component={Home}></Route>
+      {main_page}
       <Route path="/Profile" component={Profile}></Route>
       <Route path="/Chats" component={Chats}></Route>
       <Route path="/People" component={People}></Route>

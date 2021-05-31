@@ -54,14 +54,15 @@ const LoginToAccount = (props) => {
 
      var isLogedIn  = localStorage.getItem("isLogedIn")
       console.log("Is loged in"+isLogedIn)
-      if(isLogedIn==="false")
+      if(isLogedIn==="false" || localStorage.getItem("isLogedIn")==null)
       {
         //If not loged in then open login modal
         toggle();
       }
       else
       {
-        history.push('/UserMainDashBoard');
+
+        history.push('/Home');
       }
 
      }
@@ -108,8 +109,9 @@ function login()
       console.log(responseMessage)
       if(responseCode===1)
       {
+        localStorage.setItem("isLogedIn",true)
         localStorage.setItem("userUid",userId)
-        history.push('/UserMainDashBoard');
+        window.location.reload();
       }
      else{
       setErroMeeage(<span>{responseMessage}</span>)

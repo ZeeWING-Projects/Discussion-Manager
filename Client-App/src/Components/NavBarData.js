@@ -6,7 +6,7 @@ import * as IoIcons from 'react-icons/io';
 export const NavBarData = [
   {
     title: 'Home',
-    path: '/Home',
+    path: '/',
     icon: <AiIcons.AiFillHome size={30}/>,
     cName: 'nav-text'
   },

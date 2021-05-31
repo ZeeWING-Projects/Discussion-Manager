@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
-import LoginToAccount from './LoginToAccount'
-import SinUpToAccount from './SinUpToAccount'
+import LoginToAccount from '../LoginToAccount'
+import SinUpToAccount from '../SinUpToAccount'
 import {Route,Link} from 'react-router-dom'
 import {Navbar,Nav,NavDropdown,button} from 'react-bootstrap'
 import Avatar from 'react-avatar';
