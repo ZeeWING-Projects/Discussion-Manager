@@ -7,37 +7,31 @@ export const NavBarData = [
   {
     title: 'Home',
     path: '/',
-    icon: <AiIcons.AiFillHome size={35}/>,
+    icon: <AiIcons.AiFillHome size={30}/>,
     cName: 'nav-text'
   },
   {
-    title: 'Reports',
+    title: 'My Profile',
     path: '/reports',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <FaIcons.FaUserAlt size={30}/>,
     cName: 'nav-text'
   },
   {
-    title: 'Products',
+    title: 'Find New People',
     path: '/products',
-    icon: <FaIcons.FaCartPlus />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />,
+    icon: <IoIcons.IoIosPeople size={30}/>,
     cName: 'nav-text'
   },
   {
     title: 'Messages',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
+    path: '/team',
+    icon: <AiIcons.AiFillMessage size={30}/>,
     cName: 'nav-text'
   },
   {
     title: 'Support',
     path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
+    icon: <IoIcons.IoMdHelpCircle size={30}/>,
     cName: 'nav-text'
   }
 ];
