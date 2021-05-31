@@ -1,49 +1,99 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import React from 'react'
-import LoginToAccount from './LoginToAccount'
-import SinUpToAccount from './SinUpToAccount'
-import {Route,Link} from 'react-router-dom'
-import {Navbar,Nav,NavDropdown,button} from 'react-bootstrap'
-import Avatar from 'react-avatar';
-import styles from './mystyle.module.css'; 
+import React, { useState } from 'react';
+import * as AiIcons from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+
+import {NavBarData} from './NavBarData';
+import {Image,FormControl,Button,Form,Dropdown,ButtonGroup} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Navbar.css';
+import logo from './logo192.png'
+import { IconContext} from 'react-icons';
+
 function WebMainHomePageNavBar()
 {
-    return(
+  const [sidebar, setSidebar] = useState(false);
 
-    <Navbar collapseOnSelect expand="lg"  variant="dark">
-        <Navbar.Brand href="#home"><div className={styles.navBrand}>Discussion Manager</div></Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
+  const showSidebar = () => setSidebar(!sidebar);
 
-            {/* <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown> */}
-            
-          </Nav>
-          <Nav>
-            
-            
-            <Nav.Item><button type="button" class="btn btn-outline-light mr-2" to="/webMainHomePage">About</button></Nav.Item>  
-            <Nav.Item><button type="button" class="btn btn-outline-light mr-2" to="/webMainHomePage">Get App</button></Nav.Item>  
-            <Nav.Item><button type="button" class="btn btn-outline-light mr-2" to="/webMainHomePage"> Forum</button></Nav.Item>  
-            <Nav.Item><SinUpToAccount  buttonLabel="Create Account" type="NavBar"/></Nav.Item>
-            <Nav.Item><LoginToAccount  buttonLabel="Login" type="NavBar"/></Nav.Item>
-            
-            
-            
-            
-            <Nav.Item><Avatar name="Zeeshan" size="40" /></Nav.Item>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
+  return (
+    <>
+      <IconContext.Provider value={{ color: '#fff' }}>
+
+        <div className='navbar'>
+          {/* <Link to='#' className='menu-bars'>
+            <FaIcons.FaBars onClick={showSidebar} />
+          </Link> */}
+          <Link>
+               <img alt="panda" className="logo" src={logo} />
+          </Link>
+
+        {NavBarData.map((item, index) => {
+              return (
+                <Link key={index} className={item.cName} to={item.path} style={ index==0 ? {"margin-left":"20px"} : {}}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </Link>
+              );
+            })}
+      <div style={{
+          position: 'absolute',
+          right: '10%',
+       }}>
+      <Form className="d-flex ms-4">
+            <FormControl
+            type="search"
+            placeholder="Search"
+            className="mr-2"
+            aria-label="Search"
+           />
+        <Button variant="outline-success">Search</Button>
+
+        </Form>
+      </div>
+        
+
+       <div style={{
+          position: 'absolute',
+          right: '10px',
+       }}>
+       
+    <Dropdown>
+
+    <Dropdown.Toggle variant="outline-dark" >
+    <Image src={logo}  style={{
+                                     marginRight:"25px",
+                                     borderWidth: 3,
+                                     borderColor: "red",
+                                     borderRadius: "60%",
+                                     height:"40px",
+                                     width:"40px"
+                                  }} 
+                                  
+        />
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu >
+      <Dropdown.Item href="#/action-1" active>
+        Action
+      </Dropdown.Item>
+      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      <Dropdown.Divider />
+      <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item>
+      </Dropdown.Menu>
+      </Dropdown>
+
+       </div>
+      
+    
+        </div>
+        
+        
+      </IconContext.Provider>
+    </>
+  );
 }
 
 export default WebMainHomePageNavBar

@@ -5,7 +5,7 @@ import DashboardNavbar from './DashboardNavbar'
 import Profile from "./Profile";
 import Chats from "./Chats";
 import Home from "./Home";
-import Settings from "./Settings";
+import Settings from "./Support";
 import People from "./People";
 import FriendRequests from './FriendRequests.js'
 import styles from './mystyle.module.css'; 

@@ -27,9 +27,8 @@ function WebMainHomePage()
     return (
 
         <div className={styles.mainWebHomePageBackground}>
-             {nav}
-           
-             <WebMainHomePageBody />
+            <WebMainHomePageNavBar />
+            <WebMainHomePageBody />
 
          </div>
   

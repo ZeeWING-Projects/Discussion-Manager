@@ -3,7 +3,13 @@ import './App.css';
 import WebMainHomePage from './WebMainHomePage'
 import UserMainDashBoard from './UserMainDashBoard'
 import LoginToAccount from './Components/LoginToAccount'
-import {Route,Link} from 'react-router-dom'
+import Profile from './Components/Profile'
+import People from './Components/People'
+import Chats from './Components/Chats'
+import Home from './Components/Home'
+import Support from './Components/Support'
+import WebMainHomePageNavBar from  './Components/WebMainHomePageNavBar'
+import {Route,Link, Router} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -16,12 +22,13 @@ function App() {
   localStorage.setItem("isLogedIn",false);
   return (
     <div className="App">
+      <WebMainHomePageNavBar />
+      <Route path="/Home" component={Home}></Route>
+      <Route path="/Profile" component={Profile}></Route>
+      <Route path="/Chats" component={Chats}></Route>
+      <Route path="/People" component={People}></Route>
+      <Route path="/Support" component={Support}></Route>
       
-      {/* <WebMainHomePage /> */}
-      <Route exact path="/" component={WebMainHomePage}></Route>
-      <Route exact path="/userDashBorad" component={UserMainDashBoard}></Route>
-      <Route exact path="/loginToAccount" component={LoginToAccount}></Route>
-      <Route path="/userMainDashBoard" component={UserMainDashBoard}></Route>
     </div>
   );
 }
