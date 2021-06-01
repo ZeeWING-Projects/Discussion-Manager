@@ -10,8 +10,53 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ChatArea = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
+    const [flag,setFalg]=useState(0);
+    const [message,setMessage]=useState( 
+        {message:'cxc',
+        messageType:"Sent"})
+    const [listOfMessages,setListOfMessages]=useState([]);
+    //Follwiing list will be loaded from server
+    const [messages,setMessages]=useState([{}])
     
+    function sendMessage(messageToSend)
+    {
+        let v = messages;
+        v.push({
+            message:messageToSend,
+            messageSentTime:"10:40 pm",
+            messageType:"Sent"
+        })
 
+        setMessages(v)
+
+        setListOfMessages(
+            v.map((itm,index)=>{
+                if(itm.messageType==="Sent")
+                {
+                return(
+                     <div key={index} className={styles.sentMessage} fluid>
+                        {/* Sent  meesage */}
+                        <h7>{itm.message}</h7><span className={styles.spaceSentMessage}>''''''</span>
+                     </div>
+                    )
+                }
+                else
+                {
+                    return(
+                        <div className={styles.recievedMessage} fluid>
+                            {/* Reciede meesage */}
+                            <h7>{itm.message}</h7>
+                         </div>
+                    )
+                }
+            })
+        )
+       
+    }
+
+
+
+    console.log("Rendering")
     return (
         <div>
             {/* Header Aread */}
@@ -20,9 +65,7 @@ const ChatArea = props => {
                     borderStyle: 'solid',
                     borderColor:'rgb(201, 164, 164)',
                     borderWidth: "1px",
-                    height:"15%",
-
-                    
+                    height:"15%",                    
                 }
             }>
                    
@@ -50,12 +93,12 @@ const ChatArea = props => {
                             }}
                             >
                                 {props.selectedUserName}</span>
-                            
                         </div>
                      
             </div>
             
             {/* Messages areas */}
+
             <div
             style={
                 {
@@ -67,65 +110,15 @@ const ChatArea = props => {
 
             >
             <div className={styles.listOfMessages}>
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Heyy Zeeshan</h7>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Hello tuba</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>How is going on ?</h7>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Whats status?</h7>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Every this fine... </h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Working on chat module...</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>What about you</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.sentMessage} fluid>
-                                    {/* Sent  meesage */}
-                                    <h7>Which module on which you are working???</h7><span className={styles.spaceSentMessage}>''''''</span>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Fine ...Every thing is smooth...</h7>
-                                </div>
-
-                                <div className={styles.recievedMessage} fluid>
-                                    {/* Reciede meesage */}
-                                    <h7>Working on posts model</h7>
-                                </div>
-                                
-
-                          </div>
+                        {/* **************************************************************** MEssages ***************** */}
+{
+     listOfMessages
+}
+                          
+                        </div>
 
             </div>
-            {/* <span><FontAwesomeIcon icon="upload" size="2x"/></span>  */}
-            {/* <Form.Control  type="text" placeholder="Small text" />  */}
-            {/* <Button variant="primary">Send</Button>/ */}
-
-            {/* Sending options */}
+        
             <Row className={styles.messageSendArea}>
                <Col md={1}
                style={
@@ -146,8 +139,16 @@ const ChatArea = props => {
                      
                   }
                }
+
                >
-                <Form.Control  type="text" placeholder="Small text" /> 
+                <Form.Control  type="text" placeholder="Small text" 
+                onChange={
+                    (e)=>{
+                        setMessage(e.target.value)
+                    }
+                   
+                }
+                /> 
                </Col> 
                <Col md={2}
                style={
@@ -157,7 +158,13 @@ const ChatArea = props => {
                   }
                }
                >
-                <Button variant="primary">Send</Button>
+                <Button variant="primary" onClick={
+                    ()=>{
+                        
+                        sendMessage(message)
+                       
+                    }
+                } >Send</Button>
                </Col> 
             </Row>   
             
