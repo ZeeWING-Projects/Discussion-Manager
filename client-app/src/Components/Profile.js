@@ -5,15 +5,22 @@ import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
-import TableScrollbar from 'react-table-scrollbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const Profile = props => {
    
+     function LoadFile(e){
+        let files = e.target.files;
+        let reader = new FileReader();
+        reader.readAsDataURL(files[0])
+        reader.onload=(e)=>{
+            console.warn("image data",e.target.result)
+        } 
+            }
+
     return (
         <div>
-            <container>
+         
             <Row>
             <Col xs={4} md={3}  style={
                   {
@@ -22,7 +29,8 @@ const Profile = props => {
                     
                   }
                }>
-            <Image src={profile_image} roundedCircle />
+                      
+<Image src={profile_image} roundedCircle />
             <div>
             <div style={
                 {    marginTop: "3%",
@@ -43,7 +51,7 @@ const Profile = props => {
                             
                         }}>
                             
-                            <Image src={plogo}  style={{
+                           <Image src={plogo}  style={{
                                    
                                    borderWidth: 3,
                                    borderColor: "red",
@@ -61,19 +69,17 @@ const Profile = props => {
             </div>
 </div>
 <div>
-<Button variant="light" size="lg" block style={{
-                               marginTop: "2%"
-                            }} onClick={
-                    ()=>{
-                        
-                      
-                       
-                    }
-                } >Edit profile</Button>
+   
+                                
+<input type="file" style={{
+                              marginTop: "3%",  
+                              
+                            }} onChange={LoadFile} />
+
     </div>
             </Col>
             </Row>
-            </container>
+          
             
             </div>
        
