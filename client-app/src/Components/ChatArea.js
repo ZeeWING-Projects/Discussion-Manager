@@ -51,9 +51,62 @@ const ChatArea = props => {
                 }
             })
         )
+
+        //Sneding message
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+        sendingMessageToAPI(localStorage.getItem("userUid"),props.selectedUserUid,"Text",messageToSend,"New",today)
+        
+        
        
     }
+//Now sending message to server ... I mean calling API to send message.
 
+    function sendingMessageToAPI(userUid,recieverUid,messageType,messageContent,messageStatus,messageSendTime)
+    {
+        let data ={
+            userUid:userUid,
+            recieverUid:recieverUid,
+            messageType:messageType,
+            messageContent:messageContent,
+            messageStatus:"New",
+            messageSendTime:messageSendTime	
+        }
+        fetch("http://localhost:8000/chatService/sendMessage",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+          return response.json();
+        },
+        error=>
+        {
+          //on error
+          console.log(error)
+        }
+    
+        ).then(data=>{
+          //on sucess.
+          
+          try{
+          console.log(data);
+          }catch(e)
+          {
+    
+          }
+        })
+    }  
 
 
     console.log("Rendering")
