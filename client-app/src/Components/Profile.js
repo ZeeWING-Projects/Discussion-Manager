@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import profile_image from './default_image.png'
 import plogo from './profile_name_logo.png'
+import setMyBio from './MyBio'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
@@ -8,8 +9,15 @@ import styles from './mystyle.module.css';
 
 
 const Profile = props => {
-   
-   
+   const [variableScreen,setVariableScreen]= useState("set screen")
+   function setBio(){
+    setVariableScreen(<setMyBio />)
+   }
+   function resetPass(){
+    setVariableScreen(<setMyBio />)
+   }
+
+
     return (
         <div>
          
@@ -27,7 +35,7 @@ const Profile = props => {
     <Button variant="dark" size="lg" block style={{
                               marginTop: "3%",  
                               
-                            }} onClick={()=>{}}>
+                            }} onClick={setBio}>
 
   My Bio </Button>
       </div>  
@@ -43,7 +51,7 @@ const Profile = props => {
     <Button variant="dark" size="lg" block style={{
                               marginTop: "5%",  
                               
-                            }} onClick={()=>{}}>
+                            }} onClick={resetPass}>
 
   Reset Password </Button>
       </div>        
@@ -72,8 +80,12 @@ const Profile = props => {
 
 
             </Col>
+            <Col xs={8} md={8}>
+             
+           {variableScreen}
+</Col>
             </Row>
-          
+             
             
             </div>
        
