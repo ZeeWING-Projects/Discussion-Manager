@@ -8,7 +8,7 @@ import Support from './Components/Support'
 import NewUserMainPage from './Components/NewUserMainPage'
 import WebMainHomePageNavBar from  './Components/WebMainHomePageNavBar'
 import FriendRequests from './Components/FriendRequests'
-import {Route,Link, Router} from 'react-router-dom'
+import {Route,Link, Router,useHistory} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{useEffect,useState} from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -23,7 +23,7 @@ function App() {
 
   const [navBar,setNavBar]=useState(<WebMainHomePageNavBar />)
   const [body,setBody]=useState(main_page)
-  
+  const history = useHistory();
   console.log("values  "+localStorage.getItem("isLogedIn"))
  
   if(localStorage.getItem("isLogedIn")==null || localStorage.getItem("isLogedIn")==="false")
@@ -42,7 +42,7 @@ function App() {
       fetch('http://localhost:8000/serverStatusService/serverStatus').then((resp)=>{
         return resp.json()
       },(error)=>{
-        console.log(error)
+        console.log("Error in fetchgin")
       }).then((data)=>{
         console.log(data)
         try{
@@ -53,12 +53,24 @@ function App() {
           catch(e){}
         if(g===1)
         {
-            
+          setNavBar(<WebMainHomePageNavBar />)
+          setBody(main_page)
         }
         else
         {
+          history.push('/Home');
           setNavBar("")
-          setBody("Server is not responding...!! Please try later.")
+          setBody(
+            <div
+          style={
+            {
+              color:"yellow",
+              marginTop:"20%"
+            }
+          }
+          >
+            <h1>Server is not responding please  try again ...!! Our team is working on it..</h1>
+          </div>)
         }
       }catch(e){
 

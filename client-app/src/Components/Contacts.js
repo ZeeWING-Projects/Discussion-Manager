@@ -99,6 +99,7 @@ const Contacts = props => {
         borderStyle:"groove",
         borderColor:"white",
         borderWidth:"1px",
+        backgroundColor:""
         }} onClick={e => selectContact(e,record.userUid,record.profileImage,record.userName)}>
                 
                 <Row>
@@ -131,8 +132,6 @@ const Contacts = props => {
                     </Col>
                 </Row>
                 
-               
-
                 {/* <div style={
                     {
                         color:"white",
