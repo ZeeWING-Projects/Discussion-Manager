@@ -6,7 +6,12 @@ import styles from './mystyle.module.css';
 function NewUserMainPage()
 {
    return(
-       <div fluid className={styles.startDiscussionDiv}>
+       <div fluid style={
+           {
+               marginTop:"18%",
+              
+           }
+       }>
            <LoginToAccount  buttonLabel="Login" type="BodyLogin"/>
        </div>
     );

@@ -24,7 +24,7 @@
 
   <script>
 
-    fetch('http://localhost:8000/accountsService/getTheFireBaseConfugration').then(response => response.json())
+  fetch('http://localhost:8000/accountsService/getTheFireBaseConfugration').then(response => response.json())
   .then((data)=>{
       const {apiKeyResp,authDomainResp,databaseURLResp,projectIdResp,storageBucketResp,messagingSenderIdResp,appIdResp}=data
       var firebaseConfig = {
@@ -42,6 +42,7 @@
 
     
   });
+  
   function uploadImage() {
       const ref = firebase.storage().ref();
       const file = document.querySelector("#photo").files[0];
@@ -49,6 +50,7 @@
       const metadata = {
         contentType: file.type
       };
+
       const task = ref.child(name).put(file, metadata);
       task
         .then(snapshot => snapshot.ref.getDownloadURL())

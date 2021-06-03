@@ -6,37 +6,108 @@ import {Container,Row,Col,Card,Button,Image,Form} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { version } from "react-dom";
 
 const ChatArea = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
     const [flag,setFalg]=useState(0);
-    const [message,setMessage]=useState( 
-        {message:'cxc',
-        messageType:"Sent"})
+    const [shouldLoadMessages,setShouldLoadMessages] = useState(props.selectedUserUid)
+    const [message,setMessage]=useState()
     const [listOfMessages,setListOfMessages]=useState([]);
+
     //Follwiing list will be loaded from server
-    const [messages,setMessages]=useState([{}])
-    
-    function sendMessage(messageToSend)
-    {
-        let v = messages;
-        v.push({
-            message:messageToSend,
-            messageSentTime:"10:40 pm",
-            messageType:"Sent"
+    const [messages,setMessages]=useState([])
+    const [selectedUserUid,setUserUid]=useState(props.selectedUserUid)
+    useEffect(()=>{
+        //here we will load initial chat
+        console.log("Contact uid "+props.selectedUserUid+" User uid "+localStorage.getItem("userUid"))
+        loadMessagesFromServer(localStorage.getItem("userUid"),props.selectedUserUid,30,0)
+
+    },[])
+
+    useEffect(()=>{
+        console.log("Loading in list")
+        loadMessagesIntoList()
+    },[messages])
+
+    useEffect(()=>{
+
+        //Now checking contineosly about new messages..
+        setInterval(()=>{
+            loadMessagesFromServer(localStorage.getItem("userUid"),props.selectedUserUid,30,0)
+        },2000)
+
+    },[])
+
+    function loadMessagesFromServer(userUid,recieverUid,numberOfMessages,messageOffset){
+        let data ={
+            
+                 userUid:userUid,
+                 recieverUid:recieverUid,
+                 numberOfMessages:numberOfMessages,
+                 messageOffset:messageOffset
+
+        }
+        fetch("http://localhost:8000/chatService/loadChat",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+        //   console.log(response.json())  
+          return response.json();
+        },
+        error=>
+        {
+          //on error
+          console.error(error)
+        }
+        ).then(data=>{
+          //on sucess.
+          
+          try{
+                //Now we will set it in messages ..
+                let tempMessages = [];
+                
+
+                data.forEach((itm,index)=>{
+                    console.log(itm.messageContent)
+                    tempMessages.push({
+                        messageType: itm.messageType,
+                        userUid: itm.userUid,
+                        messageContent: itm.messageContent,
+                        messageStatus: itm.messageStatus,
+                        messageSendTime: itm.messageSendTime
+                    })
+                })
+
+                console.log("Loading messages")
+                setMessages(tempMessages)
+                //loadMessagesIntoList()
+          }
+          catch(e)
+          {
+            console.log("Error"+e);
+          }
         })
 
-        setMessages(v)
+    }
 
+    function loadMessagesIntoList()
+    {
         setListOfMessages(
-            v.map((itm,index)=>{
-                if(itm.messageType==="Sent")
+            messages.map((itm,index)=>{
+                if(itm.userUid===localStorage.getItem("userUid"))
                 {
                 return(
                      <div key={index} className={styles.sentMessage} fluid>
                         {/* Sent  meesage */}
-                        <h7>{itm.message}</h7><span className={styles.spaceSentMessage}>''''''</span>
+                        <h7>{itm.messageContent}</h7><span className={styles.spaceSentMessage}>''''''</span>
                      </div>
                     )
                 }
@@ -45,27 +116,41 @@ const ChatArea = props => {
                     return(
                         <div className={styles.recievedMessage} fluid>
                             {/* Reciede meesage */}
-                            <h7>{itm.message}</h7>
+                            <h7>{itm.messageContent}</h7>
                          </div>
                     )
                 }
             })
         )
+    }
 
+    function sendMessage(messageToSend)
+    {
+        var currentdate = new Date(); 
+        var datetime = "Sent: " + currentdate.getDate() + "/"
+                        + (currentdate.getMonth()+1)  + "/" 
+                        + currentdate.getFullYear() + " @ "  
+                        + currentdate.getHours() + ":"  
+                        + currentdate.getMinutes() + ":" 
+                        + currentdate.getSeconds();
+
+        let v = messages;
+        v.push({
+            messageType: "Text",
+            userUid:localStorage.getItem("userUid"),
+            messageContent: messageToSend,
+            messageStatus: "New",
+            messageSendTime: datetime
+        })
+
+        setMessages(v)
+        loadMessagesIntoList()
+        
         //Sneding message
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-
-        today = mm + '/' + dd + '/' + yyyy;
-
-        sendingMessageToAPI(localStorage.getItem("userUid"),props.selectedUserUid,"Text",messageToSend,"New",today)
-        
-        
-       
+        sendingMessageToAPI(localStorage.getItem("userUid"),props.selectedUserUid,"Text",messageToSend,"New",datetime)  
     }
+
 //Now sending message to server ... I mean calling API to send message.
 
     function sendingMessageToAPI(userUid,recieverUid,messageType,messageContent,messageStatus,messageSendTime)
@@ -98,7 +183,6 @@ const ChatArea = props => {
     
         ).then(data=>{
           //on sucess.
-          
           try{
           console.log(data);
           }catch(e)

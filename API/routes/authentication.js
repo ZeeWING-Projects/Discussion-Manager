@@ -19,7 +19,8 @@ module.exports={
     ,
     loginRouter:
 
-    loginRouter.post("/login", function(req,res){
+    loginRouter.post("/login", function(req,res)
+    {
     if(req.body.email!=null && req.body.password!=null)  
     {
         try{

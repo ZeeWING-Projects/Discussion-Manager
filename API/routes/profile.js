@@ -96,9 +96,11 @@ module.exports={
         res.send({responseMessage:"You have called profile service and this is an post method please provide json"})
     }),
     loadProfileRouter:
+
     loadProfileRouter.post("/loadProfile",function(req,res){
     if(req.body.email!=null)  
     {
+        
     admin
    .auth()
    .getUserByEmail(req.body.email)

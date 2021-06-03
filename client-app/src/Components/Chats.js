@@ -12,7 +12,7 @@ import ChatProfileVeiwer from './ChatProfileViewer'
 const Chats = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
-    const [chatAreaHolder,setChatAreaHolder]=useState(<ChatArea selectedUserUid={"v"} selectedUserName={"Z"} selectedUserProfile={"v"}/>)
+    const [chatAreaHolder,setChatAreaHolder]=useState("")
     
     function makeCallToChatArea()
     {

@@ -79,6 +79,8 @@ function login()
         email:email,
         password:password
     }
+
+    
     fetch("http://localhost:8000/authenticationService/login",
     {
       method: 'POST',
@@ -110,6 +112,7 @@ function login()
       {
         localStorage.setItem("isLogedIn",true)
         localStorage.setItem("userUid",userId)
+        history.push('');
         window.location.reload();
       }
      else{
@@ -193,15 +196,22 @@ function login()
   
 
 
-  let btn =<Nav.Item>  <button  className="btn btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>
+  let btn =<Nav.Item>  <button  className="btn btn-primary btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>
 
   if(type==="NavBar")
   {
-    btn =<Nav.Item>  <button  className="btn btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>
+    btn =<Nav.Item>  <button  className="btn btn-primary btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>
   }
   else
   {
-    btn = <Nav.Item><button type="button" className={styles.startDiscussionBtn} onClick={handleClick}>Manage</button></Nav.Item>
+    btn = <Nav.Item><button type="button" style={{
+      borderRadius: "15px 50px 30px",
+      background: "#73AD21",
+      padding: "20px",
+      width: "250px",
+      height: "100px",
+      fontSize:"30px"
+    }} onClick={handleClick}>Manage</button></Nav.Item>
   }
 
   return (

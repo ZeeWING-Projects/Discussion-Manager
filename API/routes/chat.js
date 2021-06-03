@@ -82,7 +82,7 @@ module.exports={
     ,
     loadAllNewFrndsListRouter:
     loadAllNewFrndsListRouter.post("/loadAllNewFrndsList",function(req,res){
-        connectionToMySql.query(`SELECT * FROM contactslist WHERE userUid = '${req.body.userUid}' and status='Not Approved'`, function (err, result) {
+        connectionToMySql.query(`SELECT * FROM contactslist WHERE contactUserUid = '${req.body.userUid}' and status='Not Approved'`, function (err, result) {
             if (err)
             { 
                 var errorCode = err.code;
@@ -131,7 +131,6 @@ module.exports={
         res.send({responseMessage:"you have call a method of chat service and this is a post method so please provide the json"})          
     })
     ,
-    
     sendMessageRouter:
     sendMessageRouter.post("/sendMessage",function(req,res){
         var sql = `INSERT INTO sentmessages (userUid,recieverUid,messageType,messageContent,messageStatus,messageSendTime) VALUES 
@@ -165,7 +164,7 @@ module.exports={
     ,
     acceptFrndRequestRouter:
     acceptFrndRequestRouter.post("/acceptFrndRequest",function(req,res){
-        var sql =  `UPDATE contactslist SET status = 'Approved' WHERE userUid = '${req.body.userUid}' and contactUserUid= '${req.body.contactUserUid}'`;
+        var sql =  `UPDATE contactslist SET status = 'Approved' WHERE contactUserUid = '${req.body.userUid}' and contactUserUid= '${req.body.contactUserUid}'`;
         connectionToMySql.query(sql, function (err, result) {
           if (err){
             var errorCode = err.code;
@@ -175,6 +174,7 @@ module.exports={
                 responseCode:1
             })  
           }
+
           else
           {
             console.log("Updated to approved"); 
@@ -201,7 +201,7 @@ module.exports={
         connectionToMySql.query(`SELECT * from sentmessages
          WHERE userUid='${req.body.userUid}' and recieverUid='${req.body.recieverUid}' 
          or recieverUid='${req.body.userUid}' and userUid='${req.body.recieverUid}' 
-         ORDER BY serialNumber DESC LIMIT ${req.body.numberOfMessages} OFFSET ${req.body.messageOffset}`, function (err, result) {
+         ORDER BY serialNumber ASC LIMIT ${req.body.numberOfMessages} OFFSET ${req.body.messageOffset}`, function (err, result) {
             if (err)
             { 
                 var errorCode = err.code;
@@ -235,8 +235,27 @@ module.exports={
                         });
                     }
                 }
+                let records = []
+                result.forEach(element => {
+                    records.push({
+                        userUid: element.userUid,
+                        recieverUid: element.recieverUid,
+                        messageType: element.messageType,
+                        messageContent: element.messageContent,
+                        messageStatus: element.messageStatus,
+                        messageSendTime: element.messageSendTime,
+                        serialNumber: element.serialNumber
+                    })
 
-                res.status(200).send(result)
+
+                    // records.push({myName:"Zeeshan"})
+                    console.log(element.messageSendTime)
+                });
+                let v = []
+                v.push({myName:"Zeeshan",lastName:"dfd"})
+                v.push({myName:"Ahmed",lastName:"dfd"})
+                
+                res.status(200).send(records)
             }
           });
        
