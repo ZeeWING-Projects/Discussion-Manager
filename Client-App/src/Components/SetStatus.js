@@ -17,7 +17,7 @@ export default function SetStatus(){
             height:"20%",
             width:"50%"  
          }}>
-    {/* <Row>
+    <Row>
         <Col md={12}>
         <Form style={{
             marginTop:"8%",
@@ -29,7 +29,7 @@ export default function SetStatus(){
   />
   </Form>
         </Col>
-        </Row> */}
+        </Row>
         </div>
     );
 }
