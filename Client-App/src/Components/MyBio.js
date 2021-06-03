@@ -62,7 +62,7 @@ export default function MyBio(){
            height:"70%",
            width:"100%"  
         }}>
-       <container>
+       <Container>
            <Row>
                <Col md={5} 
                >
@@ -367,7 +367,7 @@ export default function MyBio(){
                </Col>
                </Row>
 
-           </container>
+           </Container>
         </div>
     );
 }
