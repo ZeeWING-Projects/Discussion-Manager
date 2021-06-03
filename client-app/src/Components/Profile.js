@@ -2,6 +2,10 @@ import React,{useEffect,useState} from "react";
 import profile_image from './default_image.png'
 import plogo from './profile_name_logo.png'
 import MyBio from './MyBio'
+import PassReset from './ResetPass'
+import DeleteAccount from './DeleteAccount'
+import SetStatus from './SetStatus'
+import UploadProfile from './UploadProfile'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
@@ -16,7 +20,16 @@ const Profile = props => {
    }
 
    function resetPass(){
-    setVariableScreen(<MyBio />)
+    setVariableScreen(<PassReset />)
+   }
+   function DeleteAcc(){
+    setVariableScreen(<DeleteAccount />)
+   }
+   function setStatus(){
+    setVariableScreen(<SetStatus />)
+   }
+   function uploadProfile(){
+    setVariableScreen(<UploadProfile />)
    }
 
 
@@ -45,7 +58,7 @@ const Profile = props => {
     <Button variant="dark" size="lg" block style={{
                               marginTop: "5%",  
                               
-                            }} onClick={()=>{}}>
+                            }} onClick={uploadProfile}>
 
  Upload New Profile Pic </Button>
       </div>  
@@ -61,7 +74,7 @@ const Profile = props => {
     <Button variant="dark" size="lg" block style={{
                               marginTop: "5%",  
                               
-                            }} onClick={()=>{}}>
+                            }} onClick={setStatus}>
 
   Set Status </Button>
       </div>        
@@ -69,7 +82,7 @@ const Profile = props => {
     <Button variant="dark" size="lg" block style={{
                               marginTop: "5%",  
                               
-                            }} onClick={()=>{}}>
+                            }} onClick={DeleteAcc}>
 
   Delete Account </Button>
       </div>        
