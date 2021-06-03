@@ -8,7 +8,8 @@ export default function MyBio(){
     return (
         <div  style={{
             marginTop:"10%",
-            backgroundColor:"white"
+            backgroundColor:"white",
+            fontSize:"100px"
         }}>
         <h1>this is my bio</h1>
         </div>
