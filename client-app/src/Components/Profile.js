@@ -9,15 +9,7 @@ import styles from './mystyle.module.css';
 
 const Profile = props => {
    
-     function LoadFile(e){
-        let files = e.target.files;
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0])
-        reader.onload=(e)=>{
-            console.warn("image data",e.target.result)
-        } 
-            }
-
+   
     return (
         <div>
          
@@ -31,52 +23,54 @@ const Profile = props => {
                }>
                       
 <Image src={profile_image} roundedCircle />
-            <div>
-            <div style={
-                {    marginTop: "3%",
-                    borderStyle: 'solid',
-                    borderColor:'rgb(201, 164, 164)',
-                    borderWidth: "3px",
-                    height:"15%",                    
-                }
-            }>
-                   
-                        <div style={{
-                             marginTop: "3%",
-                             textAlign: 'left',
-                             marginLeft: "2%",
-                             marginTop:"2%",
-                             color: 'white',
-                             paddingBottom:"10px"
-                            
-                        }}>
-                            
-                           <Image src={plogo}  style={{
-                                   
-                                   borderWidth: 3,
-                                   borderColor: "red",
-                                   borderRadius: "60%",
-                                   height:"40px",
-                                   width:"40px"
-                                }} />
-                            <span
-                            style={{
-                                fontSize:"25px"
-                            }}
-                            >
-                                "set name"</span>
-                        </div> 
-            </div>
-</div>
-<div>
-   
-                                
-<input type="file" style={{
+    <div>
+    <Button variant="dark" size="lg" block style={{
                               marginTop: "3%",  
                               
-                            }} onChange={LoadFile} />
+                            }} onClick={()=>{}}>
 
-    </div>
+  My Bio </Button>
+      </div>  
+      <div>
+    <Button variant="dark" size="lg" block style={{
+                              marginTop: "5%",  
+                              
+                            }} onClick={()=>{}}>
+
+ Upload New Profile Pic </Button>
+      </div>  
+      <div>
+    <Button variant="dark" size="lg" block style={{
+                              marginTop: "5%",  
+                              
+                            }} onClick={()=>{}}>
+
+  Reset Password </Button>
+      </div>        
+      <div>
+    <Button variant="dark" size="lg" block style={{
+                              marginTop: "5%",  
+                              
+                            }} onClick={()=>{}}>
+
+  Set Status </Button>
+      </div>        
+      <div>
+    <Button variant="dark" size="lg" block style={{
+                              marginTop: "5%",  
+                              
+                            }} onClick={()=>{}}>
+
+  Delete Account </Button>
+      </div>        
+  
+                                
+{/* <input type="file" style={{
+                              marginTop: "3%",  
+                              
+                            }} /> */}
+
+
             </Col>
             </Row>
           
