@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import home from './home.png'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container,Row,Col,Card,Button,Form,FormControl} from 'react-bootstrap'
+import {Container,Row,Col,Card,Button,Form,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -63,14 +63,16 @@ const Contacts = props => {
 
     function setDataIntoList()
     {
-       const selectContact =  function (e,uid,profile,name)
+       
+       try{
+        const selectContact =  function (e,uid,profile,name)
         {
             props.chatAreaTrigger(uid,name,profile)
         }  
 
 
         let list=[]
-
+        
         console.log(Object.values(serverResponse))
         Object.keys(serverResponse).map((rec)=>{
             var record = serverResponse[rec];
@@ -83,6 +85,7 @@ const Contacts = props => {
                 })
         })
 
+
      setPeopleProfileCard(list.map((record)=>
      {
       console.log(record.userName)
@@ -91,29 +94,54 @@ const Contacts = props => {
          <div style={
         {
         cursor:"pointer",
-        width:"100%",
+        width:"98%",
         height:"90px",
-        borderStyle:"inset",
+        borderStyle:"groove",
         borderColor:"white",
-        borderWidth:"1px"
+        borderWidth:"1px",
         }} onClick={e => selectContact(e,record.userUid,record.profileImage,record.userName)}>
-                <h5 style={
+                
+                <Row>
+                    <Col md={4}>
+
+                    <Image src={record.profileImage}  style={{
+                                   
+                                   borderWidth: 3,
+                                   borderColor: "red",
+                                   borderRadius: "60%",
+                                   height:"80px",
+                                   width:"80px",
+                                   marginTop:"4%"
+                                }} />
+
+                    </Col>
+                    <Col md={8}>
+
+                    <h5 style={
                     {
-                    paddingLeft:"10px",
+                   
                     paddingTop:"10px",    
                     textAlign:'left',
                     fontSize:"25px",
-                    color:"white"
+                    color:"white",
+                    marginTop:"5%"
                     }
                     }>{record.userName}</h5>
-                <div style={
+
+                    </Col>
+                </Row>
+                
+               
+
+                {/* <div style={
                     {
                         color:"white",
                         fontSize:"14px",
                         textAlign:"right",
                         marginRight:"10px"
                     }
-                }>Status : Online</div> 
+                }>Status : Online</div> */}
+
 
           </div> 
 
@@ -121,6 +149,24 @@ const Contacts = props => {
          </div> 
             return rec
           }) )
+
+       } 
+       catch(e)
+       {
+             setPeopleProfileCard(
+                 <div style={
+                     {
+                         backgroundColor:"white"
+                         ,
+                         color:"red"
+                     }
+                 }>
+                     Server is not responding, That is why cant load your contacts list. and Actual response from server is {e}
+                 </div>
+             )
+           
+       }
+      
     }
 
 

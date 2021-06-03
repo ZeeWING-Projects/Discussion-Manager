@@ -112,7 +112,7 @@ function login()
       {
         localStorage.setItem("isLogedIn",true)
         localStorage.setItem("userUid",userId)
-        history.push('');
+        
         window.location.reload();
       }
      else{

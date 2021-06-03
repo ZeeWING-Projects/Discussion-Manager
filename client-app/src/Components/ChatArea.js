@@ -107,7 +107,26 @@ const ChatArea = props => {
                 return(
                      <div key={index} className={styles.sentMessage} fluid>
                         {/* Sent  meesage */}
-                        <h7>{itm.messageContent}</h7><span className={styles.spaceSentMessage}>''''''</span>
+                        <h7
+                        
+                        style={
+                            {
+                                fontFamily:"Gill Sans, sans-serif",
+                                fontSize:"15px"
+                            }
+                        }
+
+                        >{itm.messageContent}</h7><span className={styles.spaceSentMessage}>''''''</span>
+                         <div></div>
+                        <h7 
+                        style={
+                            {
+                                fontSize:"10px"
+                                
+                            }
+                        }
+                        >{itm.messageSendTime}</h7><span className={styles.spaceSentMessage}>''''''</span>
+                        
                      </div>
                     )
                 }
@@ -116,7 +135,24 @@ const ChatArea = props => {
                     return(
                         <div className={styles.recievedMessage} fluid>
                             {/* Reciede meesage */}
-                            <h7>{itm.messageContent}</h7>
+                            <h7
+                            
+                            style={
+                                {
+                                    fontFamily:"Gill Sans, sans-serif",
+                                    fontSize:"15px"
+                                
+                                }
+                            }
+                            >{itm.messageContent}</h7>
+                            <div></div>
+                        <h7 
+                        style={
+                            {
+                                fontSize:"10px"
+                            }
+                        }
+                        >{itm.messageSendTime}</h7>
                          </div>
                     )
                 }
@@ -202,10 +238,9 @@ const ChatArea = props => {
                     borderStyle: 'solid',
                     borderColor:'rgb(201, 164, 164)',
                     borderWidth: "1px",
-                    height:"15%",                    
-                }
+                    height:"15%"                   
+                } 
             }>
-                   
                         <div style={{
                              marginTop: "3%",
                              textAlign: 'left',
@@ -213,23 +248,32 @@ const ChatArea = props => {
                              marginTop:"2%",
                              color: 'white',
                              paddingBottom:"10px"
-                            
                         }}>
-                            
-                            <Image src={logo}  style={{
-                                   
+
+                        <Row>
+                            <Col md={1}>
+                            <Image src={props.selectedUserProfile}  style={{
                                    borderWidth: 3,
                                    borderColor: "red",
                                    borderRadius: "60%",
-                                   height:"40px",
-                                   width:"40px"
+                                   height:"50px",
+                                   width:"50px"
                                 }} />
-                            <span
-                            style={{
-                                fontSize:"25px"
-                            }}
-                            >
+                            </Col>
+                            <Col md={8}>
+                             <span
+                             style={{
+                                fontSize:"25px",
+                                textAlign:"left",
+                                color:"yellow"
+                             }}
+                                >
                                 {props.selectedUserName}</span>
+                            </Col>
+                        </Row>    
+                            
+
+                            
                         </div>
                      
             </div>
@@ -239,9 +283,7 @@ const ChatArea = props => {
             <div
             style={
                 {
-                   
                     height:"100%",
-                    
                 }
             }
 

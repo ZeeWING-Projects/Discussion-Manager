@@ -32,6 +32,16 @@ const Chats = props => {
             <div className={styles.chatList}>
                 <Row>
                    <Col md={4}>
+                       <div style={
+                           {
+                               color:"yellow",
+                               fontSize:"30px",
+                               paddingBottom:"20px"
+                               
+                           }
+                       }>
+                           My Contacts 
+                        </div>
                        <Contacts chatAreaTrigger={chatAreaTigger} />
                    </Col>
                    <Col md={8} >

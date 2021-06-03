@@ -17,6 +17,9 @@ var postsService = require('./routes/posts')
 
 var statisticsService = require('./routes/statistics')
 
+const {serverStatusRouter} = require('./routes/serverStatus')
+
+
 const {
       chatInfo,
       addInContactListrouter,
@@ -41,6 +44,7 @@ const {
       restMyPasswordWithEmailLinkRouter,
       getTheFireBaseConfugrationRotuer
       } = require('./routes/accounts');
+
 const { send } = require('process');
 
 
@@ -60,7 +64,8 @@ app.use(cors())//NOTE-----------------------------------------------------------
 
 app.use('/postsService',postsService)
 app.use('/statisticsService',statisticsService)
-
+ 
+app.use('/serverStatusService',serverStatusRouter)
 
 app.use('/authenticationService',inforAuthentication)
 app.use('/authenticationService',loginRouter)
