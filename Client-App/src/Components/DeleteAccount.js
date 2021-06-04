@@ -52,7 +52,7 @@ export default function DeleteAccount(){
       <Col md={8}>
       <Label style={{
            marginTop:"1%",
-           color: "red",
+           color: 'rgb(201, 29, 18)',
            fontSize:"20px",
            marginLeft:"5%",
         }}>

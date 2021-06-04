@@ -20,10 +20,16 @@ export default function MyBio(){
     const [ON_status,Set_On_status]= useState("status")
     const [address,SetAddress]= useState("address")
 
+
+
+    function loadProfile(){
     let data ={
-       uid:localStorage.uid
+       uid:localStorage.getItem("userUid")
+       
     }
-    fetch("http://localhost:8000/profileService/loadProfile",
+
+console.log(data)
+    fetch("http://localhost:8000/profileService/loadProfilewithUid",
     {
       method: 'POST',
       headers: {
@@ -38,21 +44,25 @@ export default function MyBio(){
 
     error=>
     {
-     
+     console.log(error)
     }
 
     ).then(data=>{
+        console.log(data)
         SetEmail(data.email)
-        SetUserName(data.usename)
+        SetUserName(data.displayName)
         SetPass(data.password)
         SetPn(data.phoneNumber)
         Set_On_status(data.onlineStatus)
         SetAddress(data.address)
     })
 
+    }
 
-
+    useEffect(loadProfile,[]);
+  
     return (
+       
         <div  style={{
            marginTop:"15%",
            marginLeft:"10%",
@@ -77,7 +87,7 @@ export default function MyBio(){
                <Col md={7}
                >
                <div style={
-                {   
+                {    
                     borderStyle: 'solid',
                     borderColor:'rgb(201, 164, 164)',
                     borderWidth: "1px",
