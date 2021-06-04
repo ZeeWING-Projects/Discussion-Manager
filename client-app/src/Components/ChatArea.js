@@ -7,7 +7,7 @@ import styles from './mystyle.module.css';
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { version } from "react-dom";
-
+import connectionUrl from './ConnectionUrl'
 const ChatArea = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
@@ -49,7 +49,7 @@ const ChatArea = props => {
                  messageOffset:messageOffset
 
         }
-        fetch("http://localhost:8000/chatService/loadChat",
+        fetch(`${connectionUrl}/chatService/loadChat`,
         {
           method: 'POST',
           headers: {
@@ -199,7 +199,7 @@ const ChatArea = props => {
             messageStatus:"New",
             messageSendTime:messageSendTime	
         }
-        fetch("http://localhost:8000/chatService/sendMessage",
+        fetch(`${connectionUrl}/chatService/sendMessage`,
         {
           method: 'POST',
           headers: {

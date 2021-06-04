@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import "react-loadingmask/dist/react-loadingmask.css";
 import LoadingMask from "react-loadingmask";
 import {Route,Link,useHistory} from 'react-router-dom'
-
+import connectionUrl from './ConnectionUrl'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter,NavLink } from 'reactstrap';
 import {Form,Nav,Alert} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
@@ -81,7 +81,7 @@ function login()
     }
 
     
-    fetch("http://localhost:8000/authenticationService/login",
+    fetch(`${connectionUrl}/authenticationService/login`,
     {
       method: 'POST',
       headers: {
@@ -140,7 +140,7 @@ function login()
       address:address
     }
     
-  fetch("http://localhost:8000/accountsService/createAccountWithEmail",
+  fetch(`${connectionUrl}/accountsService/createAccountWithEmail`,
   {
     method: 'POST',
     headers: {

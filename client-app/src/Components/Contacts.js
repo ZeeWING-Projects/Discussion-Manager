@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import TableScrollbar from 'react-table-scrollbar';
+import connectionUrl from './ConnectionUrl'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Contacts = props => {
   
@@ -25,7 +26,7 @@ const Contacts = props => {
             userUid:localStorage.getItem("userUid")
         }
         
-        fetch("http://localhost:8000/chatService/loadAllContacts",
+        fetch(`${connectionUrl}/chatService/loadAllContacts`,
         {
           method: 'POST',
           headers: {

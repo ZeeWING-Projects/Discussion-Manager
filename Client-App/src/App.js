@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{useEffect,useState} from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import connectionUrl from './Components/ConnectionUrl'
 import { faUsers,faUserCircle,faComments,faMailBulk,faCogs, faHome,faAddressBook,faThumbsUp,faSearch, faUpload,faBell} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faUsers, faUserCircle, faComments,faMailBulk,faCogs,faHome,faAddressBook,faThumbsUp,faSearch,faUpload,faBell)
@@ -39,7 +40,7 @@ function App() {
 
     setInterval(()=>{
 
-      fetch('http://localhost:8000/serverStatusService/serverStatus').then((resp)=>{
+      fetch(`${connectionUrl}/serverStatusService/serverStatus`).then((resp)=>{
         return resp.json()
       },(error)=>{
         console.log("Error in fetchgin")

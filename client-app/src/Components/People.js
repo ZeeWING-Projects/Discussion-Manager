@@ -6,6 +6,7 @@ import {Container,Row,Col,Card,Button,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import TableScrollbar from 'react-table-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import connectionUrl from './ConnectionUrl'
 const People = props => {
   
     //Now here we will make a call to our API for fetching our the contacts information.
@@ -20,7 +21,7 @@ const People = props => {
 
     function loadContacts()
     {
-        fetch("http://localhost:8000/chatService/loadAllUsersList").then(
+        fetch(`${connectionUrl}/chatService/loadAllUsersList`).then(
         response => 
         {
           return response.json();
@@ -61,7 +62,7 @@ const People = props => {
                 contactUserProfile:profile
             }
             
-          fetch("http://localhost:8000/chatService/addInContactList",
+          fetch(`${connectionUrl}/chatService/addInContactList`,
           {
             method: 'POST',
             headers: {
