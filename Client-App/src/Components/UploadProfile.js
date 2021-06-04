@@ -5,9 +5,48 @@ import profile_image from './ImagePreview_logo.png'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import { Label } from "reactstrap";
+import firebase from 'firebase'
 
 export default function UploadProfile(){
     let imagePreview="Image Preview"
+
+    useEffect(()=>{
+ fetch('http://localhost:8000/accountsService/getTheFireBaseConfugration').then(response => response.json())
+  .then((data)=>{
+      const {apiKeyResp,authDomainResp,databaseURLResp,projectIdResp,storageBucketResp,messagingSenderIdResp,appIdResp}=data
+      var firebaseConfig = {
+      apiKey: data.apiKey,
+      authDomain: data.authDomain,
+      databaseURL: data.databaseURL,
+      projectId: data.projectId,
+      storageBucket: data.storageBucket,
+      messagingSenderId: data.messagingSenderId,
+      appId:data.appId
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
+    
+  });
+    },[])
+
+    function uploadImage(e) {
+        const ref = firebase.storage().ref();
+        const file = e.target.files[0];
+        const name = +new Date() + "-" + file.name;
+        const metadata = {
+          contentType: file.type
+        };
+        const task = ref.child(name).put(file, metadata);
+        task
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            console.log("URL"+url);
+            //here will make call to our api .. which will make enntry for new post..
+          })
+          .catch(console.error);
+      }
+     
     return (
         <div  style={{
             marginTop:"10%",
@@ -19,7 +58,9 @@ export default function UploadProfile(){
             color:"white",
             marginLeft: "60%",
             
-        }}/> 
+        }}
+        onChange={uploadImage}
+        /> 
         </Col>
         </Row>
         <Row>
