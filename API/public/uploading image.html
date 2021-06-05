@@ -24,7 +24,7 @@
 
   <script>
 
-    fetch('http://localhost:8000/accountsService/getTheFireBaseConfugration').then(response => response.json())
+  fetch('http://localhost:8000/accountsService/getTheFireBaseConfugration').then(response => response.json())
   .then((data)=>{
       const {apiKeyResp,authDomainResp,databaseURLResp,projectIdResp,storageBucketResp,messagingSenderIdResp,appIdResp}=data
       var firebaseConfig = {
@@ -54,6 +54,8 @@
         .then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           console.log("URL"+url);
+          //here will make call to our api .. which will make enntry for new post..
+          
           document.querySelector("#image").src = url;
         })
         .catch(console.error);

@@ -5,46 +5,117 @@ import profile_image from './ImagePreview_logo.png'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import { Label } from "reactstrap";
-import firebase from 'firebase'
-
+import {storage} from './FirebaseInitializer'
+import "firebase/storage"
+import SetStatus from "./SetStatus";
 export default function UploadProfile(){
     let imagePreview="Image Preview"
-
-    useEffect(()=>{
- fetch('http://localhost:8000/accountsService/getTheFireBaseConfugration').then(response => response.json())
-  .then((data)=>{
-      const {apiKeyResp,authDomainResp,databaseURLResp,projectIdResp,storageBucketResp,messagingSenderIdResp,appIdResp}=data
-      var firebaseConfig = {
-      apiKey: data.apiKey,
-      authDomain: data.authDomain,
-      databaseURL: data.databaseURL,
-      projectId: data.projectId,
-      storageBucket: data.storageBucket,
-      messagingSenderId: data.messagingSenderId,
-      appId:data.appId
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    console.log(firebase);
+    // const [storage,setStorage]=useState()
+    const [imageFile,setImageFile]=useState(null)
+    const [uploadingStatus,setUploadingStatus]=useState("")
+    const [profileImage,setProfileImage]=useState(<Image src={profile_image} roundedCircle style={{
+      marginTop:"5%"
+    }} />)
+    console.log(storage)
     
-  });
-    },[])
+    function setImage(e)
+    {
+      setImageFile(e.target.files[0])
+      
+    }
 
     function uploadImage(e) {
-        const ref = firebase.storage().ref();
-        const file = e.target.files[0];
-        const name = +new Date() + "-" + file.name;
-        const metadata = {
-          contentType: file.type
-        };
-        const task = ref.child(name).put(file, metadata);
-        task
-          .then(snapshot => snapshot.ref.getDownloadURL())
-          .then(url => {
-            console.log("URL"+url);
-            //here will make call to our api .. which will make enntry for new post..
-          })
-          .catch(console.error);
+      if(imageFile)
+      {
+        const image = imageFile
+        setProfileImage(<Image   style={
+          {
+            marginTop:"5%",
+                  width:"200px",
+                  height:"200px"
+          }
+        } src="https://64.media.tumblr.com/695ce9a82c8974ccbbfc7cad40020c62/tumblr_o9c9rnRZNY1qbmm1co1_1280.gifv"/>)
+        const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            
+          },
+          error => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("profileImages")
+              .child(image.name)
+              .getDownloadURL()
+              .then(url => {
+
+                setProfileImage(<Image src={url} roundedCircle style={{
+                  marginTop:"5%",
+                  width:"200px",
+                  height:"200px"
+                }} />)
+                
+                //Now uploading to API
+                let data ={
+                  userUid:localStorage.getItem("userUid"),
+                  photoUrl:url
+              }
+              fetch("http://localhost:8000/profileService/uploadProfileImage",
+              {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                },
+                   body: JSON.stringify(data)
+              }).then(
+              response => 
+              {
+                return response.json();
+              },
+          
+              error=>
+              {
+                //on error
+                console.log(error)
+              }
+          
+              ).then(data=>{
+                //get data here
+                
+                setUploadingStatus(
+                  <div style={
+                    {
+                      fontSize:"20px",
+                      color:"white",
+                      marginTop:"20px"
+                    }
+                  }>
+                  {data.responseMessage}
+                  </div>)
+              })
+
+              });
+          }
+        ); 
+      }
+      else
+      {
+        setUploadingStatus(
+          <div style={
+            {
+              fontSize:"20px",
+              color:"white",
+              marginTop:"20px"
+            }
+          }>
+            Please choose a file.
+          </div>)
+      } 
       }
      
     return (
@@ -59,18 +130,14 @@ export default function UploadProfile(){
             marginLeft: "60%",
             
         }}
-        onChange={uploadImage}
+        onChange={setImage}
         /> 
         </Col>
         </Row>
         <Row>
         <Col md={12}>
-            <div>
-                
-        <Image src={profile_image} roundedCircle style={{
-          marginTop:"5%"
-            
-        }} />
+            <div>       
+        {profileImage}
         </div>
         </Col>
    </Row>
@@ -90,11 +157,20 @@ export default function UploadProfile(){
             <Button variant="dark" size="lg" block style={{
                               marginTop: "5%",  
                               marginLeft: "115%"
-                            }} >
+                            }} 
+                            
+                            onClick={uploadImage}
 
- Set Image </Button>
+                            >
+
+ Upload</Button>
  </Col>
                 </Row>
+         <div >
+         {uploadingStatus}  
+
+         </div>       
+             
         </div>
     );
 }

@@ -21,65 +21,105 @@ module.exports={
     uploadProfileImageRouter:
     uploadProfileImageRouter.post("/uploadProfileImage",function(req,res){
 
-    if(req.body.email!=null && req.body.password!=null)  
+    if(req.body.userUid!=null)  
     {
-        try{
-        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
-        .then((userCredential) => {
-         // Signed in
-         var user = firebase.auth().currentUser;
+   admin
+  .auth()
+  .updateUser(req.body.userUid, {
+    photoUrl: 'http://www.example.com/12345678/photo.png'
+   })
+  .then(function() {
 
-         user.updateProfile({
-            photoUrl: req.body.photoUrl
-         }).then(function() {
+    var sql = `UPDATE users SET profileImage = '${req.body.photoUrl}' WHERE userUid = '${req.body.userUid}'`;
+    connectionToMySql.query(sql, function (error, result) {
+      if (error)
+      {
+          //Here add code which will remove the record from firebase in case there was issue in qur
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        res.status(400).send({
+            responseMessage:errorMessage,
+            responseCode:1
+        })  
+      }
+      else
+      {
+        res.status(200).send({responseMessage:"Uploaded Profile Image"})
+        console.log(result.affectedRows + " record(s) updated");
+      }
+    
+    });
+   
+ }).catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    res.status(400).send({
+        responseMessage:errorMessage,
+        responseCode:1
+    })  
+ });
 
-            var sql = `UPDATE users SET profileImage = '${req.body.photoUrl}' WHERE userEmail = '${req.body.email}'`;
-            connectionToMySql.query(sql, function (error, result) {
-              if (error)
-              {
-                  //Here add code which will remove the record from firebase in case there was issue in qur
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                res.status(400).send({
-                    responseMessage:errorMessage,
-                    responseCode:1
-                })  
-              }
-              else
-              {
-                res.status(200).send({responseMessage:"Uploaded Profile Image"})
-                console.log(result.affectedRows + " record(s) updated");
-              }
+//   .catch((error) => {
+//     console.log('Error updating user:', error);
+//     res.status(200).send(error)
+//   });
+//         try{
+//         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+//         .then((userCredential) => {
+//          // Signed in
+//          var user = firebase.auth().currentUser;
+
+//          user.updateProfile({
+//             photoUrl: req.body.photoUrl
+//          }).then(function() {
+
+//             var sql = `UPDATE users SET profileImage = '${req.body.photoUrl}' WHERE userEmail = '${req.body.email}'`;
+//             connectionToMySql.query(sql, function (error, result) {
+//               if (error)
+//               {
+//                   //Here add code which will remove the record from firebase in case there was issue in qur
+//                 var errorCode = error.code;
+//                 var errorMessage = error.message;
+//                 res.status(400).send({
+//                     responseMessage:errorMessage,
+//                     responseCode:1
+//                 })  
+//               }
+//               else
+//               {
+//                 res.status(200).send({responseMessage:"Uploaded Profile Image"})
+//                 console.log(result.affectedRows + " record(s) updated");
+//               }
             
-            });
+//             });
 
            
-         }).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            res.status(400).send({
-                responseMessage:errorMessage,
-                responseCode:1
-            })  
-         });
+//          }).catch(function(error) {
+//             var errorCode = error.code;
+//             var errorMessage = error.message;
+//             res.status(400).send({
+//                 responseMessage:errorMessage,
+//                 responseCode:1
+//             })  
+//          });
 
-        }) .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    res.status(400).send({
-                        responseMessage:errorMessage,
-                        responseCode:3
-                    })  
-        });
-        }
-        catch(t)
-        {
-            es.status(400).send({
-                responseMessage:t.message,
-                responseCode:4,
-                userId:user.uid
-            })  
-        }
+//         }) .catch((error) => {
+//                     var errorCode = error.code;
+//                     var errorMessage = error.message;
+//                     res.status(400).send({
+//                         responseMessage:errorMessage,
+//                         responseCode:3
+//                     })  
+//         });
+//         }
+//         catch(t)
+//         {
+//             es.status(400).send({
+//                 responseMessage:t.message,
+//                 responseCode:4,
+//                 userId:user.uid
+//             })  
+//         }
     }  
     else
     {
