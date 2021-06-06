@@ -8,7 +8,7 @@ import { Label } from "reactstrap";
 import {storage} from './FirebaseInitializer'
 import "firebase/storage"
 import SetStatus from "./SetStatus";
-export default function UploadProfile(){
+export default function UploadProfile(props){
     let imagePreview="Image Preview"
     // const [storage,setStorage]=useState()
     const [imageFile,setImageFile]=useState(null)
@@ -16,6 +16,8 @@ export default function UploadProfile(){
     const [profileImage,setProfileImage]=useState(<Image src={profile_image} roundedCircle style={{
       marginTop:"5%"
     }} />)
+
+    
     console.log(storage)
     
     function setImage(e)
@@ -28,7 +30,7 @@ export default function UploadProfile(){
       if(imageFile)
       {
         const image = imageFile
-        setProfileImage(<Image   style={
+        setProfileImage(<Image  style={
           {
             marginTop:"5%",
                   width:"200px",
@@ -86,17 +88,8 @@ export default function UploadProfile(){
           
               ).then(data=>{
                 //get data here
-                
-                setUploadingStatus(
-                  <div style={
-                    {
-                      fontSize:"20px",
-                      color:"white",
-                      marginTop:"20px"
-                    }
-                  }>
-                  {data.responseMessage}
-                  </div>)
+                props.Parent_profileImageLoader(url);
+              
               })
 
               });

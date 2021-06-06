@@ -80,7 +80,6 @@ app.use('/chatService',acceptFrndRequestRouter)
 
 app.use('/profileService',infoProfile)
 app.use('/profileService',uploadProfileImageRouter)
-app.use('/profileService',loadProfileRouter)
 app.use('/profileService',loadProfileWithUidRouter)
 
 

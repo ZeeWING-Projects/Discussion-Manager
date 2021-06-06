@@ -9,11 +9,17 @@ import UploadProfile from './UploadProfile'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
-import styles from './mystyle.module.css'; 
+
 
 
 const Profile = props => {
    const [variableScreen,setVariableScreen]= useState("set screen")
+   const [ProfileImage,setProfileImage]=useState(profile_image);
+
+    function profileReloader(e,newProfilePicture){
+      setProfileImage(newProfilePicture);
+ 
+    } 
 
    function setBio(){
     setVariableScreen(<MyBio />)
@@ -29,7 +35,7 @@ const Profile = props => {
     setVariableScreen(<SetStatus />)
    }
    function uploadProfile(){
-    setVariableScreen(<UploadProfile />)
+    setVariableScreen(<UploadProfile Parent_profileImageLoader={profileReloader} />)
    }
 
 
@@ -45,7 +51,11 @@ const Profile = props => {
                   }
                }>
                       
-<Image src={profile_image} roundedCircle />
+<Image src={ProfileImage} roundedCircle  style={{
+                             height:"200px",
+                             width:"200px", 
+                              
+                            }} />
     <div>
     <Button variant="dark" size="lg" block style={{
                               marginTop: "3%",  
