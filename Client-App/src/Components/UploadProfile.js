@@ -9,6 +9,7 @@ import {storage} from './FirebaseInitializer'
 import "firebase/storage"
 import SetStatus from "./SetStatus";
 export default function UploadProfile(props){
+
     let imagePreview="Image Preview"
     // const [storage,setStorage]=useState()
     const [imageFile,setImageFile]=useState(null)
@@ -18,7 +19,6 @@ export default function UploadProfile(props){
     }} />)
 
     
-    console.log(storage)
     
     function setImage(e)
     {
@@ -30,7 +30,7 @@ export default function UploadProfile(props){
       if(imageFile)
       {
         const image = imageFile
-        setProfileImage(<Image  style={
+        setProfileImage(<Image   style={
           {
             marginTop:"5%",
                   width:"200px",
@@ -88,8 +88,17 @@ export default function UploadProfile(props){
           
               ).then(data=>{
                 //get data here
-                props.Parent_profileImageLoader(url);
-              
+                props.parent_profileImageReloader(url)
+                setUploadingStatus(
+                  <div style={
+                    {
+                      fontSize:"20px",
+                      color:"white",
+                      marginTop:"20px"
+                    }
+                  }>
+                  {data.responseMessage}
+                  </div>)
               })
 
               });
@@ -146,16 +155,13 @@ export default function UploadProfile(props){
                 </Col>
             </Row>
             <Row>
-                <Col md={4}>
+            <Col md={4}>
             <Button variant="dark" size="lg" block style={{
                               marginTop: "5%",  
                               marginLeft: "115%"
                             }} 
-                            
                             onClick={uploadImage}
-
                             >
-
  Upload</Button>
  </Col>
                 </Row>
@@ -167,4 +173,3 @@ export default function UploadProfile(props){
         </div>
     );
 }
-

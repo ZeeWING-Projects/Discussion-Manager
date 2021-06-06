@@ -9,17 +9,18 @@ import UploadProfile from './UploadProfile'
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
-
-
+import styles from './mystyle.module.css'; 
 
 const Profile = props => {
    const [variableScreen,setVariableScreen]= useState("set screen")
-   const [ProfileImage,setProfileImage]=useState(profile_image);
+   const [profileImage,setProfileImage]=useState(profile_image)
+   function profileImageReloader(newProfileImage)
+   {
+      console.log("Called the parent"+newProfileImage)
+      setProfileImage(newProfileImage)
+   }
 
-    function profileReloader(e,newProfilePicture){
-      setProfileImage(newProfilePicture);
- 
-    } 
+   
 
    function setBio(){
     setVariableScreen(<MyBio />)
@@ -35,9 +36,8 @@ const Profile = props => {
     setVariableScreen(<SetStatus />)
    }
    function uploadProfile(){
-    setVariableScreen(<UploadProfile Parent_profileImageLoader={profileReloader} />)
+    setVariableScreen(<UploadProfile parent_profileImageReloader={profileImageReloader}  />)
    }
-
 
     return (
         <div>
@@ -51,11 +51,16 @@ const Profile = props => {
                   }
                }>
                       
-<Image src={ProfileImage} roundedCircle  style={{
-                             height:"200px",
-                             width:"200px", 
-                              
-                            }} />
+<Image 
+
+style={
+  {
+    height:"180px",
+    width:"180px"
+  }
+}
+
+src={profileImage} roundedCircle />
     <div>
     <Button variant="dark" size="lg" block style={{
                               marginTop: "3%",  
@@ -103,7 +108,6 @@ const Profile = props => {
                               
                             }} /> */}
 
-
             </Col>
             <Col xs={8} md={8}>
              
@@ -120,5 +124,4 @@ const Profile = props => {
         );
   };
   export default Profile
-
 

@@ -3,7 +3,7 @@ const { use } = require("./chat");
 const connectionToMySql = require("./databaseConnector");
 var infoRouter = express.Router();
 var uploadProfileImageRouter = express.Router();
-var loadProfileRouter = express.Router();
+var loadStatusInProfile = express.Router();
 var loadProfileWithUidRouter = express.Router();
 
 const {firebase,admin,firebaseConfig} = require('./firebaseConnector')
@@ -91,7 +91,57 @@ module.exports={
    .catch((error) => {
     console.log('Error fetching user data:', error);
     });
+
+    connectionToMySql.query(`SELECT * FROM users WHERE userUid = '${req.body.userUid}' `, function (err, result) {
+        if (err)
+        { 
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            res.status(400).send({
+                responseMessage:errorMessage,
+                responseCode:1
+            })  
+        }
+        else
+        {
+            console.log(result)
+            res.status(200).send(result)
+        }
+      });
     }
+
       
-    })   
+    }),
+    
+    loadStatusInProfile:
+    loadStatusInProfile.get("/loadStatusInProfile",function(req,res){
+        res.send({responseMessage:"You have called profile status service and this is an post method please provide json"})
+    })
+    ,
+    loadStatusInProfile:
+    loadStatusInProfile.post("/loadStatusInProfile",function(req,res){
+    if(req.body.uid!=null)  
+    {
+   
+    connectionToMySql.query(`SELECT onlineStatus FROM users WHERE userUid = '${req.body.userUid}' `, function (err, result) {
+        if (err)
+        { 
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            res.status(400).send({
+                responseMessage:errorMessage,
+                responseCode:2
+            })  
+        }
+        else
+        {
+            console.log(result)
+            res.status(200).send(result)
+        }
+      });
+    }
+
+      
+    }),
+
 }
