@@ -35,7 +35,6 @@ const {
 const {
       infoProfile,
       uploadProfileImageRouter,
-      loadProfileRouter,
       loadProfileWithUidRouter
       } = require('./routes/profile')
 

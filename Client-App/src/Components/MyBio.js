@@ -11,11 +11,10 @@ import UserNamelogo from './profile_name_logo.png'
 import { Label } from "reactstrap";
 
 export default function MyBio(){
-    let Email="Email:",UserName="UserName:",Pass="Password:",pn="Phone-Number:",OnStatus="Online-Status:",add="Address:";
+    let Email="Email:",UserName="UserName:",pn="Phone-Number:",OnStatus="Online-Status:",add="Address:";
     let setEmail="hello@gmail.com";
     const [email,SetEmail]= useState("email")
     const [usename,SetUserName]= useState("username")
-    const [pass,SetPass]= useState("Password")
     const [PN,SetPn]= useState("Phone-number")
     const [ON_status,Set_On_status]= useState("status")
     const [address,SetAddress]= useState("address")
@@ -51,7 +50,7 @@ console.log(data)
         console.log(data)
         SetEmail(data.email)
         SetUserName(data.displayName)
-        SetPass(data.password)
+       
         SetPn(data.phoneNumber)
         Set_On_status(data.onlineStatus)
         SetAddress(data.address)
@@ -69,7 +68,7 @@ console.log(data)
            borderStyle: 'solid',
            borderColor:'rgb(201, 164, 164)',
            borderWidth: "5px",
-           height:"70%",
+           height:"60%",
            width:"100%"  
         }}>
        <Container>
@@ -176,57 +175,7 @@ console.log(data)
             </div>
                </Col>
                </Row>
-               <Row>
-               <Col md={5}>
-                   <Label style={{
-                       marginTop: "3%",
-                      fontSize: "25px",
-                      color:"White"
-                   }}>
-                       {Pass}
-                   </Label>
-               </Col>
-               <Col md={7}
-               >
-               <div style={
-                {   
-                    borderStyle: 'solid',
-                    borderColor:'rgb(201, 164, 164)',
-                    borderWidth: "1px",
-                    height:"85%",                    
-                }
-            }>
-                   
-                        <div style={{
-                             marginTop: "3%",
-                             textAlign: 'left',
-                             marginLeft: "2%",
-                             marginTop:"2%",
-                             color: 'white',
-                             paddingBottom:"10px"
-                            
-                        }}>
-                            
-                            <Image src={Passlogo}  style={{
-                                   
-                                   borderWidth: 3,
-                                   borderColor: "red",
-                                   borderRadius: "60%",
-                                   height:"40px",
-                                   width:"40px"
-                                }} />
-                            <span
-                            style={{
-                                fontSize:"20px"
-                            }}
-                            >
-                                {pass}</span>
-                        </div>
-                     
-            </div>
-               </Col>
-               </Row>
-               <Row>
+                      <Row>
                <Col md={5}>
                    <Label style={{
                        marginTop: "3%",

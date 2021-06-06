@@ -5,52 +5,71 @@ import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootst
 import styles from './mystyle.module.css'; 
 import { Label } from "reactstrap";
 export default function ResetPass(){
+  const [resetPassURL,setResetPass]=useState("set pass");
+  
+  
+  
+    let data ={
+      email:"tubarajput92@gmail.com"
+      
+   }
+
+console.log(data)
+   fetch("http://localhost:8000/accountsService/restMyPasswordWithEmailLink",
+   {
+     method: 'POST',
+     headers: {
+             'Content-Type': 'application/json;charset=utf-8'
+     },
+        body: JSON.stringify(data)
+   }).then(
+   response => 
+   {
+     return response.json();
+   },
+
+   error=>
+   {
+    console.log(error)
+   }
+
+   ).then(data=>{
+     
+   })
+
+  
     return (
         <div  style={{
-            marginTop:"10%",
+            marginTop:"30%",
             marginLeft:"10%",
             color:"white",
             borderStyle: 'solid',
             borderColor:'rgb(201, 164, 164)',
             borderWidth: "5px",
-            height:"70%",
+            height:"40%",
             width:"100%"  
          }}>
-        <Row>
-            <Col md={10}>
-            <Container>
-        <Form style={{
-            marginTop:"10%",
-           marginLeft:"30%",
-           color:"white"
-           
-        }}>
-  <Form.Group controlId="previousPass">
-    <Form.Label  style={{
-            marginRight:"60%",
-           color:"white"
-           
-        }}>Enter Previous Password: </Form.Label>
-    <Form.Control type="Text" placeholder="Enter  Previous Password" />
-  </Form.Group>
-  <Form.Group controlId="formGroupPassword">
-    <Form.Label style={{
-            marginRight:"60%",
-           color:"white"
-           
-        }}>Enter New Password</Form.Label>
-    <Form.Control type="password" placeholder="New Password" />
-  </Form.Group>
-  <Button variant="dark" type="submit" style={{
-            marginTop:"3%",
-     
-        }}>
-    Submit
-  </Button>
-</Form>
-</Container>
+           <Row>
+             <Col>
+     <Button variant="dark" size="lg" style={{
+                              marginTop: "10%",  
+                              
+                            }} onClick={resetPassURL}>
+                              Send Reset Pass Request
+                              </Button>
 </Col>
 </Row>
-        </div>
+<Row>
+  <Col>
+ <Label style={{
+                              marginTop: "2%",  
+                              
+                            }} >
+ check your email please and follow the link to reset you password.
+</Label>
+</Col>
+</Row>
+
+                </div>
     );
 }
