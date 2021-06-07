@@ -36,7 +36,7 @@ const {
       infoProfile,
       uploadProfileImageRouter,
       loadProfileWithUidRouter,
-      loadStatusInProfile,
+      setStatusRouter,
       } = require('./routes/profile')
 
 const {
@@ -82,7 +82,8 @@ app.use('/chatService',acceptFrndRequestRouter)
 app.use('/profileService',infoProfile)
 app.use('/profileService',uploadProfileImageRouter)
 app.use('/profileService',loadProfileWithUidRouter)
-app.use('/profileService',loadStatusInProfile)
+app.use('/profileService',setStatusRouter)
+
 
 
 app.use('/accountsService',infoAccounts)
