@@ -52,14 +52,50 @@ console.log(data)
         SetUserName(data.displayName)
        
         SetPn(data.phoneNumber)
-        Set_On_status(data.onlineStatus)
+       // Set_On_status(data.onlineStatus)
         SetAddress(data.address)
     })
 
+
+
+
+  
     }
 
+    function loadStatus(){
+        let data ={
+            uid:localStorage.getItem("userUid")
+            
+         }
+        fetch("http://localhost:8000/profileService/setStatusRouter",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+          return response.json();
+        },
+    
+        error=>
+        {
+         console.log(error)
+        }
+    
+        ).then(data=>{
+            console.log(data)
+           
+            Set_On_status(data.onlineStatus)
+           
+        })
+    
+
+    }
     useEffect(loadProfile,[]);
-  
+    //useEffect(loadStatus,[]);
     return (
        
         <div  style={{

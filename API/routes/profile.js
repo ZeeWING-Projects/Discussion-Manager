@@ -122,7 +122,10 @@ module.exports={
     ,
     setStatusRouter:
     setStatusRouter.post("/setStatusRouter",function(req,res){
+        if(req.body.userUid!=null)  
+        {
         connectionToMySql.query(`SELECT onlineStatus FROM users WHERE userUid = '${req.body.userUid}'`, function (err, result) {
+           
             if (err)
             { 
                 var errorCode = err.code;
@@ -136,8 +139,9 @@ module.exports={
             {
                 res.status(200).send(result)
             }
+        
           });
-       
+        }
     })
     ,
 }
