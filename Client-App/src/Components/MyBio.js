@@ -11,13 +11,13 @@ import UserNamelogo from './profile_name_logo.png'
 import { Label } from "reactstrap";
 
 export default function MyBio(){
-    let Email="Email:",UserName="UserName:",pn="Phone-Number:",OnStatus="Online-Status:",add="Address:";
+    let Email="Email:",UserName="UserName:",pn="Phone-Number:",OnStatus="Online-Status:",add="Last Online Activity:";
     let setEmail="hello@gmail.com";
     const [email,SetEmail]= useState("email")
     const [usename,SetUserName]= useState("username")
     const [PN,SetPn]= useState("Phone-number")
     const [ON_status,Set_On_status]= useState("status")
-    const [address,SetAddress]= useState("address")
+    const [address,SetAddress]= useState("last online activity")
 
 
 
@@ -27,7 +27,7 @@ export default function MyBio(){
        
     }
 
-console.log(data)
+console.log("loadProfile "+data)
     fetch("http://localhost:8000/profileService/loadProfilewithUid",
     {
       method: 'POST',
@@ -52,8 +52,8 @@ console.log(data)
         SetUserName(data.displayName)
        
         SetPn(data.phoneNumber)
-       // Set_On_status(data.onlineStatus)
-        SetAddress(data.address)
+       SetAddress(data.metadata[0])
+       
     })
 
 
@@ -61,10 +61,12 @@ console.log(data)
 
   
     }
+    
 
+    
     function loadStatus(){
         let data ={
-            uid:localStorage.getItem("userUid")
+            userUid:localStorage.getItem("userUid")
             
          }
         fetch("http://localhost:8000/profileService/setStatusRouter",
@@ -88,14 +90,14 @@ console.log(data)
         ).then(data=>{
             console.log(data)
            
-            Set_On_status(data.onlineStatus)
+            Set_On_status(data[0].onlineStatus)
            
         })
     
 
     }
     useEffect(loadProfile,[]);
-    //useEffect(loadStatus,[]);
+    useEffect(loadStatus,[]);
     return (
        
         <div  style={{

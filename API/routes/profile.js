@@ -124,7 +124,7 @@ module.exports={
     setStatusRouter.post("/setStatusRouter",function(req,res){
         if(req.body.userUid!=null)  
         {
-        connectionToMySql.query(`SELECT onlineStatus FROM users WHERE userUid = '${req.body.userUid}'`, function (err, result) {
+        connectionToMySql.query(`SELECT * FROM users WHERE userUid = '${req.body.userUid}'`, function (err, result) {
            
             if (err)
             { 
