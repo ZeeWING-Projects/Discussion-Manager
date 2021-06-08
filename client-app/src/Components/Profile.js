@@ -14,6 +14,88 @@ import styles from './mystyle.module.css';
 const Profile = props => {
    const [variableScreen,setVariableScreen]= useState("set screen")
    const [profileImage,setProfileImage]=useState(profile_image)
+
+   
+
+   function loadProfile(){
+    let data ={
+       uid:localStorage.getItem("userUid")
+       
+    }
+
+console.log("loadProfile "+data)
+    fetch("http://localhost:8000/profileService/loadProfilewithUid",
+    {
+      method: 'POST',
+      headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+      },
+         body: JSON.stringify(data)
+    }).then(
+    response => 
+    {
+      return response.json();
+    },
+
+    error=>
+    {
+     console.log(error)
+    }
+
+    ).then(data=>{
+        console.log(data)
+       // SetEmail(data.email)
+        //SetUserName(data.displayName)
+        setProfileImage(data.photoURL)
+        //SetPn(data.phoneNumber)
+       //SetAddress(data.metadata["lastSignInTime"])
+       
+    })
+
+
+
+
+  
+    }
+
+    useEffect(loadProfile,[]);
+    
+    
+    function loadStatus(){
+      let data ={
+          userUid:localStorage.getItem("userUid")
+          
+       }
+      fetch("http://localhost:8000/profileService/setStatusRouter",
+      {
+        method: 'POST',
+        headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+        },
+           body: JSON.stringify(data)
+      }).then(
+      response => 
+      {
+        return response.json();
+      },
+  
+      error=>
+      {
+       console.log(error)
+      }
+  
+      ).then(data=>{
+          console.log(data)
+         
+         // Set_On_status(data[0].onlineStatus)
+         
+      })
+  
+
+  }
+
+
+ 
    function profileImageReloader(newProfileImage)
    {
       console.log("Called the parent"+newProfileImage)

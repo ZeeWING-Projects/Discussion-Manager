@@ -26,6 +26,7 @@ export default function SetStatus(){
     type="switch"
     id="custom-switch"
     label="Show when you're active"
+    
   />
   </Form>
         </Col>
