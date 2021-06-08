@@ -5,7 +5,7 @@ var infoRouter = express.Router();
 var createAccountWithEmailRouter = express.Router()
 var restMyPasswordWithEmailLinkRouter = express.Router()
 var getTheFireBaseConfugrationRotuer = express.Router()
-
+var deleteAccountRouter=express.Router()
 
 module.exports = {
     
@@ -173,6 +173,39 @@ module.exports = {
                messagingSenderId: firebaseConfig.messagingSenderId,
               appId: firebaseConfig.appId
         })
+    }),
+
+    deleteAccountRouter: 
+    deleteAccountRouter.get("/deleteAccountRouter",function(req,res){
+        res.send({responseMessage:"This is a delete account method of accounts service, please provide the body in json"})
     })
+    ,
+    deleteAccountRouter:
+    deleteAccountRouter.post("/deleteAccountRouter",function(req,res){
+        var sql =  `DELETE FROM users WHERE userUid = '${req.body.userUid}'`;
+        connectionToMySql.query(sql, function (err, result) {
+          if (err){
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            res.status(400).send({
+                responseMessage:errorMessage,
+                responseCode:4
+            })  
+          }  
+          else
+          {
+            console.log("account deleted"); 
+            res.status(200).send({
+                responseMessage:"deleted",
+                responseCode:5
+            })  
+          }
+          
+        });
+
+       
+    }),
+    
+
    
 };

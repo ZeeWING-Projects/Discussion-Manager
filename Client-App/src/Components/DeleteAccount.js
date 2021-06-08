@@ -6,6 +6,45 @@ import styles from './mystyle.module.css';
 import { Label } from "reactstrap";
 
 export default function DeleteAccount(){
+
+    function deleteAccount(){
+        let data ={
+           uid:"yxt8BtcmLgXZs3jWGPTYVrFwXmi2"
+           
+        }
+    
+    console.log("delete account "+data)
+        fetch("http://localhost:8000/accountsService/deleteAccountRouter",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+          return response.json();
+        },
+    
+        error=>
+        {
+         console.log(error)
+        }
+    
+        ).then(data=>{
+            console.log(data)
+          
+           
+        })
+    
+    
+    
+    
+      
+        }
+    
+      
     return (
         <div  style={{
             marginTop:"15%",
@@ -65,7 +104,7 @@ export default function DeleteAccount(){
   <Button variant="dark" size="lg" block style={{
             marginTop:"5%",
             marginLeft:"80%",
-        }}>
+        }} onClick={deleteAccount}>
     Delete Account
   </Button>
   </Col>

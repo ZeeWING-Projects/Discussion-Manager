@@ -44,7 +44,8 @@ const {
       infoAccounts,
       createAccountWithEmailRouter,
       restMyPasswordWithEmailLinkRouter,
-      getTheFireBaseConfugrationRotuer
+      getTheFireBaseConfugrationRotuer,
+      deleteAccountRouter,
       } = require('./routes/accounts');
 const { send } = require('process');
 
@@ -92,6 +93,7 @@ app.use('/accountsService',createAccountWithEmailRouter)
 app.use('/accountsService',restMyPasswordWithEmailLinkRouter)
 app.use('/accountsService',getTheFireBaseConfugrationRotuer)
 app.use('/accountsService',UpdateStatusRouter)
+app.use('/accountsService',deleteAccountRouter)
 
 app.use('/postsServices',postRouterInfo)
 app.use('/postsServices',addPostRouter)
