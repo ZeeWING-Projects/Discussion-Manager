@@ -37,6 +37,7 @@ const {
       uploadProfileImageRouter,
       loadProfileWithUidRouter,
       setStatusRouter,
+      UpdateStatusRouter,
       } = require('./routes/profile')
 
 const {
@@ -90,6 +91,7 @@ app.use('/accountsService',infoAccounts)
 app.use('/accountsService',createAccountWithEmailRouter)
 app.use('/accountsService',restMyPasswordWithEmailLinkRouter)
 app.use('/accountsService',getTheFireBaseConfugrationRotuer)
+app.use('/accountsService',UpdateStatusRouter)
 
 app.use('/postsServices',postRouterInfo)
 app.use('/postsServices',addPostRouter)

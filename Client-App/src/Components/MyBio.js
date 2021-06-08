@@ -52,7 +52,7 @@ console.log("loadProfile "+data)
         SetUserName(data.displayName)
        
         SetPn(data.phoneNumber)
-       SetAddress(data.metadata[0])
+       SetAddress(data.metadata["lastSignInTime"])
        
     })
 
