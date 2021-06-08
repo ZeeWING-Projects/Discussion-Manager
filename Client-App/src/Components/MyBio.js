@@ -10,94 +10,9 @@ import Passlogo from './pass_logo.png'
 import UserNamelogo from './profile_name_logo.png'
 import { Label } from "reactstrap";
 
-export default function MyBio(){
+export default function MyBio(props){
     let Email="Email:",UserName="UserName:",pn="Phone-Number:",OnStatus="Online-Status:",add="Last Online Activity:";
-    let setEmail="hello@gmail.com";
-    const [email,SetEmail]= useState("email")
-    const [usename,SetUserName]= useState("username")
-    const [PN,SetPn]= useState("Phone-number")
-    const [ON_status,Set_On_status]= useState("status")
-    const [address,SetAddress]= useState("last online activity")
-
-
-
-    function loadProfile(){
-    let data ={
-       uid:localStorage.getItem("userUid")
-       
-    }
-
-console.log("loadProfile "+data)
-    fetch("http://localhost:8000/profileService/loadProfilewithUid",
-    {
-      method: 'POST',
-      headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-      },
-         body: JSON.stringify(data)
-    }).then(
-    response => 
-    {
-      return response.json();
-    },
-
-    error=>
-    {
-     console.log(error)
-    }
-
-    ).then(data=>{
-        console.log(data)
-        SetEmail(data.email)
-        SetUserName(data.displayName)
-       
-        SetPn(data.phoneNumber)
-       SetAddress(data.metadata["lastSignInTime"])
-       
-    })
-
-
-
-
-  
-    }
-    
-
-    
-    function loadStatus(){
-        let data ={
-            userUid:localStorage.getItem("userUid")
-            
-         }
-        fetch("http://localhost:8000/profileService/setStatusRouter",
-        {
-          method: 'POST',
-          headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-          },
-             body: JSON.stringify(data)
-        }).then(
-        response => 
-        {
-          return response.json();
-        },
-    
-        error=>
-        {
-         console.log(error)
-        }
-    
-        ).then(data=>{
-            console.log(data)
-           
-            Set_On_status(data[0].onlineStatus)
-           
-        })
-    
-
-    }
-    useEffect(loadProfile,[]);
-    useEffect(loadStatus,[]);
+   
     return (
        
         <div  style={{
@@ -156,7 +71,7 @@ console.log("loadProfile "+data)
                                 fontSize:"20px"
                             }}
                             >
-                                {email}</span>
+                                {props.profile_email}</span>
                         </div>
                      
             </div>
@@ -207,7 +122,7 @@ console.log("loadProfile "+data)
                                 fontSize:"20px"
                             }}
                             >
-                                {usename}</span>
+                                {props.profile_name}</span>
                         </div>
                      
             </div>
@@ -257,7 +172,7 @@ console.log("loadProfile "+data)
                                 fontSize:"20px"
                             }}
                             >
-                                {PN}</span>
+                                {props.profile_phone}</span>
                         </div>
                      
             </div>
@@ -307,7 +222,7 @@ console.log("loadProfile "+data)
                                 fontSize:"20px"
                             }}
                             >
-                                {ON_status}</span>
+                                {props.profile_onlineStatus}</span>
                         </div>
                      
             </div>
@@ -357,7 +272,7 @@ console.log("loadProfile "+data)
                                 fontSize:"20px"
                             }}
                             >
-                                {address}</span>
+                                {props.profile_address}</span>
                         </div>
                      
             </div>

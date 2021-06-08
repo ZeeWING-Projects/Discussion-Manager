@@ -14,7 +14,28 @@ import styles from './mystyle.module.css';
 const Profile = props => {
    const [variableScreen,setVariableScreen]= useState("set screen")
    const [profileImage,setProfileImage]=useState(profile_image)
+  
+     const [email,SetEmail]= useState("email")
+    const [usename,SetUserName]= useState("username")
+    const [PN,SetPn]= useState("Phone-number")
+    const [ON_status,Set_On_status]= useState("status")
+    const [address,SetAddress]= useState("last online activity")
 
+   function sendProfileData(){
+    
+      
+  
+    setVariableScreen(
+                  <MyBio 
+                      profile_email={email} profile_phone={PN}
+                      profile_name={usename} profile_address={address}
+                      profile_onlineStatus={ON_status}
+                  />
+      )
+             
+     
+
+   }
    
 
    function loadProfile(){
@@ -44,11 +65,14 @@ console.log("loadProfile "+data)
 
     ).then(data=>{
         console.log(data)
-       // SetEmail(data.email)
-        //SetUserName(data.displayName)
+        
         setProfileImage(data.photoURL)
-        //SetPn(data.phoneNumber)
-       //SetAddress(data.metadata["lastSignInTime"])
+     
+        SetEmail(data.email)
+        SetUserName(data.displayName)
+       
+        SetPn(data.phoneNumber)
+       SetAddress(data.metadata["lastSignInTime"])
        
     })
 
@@ -58,7 +82,7 @@ console.log("loadProfile "+data)
   
     }
 
-    useEffect(loadProfile,[]);
+    
     
     
     function loadStatus(){
@@ -86,15 +110,15 @@ console.log("loadProfile "+data)
   
       ).then(data=>{
           console.log(data)
-         
-         // Set_On_status(data[0].onlineStatus)
-         
+          Set_On_status(data[0].onlineStatus)
+       
       })
   
 
   }
-
-
+  useEffect(loadProfile,[]);
+  useEffect(loadStatus,[]);
+ 
  
    function profileImageReloader(newProfileImage)
    {
@@ -103,10 +127,6 @@ console.log("loadProfile "+data)
    }
 
    
-
-   function setBio(){
-    setVariableScreen(<MyBio />)
-   }
 
    function resetPass(){
     setVariableScreen(<PassReset />)
@@ -147,7 +167,7 @@ src={profileImage} roundedCircle />
     <Button variant="dark" size="lg" block style={{
                               marginTop: "3%",  
                               
-                            }} onClick={setBio}>
+                            }} onClick={sendProfileData}>
 
   My Bio </Button>
       </div>  
