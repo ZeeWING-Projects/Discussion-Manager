@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Row,Col} from 'react-bootstrap'
-import tempPostData from './Discarded matrial/postTempData'
 import Post from './posts'
 const PostsList = props => {
     const [listOfPosts,setListOfPosts] = useState(null)
