@@ -6,7 +6,54 @@ import styles from './mystyle.module.css';
 import { Label } from "reactstrap";
 
 export default function DeleteAccount(){
-  
+     
+    const [enableButton,setenableButton]=useState(false)
+    function setAuthetication(){
+        let data ={
+          email:localStorage.getItem("email")
+    
+        }
+
+    
+    console.log("delete account "+data)
+        fetch("http://localhost:8000//authenticationService/login",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+          return response.json();
+        },
+    
+        error=>
+        {
+         console.log(error)
+        }
+    
+        ).then(data=>{
+            console.log(data)
+            const {responseMessage,responseCode,userId}=data;
+            if(responseCode===1)
+            {
+                setenableButton(true)
+            }
+           else{
+            setenableButton(false)
+           }
+           
+        })
+    
+    
+    
+    
+      
+        }
+    
+    
 
 
     function deleteAccount(){

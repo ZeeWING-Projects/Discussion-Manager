@@ -198,7 +198,6 @@ export default function MyBio(props){
                     height:"85%",                    
                 }
             }>
-                   
                         <div style={{
                              marginTop: "3%",
                              textAlign: 'left',

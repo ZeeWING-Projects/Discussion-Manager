@@ -12,7 +12,13 @@ import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootst
 import styles from './mystyle.module.css'; 
 
 const Profile = props => {
-   const [variableScreen,setVariableScreen]= useState("set screen")
+   const [variableScreen,setVariableScreen]= useState(<Image   style={
+    {
+      marginTop:"5%",
+            width:"200px",
+            height:"200px"
+    }
+  } src="https://64.media.tumblr.com/695ce9a82c8974ccbbfc7cad40020c62/tumblr_o9c9rnRZNY1qbmm1co1_1280.gifv"/>)
    const [profileImage,setProfileImage]=useState("https://64.media.tumblr.com/695ce9a82c8974ccbbfc7cad40020c62/tumblr_o9c9rnRZNY1qbmm1co1_1280.gifv")
   
      const [email,SetEmail]= useState("email")
@@ -26,11 +32,13 @@ const Profile = props => {
       
   
     setVariableScreen(
+
                   <MyBio 
                       profile_email={email} profile_phone={PN}
                       profile_name={usename} profile_address={address}
                       profile_onlineStatus={ON_status}
                   />
+
       )
              
      
@@ -70,9 +78,10 @@ console.log("loadProfile "+data)
         console.log("Phto url"+data.photoURL)
         SetEmail(data.email)
         SetUserName(data.displayName)
-       
-        SetPn(data.phoneNumber)
+        localStorage.setItem("userEmail",data.email)
+       SetPn(data.phoneNumber)
        SetAddress(data.metadata["lastSignInTime"])
+       setVariableScreen("")
        
     })
 
@@ -135,7 +144,12 @@ console.log("loadProfile "+data)
     setVariableScreen(<DeleteAccount />)
    }
    function setStatus(){
-    setVariableScreen(<SetStatus />)
+     if(ON_status==="online"){
+      setVariableScreen(<SetStatus profile_onlineStatus={true}/>)
+     }else if(ON_status==="offline"){
+      setVariableScreen(<SetStatus profile_onlineStatus={false}/>)
+     }
+   
    }
    function uploadProfile(){
     setVariableScreen(<UploadProfile parent_profileImageReloader={profileImageReloader}  />)

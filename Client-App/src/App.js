@@ -19,6 +19,7 @@ library.add(faUsers, faUserCircle, faComments,faMailBulk,faCogs,faHome,faAddress
 
 function App() {
   console.log("values  "+localStorage.getItem("isLogedIn"))
+ 
   let main_page=<Route path="/Home" component={Home}></Route>
   if(localStorage.getItem("isLogedIn")==null || localStorage.getItem("isLogedIn")==="false")
   {
