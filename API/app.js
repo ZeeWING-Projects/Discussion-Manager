@@ -85,6 +85,7 @@ app.use('/profileService',infoProfile)
 app.use('/profileService',uploadProfileImageRouter)
 app.use('/profileService',loadProfileWithUidRouter)
 app.use('/profileService',setStatusRouter)
+app.use('/profileService',UpdateStatusRouter)
 
 
 

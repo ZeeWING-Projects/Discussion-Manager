@@ -7,36 +7,57 @@ import {Label } from "reactstrap";
 export default function SetStatus(props){
 
     const [onlineStatus,setonlinestatus]=useState(props.profile_onlineStatus)
+    
+    
 
-
-    let data ={
-      userUid: localStorage.getItem("userUid")
+    function changeToggle()
+    {
+        if(onlineStatus){
+            sendResponseToServer("offline")
+        }
+        else{
+            sendResponseToServer("online")
+        }
+        setonlinestatus(!onlineStatus)
         
-     }
-  
-  console.log(data)
-     fetch("http://localhost:8000/profileService/UpdateStatusRouter",
-     {
-       method: 'POST',
-       headers: {
-               'Content-Type': 'application/json;charset=utf-8'
-       },
-          body: JSON.stringify(data)
-     }).then(
-     response => 
-     {
-       return response.json();
-     },
-  
-     error=>
-     {
-      console.log(error)
-     }
-  
-     ).then(data=>{
-            
-     })
+    }
 
+    function sendResponseToServer(status)
+    {
+        let data ={
+            userUid:localStorage.getItem("userUid"),
+            requestContent:status
+        }
+        fetch("http://localhost:8000/profileService/UpdateStatusRouter",
+        {
+          method: 'POST',
+          headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+          },
+             body: JSON.stringify(data)
+        }).then(
+        response => 
+        {
+          return response.json();
+        },
+    
+        error=>
+        {
+         
+        }
+    
+        ).then(data=>{
+          //on sucess.
+          try{
+            console.log(data.responseMessage)
+         }
+          catch(e)
+          {
+    
+          }
+        })
+    
+    }
     return (
         <div  style={{
          
@@ -59,6 +80,15 @@ export default function SetStatus(props){
     id="custom-switch"
     label="Show when you're active"
     checked={onlineStatus}
+    onChange={
+
+        ()=>{
+            changeToggle()
+           
+        }
+        
+      
+    }
   />
   </Form>
         </Col>

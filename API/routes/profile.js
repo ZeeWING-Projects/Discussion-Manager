@@ -153,71 +153,25 @@ module.exports={
 
     UpdateStatusRouter:
     UpdateStatusRouter.post("/UpdateStatusRouter",function(req,res){
-
-        connectionToMySql.query(`SELECT * from users
-         WHERE userUid='${req.body.userUid}'`, function (err, result) {
-            if (err)
-            { 
-                var errorCode = err.code;
-                var errorMessage = err.message;
-                res.status(400).send({
-                    responseMessage:errorMessage,
-                    responseCode:4
-                })  
-            }
-            else
-            {     console.log(result[0].onlineStatus);
-                if(result[0].onlineStatus==='online')
-                {
-                    var sql =  `UPDATE users SET onlineStatus = 'offline' WHERE serialNumber = '${result[0].userUid}'`;
+     
+        var sql =  `UPDATE users SET onlineStatus = '${req.body.requestContent}' WHERE userUid = '${req.body.userUid}'`;
                     connectionToMySql.query(sql, function (err, result) {
                       if (err){
                         var errorCode = err.code;
                         var errorMessage = err.message;
                         res.status(400).send({
                             responseMessage:errorMessage,
-                            responseCode:6
+                            responseCode:0
                         })  
                       }
                       else
                       {
-                        console.log("Updated to offline");    
-                      }
-                      
-                    });
-                }else if(result[0].onlineStatus==='offline'){
-                    var sql =  `UPDATE users SET onlineStatus = 'online' WHERE serialNumber = '${result[0].userUid}'`;
-                    connectionToMySql.query(sql, function (err, result) {
-                      if (err){
-                        var errorCode = err.code;
-                        var errorMessage = err.message;
-                        res.status(400).send({
-                            responseMessage:errorMessage,
-                            responseCode:5
-                        })  
-                      }
-                      else
-                      {
-                        console.log("Updated to online");    
-                      }
-                      
-                    });
-    
-                }
-                
-                res.status(200).send({
-                    responseMessage:"status updated",
-                    responseCode:7
-                });
-            }
-          });
-       
-
-              
-    })
-    
-    
-
-
+                        res.status(200).send({
+                            responseMessage:"Updated Status",
+                            responseCode:1
+                        })   
+                      }        
+                    })
+                })
   
 }

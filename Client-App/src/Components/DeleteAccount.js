@@ -8,10 +8,11 @@ import { Label } from "reactstrap";
 export default function DeleteAccount(){
      
     const [enableButton,setenableButton]=useState(false)
+
     function setAuthetication(){
         let data ={
           email:localStorage.getItem("email")
-    
+         
         }
 
     
