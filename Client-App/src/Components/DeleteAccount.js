@@ -6,12 +6,15 @@ import styles from './mystyle.module.css';
 import { Label } from "reactstrap";
 
 export default function DeleteAccount(){
+  
+
 
     function deleteAccount(){
         let data ={
-           uid:"yxt8BtcmLgXZs3jWGPTYVrFwXmi2"
+           userUid:"yxt8BtcmLgXZs3jWGPTYVrFwXmi2"
            
         }
+
     
     console.log("delete account "+data)
         fetch("http://localhost:8000/accountsService/deleteAccountRouter",
