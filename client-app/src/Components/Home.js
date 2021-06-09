@@ -11,6 +11,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 const Home = props => {
+  
     const [modal, setModal] = useState(false);
     const {
         buttonLabel,
@@ -31,11 +32,11 @@ const Home = props => {
       }
       
       
-      let btn =    <Nav.Item><button  className="btn btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>  
+      let btn =    <Nav.Item><button  className="btn btn-outline-light mr-2" onClick={toggle}>Upload New Post</button></Nav.Item>  
       console.log(type)
       if(type==="NavBar")
       {
-        btn =  <Nav.Item><button  className="btn btn-outline-light mr-2" onClick={toggle}>{buttonLabel}</button></Nav.Item>
+        btn =  <Nav.Item><button  className="btn btn-outline-light mr-2" onClick={toggle}>Upload New Post</button></Nav.Item>
       }
     
    

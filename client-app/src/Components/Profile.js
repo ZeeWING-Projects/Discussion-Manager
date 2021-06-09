@@ -13,7 +13,7 @@ import styles from './mystyle.module.css';
 
 const Profile = props => {
    const [variableScreen,setVariableScreen]= useState("set screen")
-   const [profileImage,setProfileImage]=useState(profile_image)
+   const [profileImage,setProfileImage]=useState("https://64.media.tumblr.com/695ce9a82c8974ccbbfc7cad40020c62/tumblr_o9c9rnRZNY1qbmm1co1_1280.gifv")
   
      const [email,SetEmail]= useState("email")
     const [usename,SetUserName]= useState("username")
@@ -67,7 +67,7 @@ console.log("loadProfile "+data)
         console.log(data)
         
         setProfileImage(data.photoURL)
-     
+        console.log("Phto url"+data.photoURL)
         SetEmail(data.email)
         SetUserName(data.displayName)
        

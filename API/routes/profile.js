@@ -27,7 +27,7 @@ module.exports={
    admin
   .auth()
   .updateUser(req.body.userUid, {
-    photoUrl: 'http://www.example.com/12345678/photo.png'
+    photoUrl: req.body.photoUrl
    })
   .then(function() {
 
