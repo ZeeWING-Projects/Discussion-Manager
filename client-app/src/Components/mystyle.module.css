@@ -30,12 +30,13 @@
  
   width: 100%;
   margin-top: 1%;
+  background-color:rgb(23, 19, 53)
 }
 
 .ContactsList{
   height: 550px;
   width: 100%;
-
+  background-color: rgb(23, 19, 53);
   overflow-y: auto;
 }
 .contactsListRow{

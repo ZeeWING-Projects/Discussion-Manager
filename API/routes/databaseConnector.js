@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var connectionToMySql = mysql.createConnection({
-  host: "162.241.24.128",
-  user: "hrtowkmy_zeeshan",
-  database:"hrtowkmy_discussion_manager",
-  password: "zee1234"
+  host: "localhost",
+  user: "root",
+  database:"discussion_manager",
+  password: ""
 });
 
 connectionToMySql.connect(function(err) {

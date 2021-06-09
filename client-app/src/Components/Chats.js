@@ -36,8 +36,8 @@ const Chats = props => {
                            {
                                color:"yellow",
                                fontSize:"30px",
-                               paddingBottom:"20px"
-                               
+                               paddingBottom:"20px",
+                               backgroundColor:"rgb(23, 19, 53)"
                            }
                        }>
                            My Contacts 

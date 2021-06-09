@@ -48,7 +48,7 @@ function WebMainHomePageNavBar()
   
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: 'blue' }}>
 
         <div className='navbar sticky-top'>
           {/* <Link to='#' className='menu-bars'>

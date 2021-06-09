@@ -238,7 +238,8 @@ const ChatArea = props => {
                     borderStyle: 'solid',
                     borderColor:'rgb(201, 164, 164)',
                     borderWidth: "1px",
-                    height:"15%"                   
+                    height:"15%" ,
+                    backgroundColor:"rgb(23, 19, 53)"                  
                 } 
             }>
                         <div style={{
@@ -247,10 +248,15 @@ const ChatArea = props => {
                              marginLeft: "2%",
                              marginTop:"2%",
                              color: 'white',
-                             paddingBottom:"10px"
+                             paddingBottom:"10px",
+                             backgroundColor:"rgb(23, 19, 53)" 
                         }}>
 
-                        <Row>
+                        <Row
+                        
+                       
+
+                        >
                             <Col md={1}>
                             <Image src={props.selectedUserProfile}  style={{
                                    borderWidth: 3,
@@ -284,6 +290,7 @@ const ChatArea = props => {
             style={
                 {
                     height:"100%",
+                    backgroundColor:'white'
                 }
             }
 
