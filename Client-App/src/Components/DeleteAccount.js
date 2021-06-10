@@ -7,17 +7,18 @@ import { Label } from "reactstrap";
 
 export default function DeleteAccount(){
      
-    const [enableButton,setenableButton]=useState(false)
+    const [enableButton,setenableButton]=useState(true)
+    const [passText,setPassText]=useState()
 
     function setAuthetication(){
-        let data ={
-          email:localStorage.getItem("email")
-         
-        }
 
+        let data ={
+          email:localStorage.getItem("email"),
+          password: passText
+        }
     
     console.log("delete account "+data)
-        fetch("http://localhost:8000//authenticationService/login",
+        fetch("http:/localhost:8000/authenticationService/login",
         {
           method: 'POST',
           headers: {
@@ -40,10 +41,10 @@ export default function DeleteAccount(){
             const {responseMessage,responseCode,userId}=data;
             if(responseCode===1)
             {
-                setenableButton(true)
+                setenableButton(false)
             }
            else{
-            setenableButton(false)
+            setenableButton(true)
            }
            
         })
@@ -54,12 +55,12 @@ export default function DeleteAccount(){
       
         }
     
-    
+   
 
 
     function deleteAccount(){
         let data ={
-           userUid:"yxt8BtcmLgXZs3jWGPTYVrFwXmi2"
+           userUid:localStorage.getItem("userUid")
            
         }
 
@@ -123,7 +124,7 @@ export default function DeleteAccount(){
            color:"white"
            
         }}>Enter Your Password to confirm: </Form.Label>
-    <Form.Control type="password" placeholder="Password" />
+    <Form.Control type="password" placeholder="Password" onChange={e => setPassText(e.target.value )} />
   </Form.Group>
   </Form>
   </Col>
@@ -133,7 +134,7 @@ export default function DeleteAccount(){
   <Button variant="dark"style={{
             marginTop:"43%",
             marginRight:"80%",
-        }}>
+        }}  onClick={setAuthetication}>
     Check
   </Button>
   </Col>
@@ -152,7 +153,7 @@ export default function DeleteAccount(){
       </Row>
   <Row>
       <Col md={4}>
-  <Button variant="dark" size="lg" block style={{
+  <Button variant="dark" disabled={enableButton} size="lg" block style={{
             marginTop:"5%",
             marginLeft:"80%",
         }} onClick={deleteAccount}>

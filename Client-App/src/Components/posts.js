@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Row,Col,Button,Image} from 'react-bootstrap'
-import {Collapse} from 'react-collapse';
 import ReadMoreReact from 'read-more-react'
 import CommentsList from './CommnetsList';
-import ReactPlayer from 'react-player/lazy'
 import PostCommnet from './PostCommnet'
 const Post = props => 
 {
@@ -32,16 +30,7 @@ const Post = props =>
         }
         else
         {
-            setPostContent(
-                <div>
-                <ReactPlayer
-                 className='react-player'
-                 url={props.postContent}
-                 width='100%'
-                 height='100%'
-                />
-            </div>
-            )
+            
         }
     },[])
     return (
