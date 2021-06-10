@@ -1,28 +1,39 @@
 import React,{useEffect,useState} from "react";
 import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Row,Col,Form,Nav} from 'react-bootstrap'
+import {Row,Col,Form,Nav,Dropdown,Image } from 'react-bootstrap'
 import PostsList from './postLists'
-
+import profile_image from './default_image.png'
 import "react-loadingmask/dist/react-loadingmask.css";
 import LoadingMask from "react-loadingmask";
-
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Player from 'react-player'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 
 const Home = props => {
   
     const [modal, setModal] = useState(false);
+
     const {
-        buttonLabel,
         className,
         type
       } = props;
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [address, setAddress] = useState('')
+    const [Title, setTitle] = useState('')
+    const [Description, setDescription] = useState('')
+    const [mediaType,setMediaType]=useState("Image")
+    const [postField,setpostField] =useState(
+      <div>
+         <Form.Label style={{
+                    fontSize:"30px",
+                    marginTop:"5%",
+                    borderStyle: 'solid',
+                    borderColor:'rgb(201, 164, 164)',
+                    borderWidth: "5px",
+                    height:"70%",
+                    width:"100%"  
+                }}>Attach file here</Form.Label>
+        </div>
+    )
     
     const [erroMeeage, setErroMeeage] = useState('');
     const [loadingSpinner, setloadingSpinner] = useState(false);
@@ -66,57 +77,100 @@ const Home = props => {
       {btn}
       <Modal isOpen={modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
         toggle={toggle} className={className}  centered>
-        <ModalHeader toggle={toggle}>Create Account</ModalHeader>
+        <ModalHeader toggle={toggle}>Add Post</ModalHeader>
         <ModalBody>
 
           <Form>
              <Form.Group controlId="formBasicEmail">
-                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Name" onChange={event =>
+                 <Form.Label>Title:</Form.Label>
+                <Form.Control type="text" placeholder="Enter Title" onChange={event =>
                 {
-                  setName(event.target.value)
+                  setTitle(event.target.value)
                   event.preventDefault();   
                 }
                 }  />
 
-                <Form.Label>Phone number</Form.Label>
-                <Form.Control type="text" placeholder="+923053206993 Must include country code" onChange={event =>
+                <Form.Label>Description:</Form.Label>
+                <Form.Control type="text" placeholder="Post description" size="lg"  style={{
+                     width:"465px",
+                     height:"150px" 
+                }}onChange={event =>
                 {
-                  setPhoneNumber(event.target.value)
+                  setDescription(event.target.value)
                   event.preventDefault();   
                 }
                 }  />
+         <Row>
+           <Col md={6}>
+           {postField}
+           </Col>
+           <Col md={6}>
+             <Row>
+           <input type="file"  style={{
+            marginTop:"10%",
+            color:"black",
+     
+        }}
+        /> 
         
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email"  onChange={event =>
-              {
-                  setEmail(event.target.value)
-                  event.preventDefault();   
-              }
-              } />
-              <Form.Text className="text-muted">
-                       We'll never share your email with anyone else.
-              </Form.Text>
+        </Row>
+        <Row>
+        <Dropdown>
+  <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{
+            marginTop:"10%",
+  }}>
+    Select Media Type
+  </Dropdown.Toggle>
 
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={event =>
-                {
-                  setPassword(event.target.value)
-                  event.preventDefault();   
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1"  onClick={() => {
+          setMediaType("Video");
+          setpostField(
+            <div>
+            <Player  style={{
+                     width:"180px",
+                     height:"180px" 
+                }} ref={(player) => { this.player = player }} >
+  <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+</Player>
+this.player.playbackRate = 2; 
+</div>
+          );
+        }}>Videos</Dropdown.Item>
+    <Dropdown.Item href="#/action-2" onClick={() => {
+          setMediaType("Image");
+          setpostField(
+            <div>
+            <Image 
+
+style={
+  {
+    height:"180px",
+    width:"180px"
+  }
+}
+
+src={profile_image} roundedCircle />
+</div>
+          );
+        }}>Images</Dropdown.Item>
+    <Dropdown.Item href="#/action-3"  onClick={() => {
+          setMediaType("File");
+          setpostField(
+            <div>
+             <Form.Control type="text" placeholder="Post description" size="lg"  style={{
+                     width:"180px",
+                     height:"180px" 
                 }
-              } />
-              <Form.Text className="text-muted">
-                  Please do not enter the password of email, enter new password
-              </Form.Text>
-
-             <Form.Label>Address</Form.Label>
-             <Form.Control type="text" placeholder="Enter your address" onChange={event =>
-              {
-                  setAddress(event.target.value)
-                  event.preventDefault();   
-              }
-              }  />
-        
+                }  />
+</div>
+          );
+        }}>Files</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+        </Row>
+           </Col>
+           </Row>
               </Form.Group> 
           </Form>
 
@@ -127,7 +181,7 @@ const Home = props => {
           </LoadingMask>
           <div>{erroMeeage}</div>
           <Button color="primary" onClick={toggle}>Back</Button>{' '}
-            <Button color="secondary">Create Account</Button>
+            <Button color="secondary">Post</Button>
         </ModalFooter>
 
       </Modal>
