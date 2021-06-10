@@ -17,8 +17,8 @@ export default function DeleteAccount(){
           password: passText
         }
     
-    console.log("delete account "+data)
-        fetch("http:/localhost:8000/authenticationService/login",
+    
+        fetch("http://localhost:8000/authenticationService/login",
         {
           method: 'POST',
           headers: {
@@ -34,10 +34,13 @@ export default function DeleteAccount(){
         error=>
         {
          console.log(error)
+          console.log("here")
         }
     
         ).then(data=>{
             console.log(data)
+
+            console.log("here")
             const {responseMessage,responseCode,userId}=data;
             if(responseCode===1)
             {
