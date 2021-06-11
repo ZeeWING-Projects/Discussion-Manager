@@ -105,15 +105,7 @@ const Home = props => {
            {postField}
            </Col>
            <Col md={6}>
-             <Row>
-           <input type="file"  style={{
-            marginTop:"10%",
-            color:"black",
-     
-        }}
-        /> 
-        
-        </Row>
+
         <Row>
         <Dropdown>
   <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{
@@ -130,10 +122,9 @@ const Home = props => {
             <Player  style={{
                      width:"180px",
                      height:"180px" 
-                }} ref={(player) => { this.player = player }} >
-  <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                }}  >
+  <source src={"C:/Users/DELL/OneDrive/Documents/Bandicam"} />
 </Player>
-this.player.playbackRate = 2; 
 </div>
           );
         }}>Videos</Dropdown.Item>
@@ -158,7 +149,8 @@ src={profile_image} roundedCircle />
           setMediaType("File");
           setpostField(
             <div>
-             <Form.Control type="text" placeholder="Post description" size="lg"  style={{
+             <Form.Control type="text" placeholder="loaded file" size="lg"  style={{
+                     marginTop:"5%",
                      width:"180px",
                      height:"180px" 
                 }
@@ -168,6 +160,15 @@ src={profile_image} roundedCircle />
         }}>Files</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
+        </Row>
+        <Row>
+           <input type="file"  style={{
+            marginTop:"10%",
+            color:"black",
+     
+        }}
+        /> 
+        
         </Row>
            </Col>
            </Row>
