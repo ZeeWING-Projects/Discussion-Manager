@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import { Label } from "reactstrap";
-
+import connectionUrl from './ConnectionUrl'
 export default function DeleteAccount(){
      
     const [enableButton,setenableButton]=useState(true)
@@ -17,8 +17,7 @@ export default function DeleteAccount(){
           password: passText
         }
     
-    
-        fetch("http://localhost:8000/authenticationService/login",
+        fetch(`${connectionUrl}/authenticationService/login`,
         {
           method: 'POST',
           headers: {
@@ -69,7 +68,7 @@ export default function DeleteAccount(){
 
     
     console.log("delete account "+data)
-        fetch("http://localhost:8000/accountsService/deleteAccountRouter",
+        fetch(`${connectionUrl}/accountsService/deleteAccountRouter`,
         {
           method: 'POST',
           headers: {

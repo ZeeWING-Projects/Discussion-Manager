@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2021 at 09:10 AM
+-- Generation Time: Jun 12, 2021 at 02:34 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -24,13 +24,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userstatus`
+-- Table structure for table `commnets`
 --
 
-CREATE TABLE `userstatus` (
-  `userUid` varchar(30) NOT NULL,
-  `userStatus` varchar(10) NOT NULL,
-  `userLastSeen` varchar(20) NOT NULL
+CREATE TABLE `commnets` (
+  `commentId` int(50) NOT NULL,
+  `postId` int(50) NOT NULL,
+  `commentAuthorName` varchar(20) NOT NULL,
+  `commnetContent` varchar(20) NOT NULL,
+  `commentDate` varchar(20) NOT NULL,
+  `commentTime` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -38,10 +41,20 @@ CREATE TABLE `userstatus` (
 --
 
 --
--- Indexes for table `userstatus`
+-- Indexes for table `commnets`
 --
-ALTER TABLE `userstatus`
-  ADD PRIMARY KEY (`userUid`);
+ALTER TABLE `commnets`
+  ADD PRIMARY KEY (`commentId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `commnets`
+--
+ALTER TABLE `commnets`
+  MODIFY `commentId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

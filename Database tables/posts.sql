@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 04:55 PM
+-- Generation Time: Jun 12, 2021 at 02:35 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -28,21 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `posts` (
-  `postId` int(100) NOT NULL,
-  `userUid` varchar(30) NOT NULL,
+  `postId` int(20) NOT NULL,
   `postTitle` varchar(100) NOT NULL,
-  `postDesc` varchar(1000) NOT NULL,
-  `postImage` varchar(200) NOT NULL,
-  `postSentTime` varchar(30) NOT NULL
+  `postDesc` varchar(300) NOT NULL,
+  `postType` varchar(10) NOT NULL,
+  `postContent` varchar(500) NOT NULL,
+  `authotUserUid` varchar(100) NOT NULL,
+  `postUploadTime` varchar(20) NOT NULL,
+  `postUploadDate` varchar(20) NOT NULL,
+  `authorProfile` varchar(200) NOT NULL,
+  `authorName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`postId`, `userUid`, `postTitle`, `postDesc`, `postImage`, `postSentTime`) VALUES
-(2, '5U9wbAfe66RrFRibw07u9qBkDQJ2', 'Post 1', 'New post desc', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/annie-spratt-QckxruozjRg-unsplash.jpg?alt=media&token=922ba71c-45dd-4f46-85ba-6030eb80cea9', '7:50'),
-(3, '5U9wbAfe66RrFRibw07u9qBkDQJ2', 'Post 1', 'New post desc', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/annie-spratt-QckxruozjRg-unsplash.jpg?alt=media&token=922ba71c-45dd-4f46-85ba-6030eb80cea9', '7:50');
 
 --
 -- Indexes for dumped tables
@@ -62,7 +58,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `postId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

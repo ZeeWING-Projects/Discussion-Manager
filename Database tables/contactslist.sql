@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 02:42 PM
+-- Generation Time: Jun 12, 2021 at 02:34 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -34,13 +34,6 @@ CREATE TABLE `contactslist` (
   `contactUserProfile` text NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `contactslist`
---
-
-INSERT INTO `contactslist` (`userUid`, `contactUserUid`, `contactUserName`, `contactUserProfile`, `status`) VALUES
-('uLl4pRezO1VIGfmWRXSV2wWwoH13', '5U9wbAfe66RrFRibw07u9qBkDQJ2', 'tuba', 'https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada', 'Approved');
 
 --
 -- Indexes for dumped tables

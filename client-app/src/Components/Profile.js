@@ -10,7 +10,7 @@ import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
-
+import connectionUrl from './ConnectionUrl'
 const Profile = props => {
    const [variableScreen,setVariableScreen]= useState(<Image   style={
     {
@@ -53,7 +53,7 @@ const Profile = props => {
     }
 
 console.log("loadProfile "+data)
-    fetch("http://localhost:8000/profileService/loadProfilewithUid",
+    fetch(`${connectionUrl}/profileService/loadProfilewithUid`,
     {
       method: 'POST',
       headers: {
@@ -99,7 +99,7 @@ console.log("loadProfile "+data)
           userUid:localStorage.getItem("userUid")
           
        }
-      fetch("http://localhost:8000/profileService/setStatusRouter",
+      fetch(`${connectionUrl}/profileService/setStatusRouter`,
       {
         method: 'POST',
         headers: {

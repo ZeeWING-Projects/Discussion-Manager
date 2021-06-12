@@ -16,7 +16,10 @@ const {inforAuthentication,loginRouter} = require('./routes/authentication')
 
 const {
       postRouterInfo,
-      addPostRouter
+      addPostRouter,
+      loadPostsRouter,
+      loadCommentsRouter,
+      addCommentRouter
 } = require('./routes/posts')
 
 var statisticsService = require('./routes/statistics')
@@ -52,9 +55,6 @@ const {
       } = require('./routes/accounts');
 
 const { send } = require('process');
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -103,6 +103,9 @@ app.use('/accountsService',deleteAccountRouter)
 
 app.use('/postsServices',postRouterInfo)
 app.use('/postsServices',addPostRouter)
+app.use('/postsServices',loadPostsRouter)
+app.use('/postsServices',loadCommentsRouter)
+app.use('/postsServices',addCommentRouter)
 
 
 
@@ -120,6 +123,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

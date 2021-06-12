@@ -3,7 +3,7 @@ import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Modal,Button,Form} from 'react-bootstrap'
 import { propTypes } from "react-bootstrap/esm/Image";
-
+import connectionUrl from './ConnectionUrl'
 import styles from './mystyle.module.css'; 
 
 function CommentsList(props) {
@@ -41,7 +41,7 @@ function CommentsList(props) {
         offSetOfComments:"0"    
     }
 
-    fetch("http://localhost:8000/postsServices/loadComments",
+    fetch(`${connectionUrl}/postsServices/loadComments`,
     {
       method: 'POST',
       headers: {
@@ -101,25 +101,14 @@ function CommentsList(props) {
       time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
       v.push({
         //tHIS WILL BE TAKE FROM LOACAL STROAGE...
-        commentAuthorName:"Nadir",
+        commentAuthorName:localStorage.getItem("userName"),
         commnetContent:messageToSend,
         commentDate:today,
         commentTime:time
       })
       setDataOfComments(v)
 
-      // setListOfCommnets(
-      //   v.map((comment,index)=>{
-      //     return(
-      //       <div>
-      //             <h4>{comment.commentAuthorName}</h4>
-      //             <p>{comment.commentDate}{"@"}{comment.commentTime}</p>
-      //             <h6>{comment.commnetContent}</h6>
-      //       </div>
-      //     )
-      //   })
-      // )
-
+     
         //now saving message to database.
         uploadCommentToServer(messageToSend,date,time)
   
@@ -129,13 +118,13 @@ function CommentsList(props) {
     {
       let data ={
         postId:props.postId,
-        commentAuthorName:"Temp User", 
+        commentAuthorName:localStorage.getItem("userName"), 
         commnetContent:messageToSend,
         commentDate:date,
         commentTime:time
     }
       try{
-        fetch("http://localhost:8000/postsServices/addComment",
+        fetch(`${connectionUrl}/postsServices/addComment`,
         {
           method: 'POST',
           headers: {

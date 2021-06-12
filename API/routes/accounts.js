@@ -25,7 +25,7 @@ module.exports = {
     
     if(req.body.email!=null && req.body.password!=null  && connectionToMySql)    
     {
-        let defaultProfile = "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada"
+        let defaultProfile = "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/profileDeafultImages%2Fdefault_image.png?alt=media&token=432b7002-1168-4678-8339-eca37d06d25a"
         admin
         .auth()
         .createUser({

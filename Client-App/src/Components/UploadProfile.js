@@ -8,6 +8,7 @@ import { Label } from "reactstrap";
 import {storage} from './FirebaseInitializer'
 import "firebase/storage"
 import SetStatus from "./SetStatus";
+import connectionUrl from './ConnectionUrl'
 export default function UploadProfile(props){
 
     let imagePreview="Image Preview"
@@ -67,7 +68,7 @@ export default function UploadProfile(props){
                   userUid:localStorage.getItem("userUid"),
                   photoUrl:url
               }
-              fetch("http://localhost:8000/profileService/uploadProfileImage",
+              fetch(`${connectionUrl}/profileService/uploadProfileImage`,
               {
                 method: 'POST',
                 headers: {

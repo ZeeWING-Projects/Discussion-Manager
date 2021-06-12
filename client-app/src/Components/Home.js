@@ -8,7 +8,7 @@ import "react-loadingmask/dist/react-loadingmask.css";
 import LoadingMask from "react-loadingmask";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {storage} from './FirebaseInitializer'
-
+import connectionUrl from './ConnectionUrl'
 const Home = props => {
   
     const [modal, setModal] = useState(false);
@@ -84,7 +84,7 @@ const Home = props => {
                     postUploadTime:Date().toLocaleString(),
                     postUploadDate:new Date()
                    }
-                  fetch("http://localhost:8000/postsServices/addPost",
+                  fetch(`${connectionUrl}/postsServices/addPost`,
                   {
                     method: 'POST',
                     headers: {

@@ -3,6 +3,7 @@ import { Router,Link } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Row,Col} from 'react-bootstrap'
 import Post from './posts'
+import connectionUrl from './ConnectionUrl'
 const PostsList = props => {
     const [listOfPosts,setListOfPosts] = useState(null)
     const [dataOfPosts,setDataOfPosts] = useState()
@@ -35,7 +36,7 @@ const PostsList = props => {
             numberOfPosts:"10",
             offSetOfPosts:"0"
     }
-    fetch("http://localhost:8000/postsServices/loadPosts",
+    fetch(`${connectionUrl}/postsServices/loadPosts`,
     {
       method: 'POST',
       headers: {

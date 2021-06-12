@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import { Label } from "reactstrap";
+import connectionUrl from './ConnectionUrl'
 export default function ResetPass(){
   const [resetPassURL,setResetPass]=useState("set pass");
   
@@ -15,7 +16,7 @@ export default function ResetPass(){
    }
 
 console.log(data)
-   fetch("http://localhost:8000/accountsService/restMyPasswordWithEmailLink",
+   fetch(`${connectionUrl}/accountsService/restMyPasswordWithEmailLink`,
    {
      method: 'POST',
      headers: {

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
 import {Label } from "reactstrap";
+import connectionUrl from './ConnectionUrl'
 export default function SetStatus(props){
 
     const [onlineStatus,setonlinestatus]=useState(props.profile_onlineStatus)
@@ -28,7 +29,7 @@ export default function SetStatus(props){
             userUid:localStorage.getItem("userUid"),
             requestContent:status
         }
-        fetch("http://localhost:8000/profileService/UpdateStatusRouter",
+        fetch(`${connectionUrl}/profileService/UpdateStatusRouter`,
         {
           method: 'POST',
           headers: {

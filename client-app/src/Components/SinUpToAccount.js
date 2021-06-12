@@ -6,7 +6,7 @@ import LoadingMask from "react-loadingmask";
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Form,Nav} from 'react-bootstrap'
-
+import connectionUrl from './ConnectionUrl'
 const SinUpToAccount = (props) => {
   
   const {
@@ -56,7 +56,7 @@ const SinUpToAccount = (props) => {
         address:address
       }
       
-    fetch("http://localhost:8000/accountsService/createAccountWithEmail",
+    fetch(`${connectionUrl}/accountsService/createAccountWithEmail`,
     {
       method: 'POST',
       headers: {
