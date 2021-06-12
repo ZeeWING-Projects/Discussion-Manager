@@ -55,6 +55,7 @@ Command:
 		->npm install --save firebase
 	For Admin Auth API : (USED)
 		->npm install firebase-admin --save
+		->npm install @firebase/webchannel-wrapper --save-exact
 
 	For REACT components
 		->npm install react-avatar --save

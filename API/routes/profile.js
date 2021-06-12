@@ -5,7 +5,8 @@ var infoRouter = express.Router();
 var uploadProfileImageRouter = express.Router();
 var loadProfileRouter = express.Router();
 var loadProfileWithUidRouter = express.Router();
-
+var setStatusRouter=express.Router();
+var UpdateStatusRouter=express.Router();
 const {firebase,admin,firebaseConfig} = require('./firebaseConnector')
 
 
@@ -21,65 +22,44 @@ module.exports={
     uploadProfileImageRouter:
     uploadProfileImageRouter.post("/uploadProfileImage",function(req,res){
 
-    if(req.body.email!=null && req.body.password!=null)  
+    if(req.body.userUid!=null)  
     {
-        try{
-        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
-        .then((userCredential) => {
-         // Signed in
-         var user = firebase.auth().currentUser;
+   admin
+  .auth()
+  .updateUser(req.body.userUid, {
+    photoUrl: req.body.photoUrl
+   })
+  .then(function() {
 
-         user.updateProfile({
-            photoUrl: req.body.photoUrl
-         }).then(function() {
+    var sql = `UPDATE users SET profileImage = '${req.body.photoUrl}' WHERE userUid = '${req.body.userUid}'`;
+    connectionToMySql.query(sql, function (error, result) {
+      if (error)
+      {
+          //Here add code which will remove the record from firebase in case there was issue in qur
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        res.status(400).send({
+            responseMessage:errorMessage,
+            responseCode:1
+        })  
+      }
+      else
+      {
+        res.status(200).send({responseMessage:"Uploaded Profile Image"})
+        console.log(result.affectedRows + " record(s) updated");
+      }
+    
+    });
+   
+ }).catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    res.status(400).send({
+        responseMessage:errorMessage,
+        responseCode:1
+    })  
+ });
 
-            var sql = `UPDATE users SET profileImage = '${req.body.photoUrl}' WHERE userEmail = '${req.body.email}'`;
-            connectionToMySql.query(sql, function (error, result) {
-              if (error)
-              {
-                  //Here add code which will remove the record from firebase in case there was issue in qur
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                res.status(400).send({
-                    responseMessage:errorMessage,
-                    responseCode:1
-                })  
-              }
-              else
-              {
-                res.status(200).send({responseMessage:"Uploaded Profile Image"})
-                console.log(result.affectedRows + " record(s) updated");
-              }
-            
-            });
-
-           
-         }).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            res.status(400).send({
-                responseMessage:errorMessage,
-                responseCode:1
-            })  
-         });
-
-        }) .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    res.status(400).send({
-                        responseMessage:errorMessage,
-                        responseCode:3
-                    })  
-        });
-        }
-        catch(t)
-        {
-            es.status(400).send({
-                responseMessage:t.message,
-                responseCode:4,
-                userId:user.uid
-            })  
-        }
     }  
     else
     {
@@ -137,5 +117,63 @@ module.exports={
     });
     }
       
-    })   
+    }),
+    setStatusRouter:
+    setStatusRouter.get("/setStatusRouter",function(req,res){
+        res.send({responseMessage:"You have called profile service status and this is an post method please provide json"})
+    })
+    ,
+    setStatusRouter:
+    setStatusRouter.post("/setStatusRouter",function(req,res){
+        if(req.body.userUid!=null)  
+        {
+        connectionToMySql.query(`SELECT * FROM users WHERE userUid = '${req.body.userUid}'`, function (err, result) {
+           
+            if (err)
+            { 
+                var errorCode = err.code;
+                var errorMessage = err.message;
+                res.status(400).send({
+                    responseMessage:errorMessage,
+                    responseCode:3
+                })  
+            }
+            else
+            {
+                res.status(200).send(result)
+            }
+        
+          });
+        }
+    })
+    ,
+    UpdateStatusRouter:
+    UpdateStatusRouter.get("/UpdateStatusRouter",function(req,res){
+        res.send({responseMessage:"You have called profile service set status and this is an post method please provide json"})
+    })
+    ,
+
+    UpdateStatusRouter:
+    UpdateStatusRouter.post("/UpdateStatusRouter",function(req,res){
+     
+        var sql =  `UPDATE users SET onlineStatus = '${req.body.requestContent}' WHERE userUid = '${req.body.userUid}'`;
+                    connectionToMySql.query(sql, function (err, result) {
+                      if (err){
+                        var errorCode = err.code;
+                        var errorMessage = err.message;
+                        res.status(400).send({
+                            responseMessage:errorMessage,
+                            responseCode:0
+                        })  
+                      }
+                      else
+                      {
+                        res.status(200).send({
+                            responseMessage:"Updated Status",
+                            responseCode:1
+                        })   
+                      }        
+                    })
+                })
+  
 }

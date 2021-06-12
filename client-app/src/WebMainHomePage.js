@@ -13,7 +13,7 @@ function WebMainHomePage()
    
     
     var isLogedIn =  localStorage.getItem("isLogedIn");
-
+    localStorage.setItem("userName","tuba")
     let nav;
     if(isLogedIn)
     {
