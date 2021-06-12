@@ -25,29 +25,46 @@ module.exports=
     }),
     addPostRouter:
     addPostRouter.post("/addPost",function(req,res){
+        connectionToMySql.query(`SELECT * from users where userUid='${req.body.authotUserUid}'` , function (err, result) {
+            if (err)
+            { 
+                var errorCode = err.code;
+                var errorMessage = err.message;
+                res.status(400).send({
+                    responseMessage:errorMessage,
+                    responseCode:5
+                })  
+            }
+            else
+            {  
+                console.log("Name"+result[0].userName)
+                var sql = `INSERT INTO posts (postTitle,postDesc,postType,postContent,authotUserUid,postUploadTime,postUploadDate,authorProfile,authorName) VALUES 
+                ('${req.body.postTitle}', '${req.body.postDesc}','${req.body.postType}','${req.body.postContent}','${req.body.authotUserUid}','${req.body.postUploadTime}',
+                '${req.body.postUploadDate}','${result[0].profileImage}','${result[0].userName}')`;
+                connectionToMySql.query(sql, function (error, result) {
+                if (error)
+                {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    res.status(404).send({
+                      responseMessage:errorMessage,
+                      responseCode:6  
+                    })
+                }
+                else{
+                    res.status(200).send({
+                        responseMessage:"Uploaded the post",
+                        responseCode:7
+                    });
+                }
+               
+                });
+        
+            }
+        
+    })
 
-        var sql = `INSERT INTO posts (postTitle,postDesc,postType,postContent,authotUserUid,postUploadTime,postUploadDate,authorProfile,authorName) VALUES 
-        ('${req.body.postTitle}', '${req.body.postDesc}','${req.body.postType}','${req.body.postContent}','${req.body.authotUserUid}','${req.body.postUploadTime}',
-        '${req.body.postUploadDate}','${req.body.authorProfile}','${req.body.authorName}')`;
-        connectionToMySql.query(sql, function (error, result) {
-        if (error)
-        {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            res.status(404).send({
-              responseMessage:errorMessage,
-              responseCode:1  
-            })
-        }
-        else{
-            res.status(200).send({
-                responseMessage:"Uploaded the post",
-                responseCode:2
-            });
-        }
        
-        });
-
         
     }),
     addCommentRouter:
