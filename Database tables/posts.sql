@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2021 at 02:34 PM
+-- Generation Time: Jun 12, 2021 at 02:35 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -24,15 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contactslist`
+-- Table structure for table `posts`
 --
 
-CREATE TABLE `contactslist` (
-  `userUid` varchar(30) NOT NULL,
-  `contactUserUid` varchar(30) NOT NULL,
-  `contactUserName` varchar(30) NOT NULL,
-  `contactUserProfile` text NOT NULL,
-  `status` varchar(20) NOT NULL
+CREATE TABLE `posts` (
+  `postId` int(20) NOT NULL,
+  `postTitle` varchar(100) NOT NULL,
+  `postDesc` varchar(300) NOT NULL,
+  `postType` varchar(10) NOT NULL,
+  `postContent` varchar(500) NOT NULL,
+  `authotUserUid` varchar(100) NOT NULL,
+  `postUploadTime` varchar(20) NOT NULL,
+  `postUploadDate` varchar(20) NOT NULL,
+  `authorProfile` varchar(200) NOT NULL,
+  `authorName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -40,10 +45,20 @@ CREATE TABLE `contactslist` (
 --
 
 --
--- Indexes for table `contactslist`
+-- Indexes for table `posts`
 --
-ALTER TABLE `contactslist`
-  ADD PRIMARY KEY (`contactUserUid`(20),`userUid`(20)) USING BTREE;
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`postId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `postId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

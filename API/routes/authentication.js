@@ -33,7 +33,8 @@ module.exports={
             res.status(200).send({
                 responseMessage:"Login Successfull",
                 responseCode:1,
-                userId:user.uid
+                userId:user.uid,
+                userName:user.displayName
             })
         }
         else

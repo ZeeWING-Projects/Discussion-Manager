@@ -10,10 +10,17 @@ var logger = require('morgan');
 var app = express();
 
 
+
 //These are the service which will be use by our discussion manager app
 const {inforAuthentication,loginRouter} = require('./routes/authentication')
 
-var postsService = require('./routes/posts')
+const {
+      postRouterInfo,
+      addPostRouter,
+      loadPostsRouter,
+      loadCommentsRouter,
+      addCommentRouter
+} = require('./routes/posts')
 
 var statisticsService = require('./routes/statistics')
 
@@ -34,21 +41,20 @@ const {
 const {
       infoProfile,
       uploadProfileImageRouter,
-      loadProfileRouter,
-      loadProfileWithUidRouter
+      loadProfileWithUidRouter,
+      setStatusRouter,
+      UpdateStatusRouter,
       } = require('./routes/profile')
 
 const {
       infoAccounts,
       createAccountWithEmailRouter,
       restMyPasswordWithEmailLinkRouter,
-      getTheFireBaseConfugrationRotuer
+      getTheFireBaseConfugrationRotuer,
+      deleteAccountRouter,
       } = require('./routes/accounts');
 
 const { send } = require('process');
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,7 +68,6 @@ app.use(cors())//NOTE-----------------------------------------------------------
 
 //Using services ... From cleint side we will use these prefixe before we use any service.
 
-app.use('/postsService',postsService)
 app.use('/statisticsService',statisticsService)
  
 app.use('/serverStatusService',serverStatusRouter)
@@ -83,14 +88,24 @@ app.use('/chatService',acceptFrndRequestRouter)
 
 app.use('/profileService',infoProfile)
 app.use('/profileService',uploadProfileImageRouter)
-app.use('/profileService',loadProfileRouter)
 app.use('/profileService',loadProfileWithUidRouter)
+app.use('/profileService',setStatusRouter)
+app.use('/profileService',UpdateStatusRouter)
+
 
 
 app.use('/accountsService',infoAccounts)
 app.use('/accountsService',createAccountWithEmailRouter)
 app.use('/accountsService',restMyPasswordWithEmailLinkRouter)
 app.use('/accountsService',getTheFireBaseConfugrationRotuer)
+app.use('/accountsService',UpdateStatusRouter)
+app.use('/accountsService',deleteAccountRouter)
+
+app.use('/postsServices',postRouterInfo)
+app.use('/postsServices',addPostRouter)
+app.use('/postsServices',loadPostsRouter)
+app.use('/postsServices',loadCommentsRouter)
+app.use('/postsServices',addCommentRouter)
 
 
 
@@ -108,6 +123,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

@@ -106,13 +106,15 @@ function login()
       //on sucess.
       setloadingSpinner(false)
       try{
-      const {responseMessage,responseCode,userId}=data;
+      const {responseMessage,responseCode,userId,userName}=data;
+      console.log("Login data------------------------"+data)
       console.log(responseMessage)
       if(responseCode===1)
       {
         localStorage.setItem("isLogedIn",true)
         localStorage.setItem("userUid",userId)
-        
+        localStorage.setItem("userName",userName)
+        history.push('/Home');
         window.location.reload();
       }
      else{

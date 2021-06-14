@@ -5,7 +5,7 @@ var infoRouter = express.Router();
 var createAccountWithEmailRouter = express.Router()
 var restMyPasswordWithEmailLinkRouter = express.Router()
 var getTheFireBaseConfugrationRotuer = express.Router()
-
+var deleteAccountRouter=express.Router()
 
 module.exports = {
     
@@ -25,7 +25,7 @@ module.exports = {
     
     if(req.body.email!=null && req.body.password!=null  && connectionToMySql)    
     {
-        let defaultProfile = "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/1620937610218-WhatsApp%20Image%202021-04-07%20at%203.00.32%20AM.jpeg?alt=media&token=49ee247d-98bd-4719-8220-3ddd561b3ada"
+        let defaultProfile = "https://firebasestorage.googleapis.com/v0/b/discussion-manager.appspot.com/o/profileDeafultImages%2Fdefault_image.png?alt=media&token=432b7002-1168-4678-8339-eca37d06d25a"
         admin
         .auth()
         .createUser({
@@ -173,6 +173,39 @@ module.exports = {
                messagingSenderId: firebaseConfig.messagingSenderId,
               appId: firebaseConfig.appId
         })
+    }),
+
+    deleteAccountRouter: 
+    deleteAccountRouter.get("/deleteAccountRouter",function(req,res){
+        res.send({responseMessage:"This is a delete account method of accounts service, please provide the body in json"})
     })
+    ,
+    deleteAccountRouter:
+    deleteAccountRouter.post("/deleteAccountRouter",function(req,res){
+        var sql =  `DELETE FROM users WHERE userUid = '${req.body.userUid}'`;
+        connectionToMySql.query(sql, function (err, result) {
+          if (err){
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            res.status(400).send({
+                responseMessage:errorMessage,
+                responseCode:4
+            })  
+          }  
+          else
+          {
+            console.log("account deleted"); 
+            res.status(200).send({
+                responseMessage:"deleted",
+                responseCode:5
+            })  
+          }
+          
+        });
+
+       
+    }),
+    
+
    
 };
