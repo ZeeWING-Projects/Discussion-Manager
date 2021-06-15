@@ -25,7 +25,7 @@ const ChatArea = props => {
         console.log("Contact uid "+props.selectedUserUid+" User uid "+localStorage.getItem("userUid"))
         loadMessagesFromServer(localStorage.getItem("userUid"),props.selectedUserUid,30,0)
 
-    },[])
+    },[props.selectedUserUid])
 
     useEffect(()=>{
         console.log("Loading in list")
@@ -41,7 +41,7 @@ const ChatArea = props => {
       return ()=>{
           clearInterval(id)
       }  
-    },[])
+    },[props.selectedUserUid])
 
     function loadMessagesFromServer(userUid,recieverUid,numberOfMessages,messageOffset){
         let data ={
