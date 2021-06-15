@@ -39,6 +39,7 @@ const Home = props => {
     )
     
     const toggle = ()=>{
+      setServerResponse("")
         setModal(!modal)
         console.log(modal)
       }
@@ -47,6 +48,7 @@ const Home = props => {
       
       function setFile(e)
       {
+          
           setImageFile(e.target.files[0])
       }
 
@@ -104,7 +106,7 @@ const Home = props => {
               
                   ).then(data=>{
                       console.log(data)
-
+                      setServerResponse(data.responseMessage)
                   })
   
                 });
@@ -113,7 +115,7 @@ const Home = props => {
         }
         else
         {
-          console.log("Here")
+          setServerResponse("Please select file")
         } 
         }
      
@@ -133,7 +135,7 @@ const Home = props => {
         {/* //    Here we will call the components. */}
         <Row>
             <Col md={2}>
-                <h3>For latest news may be</h3>
+                {/* <h3>For latest news may be</h3> */}
             </Col>
             <Col md={8}>
                 <div style={
@@ -150,6 +152,8 @@ const Home = props => {
                 <PostsList />
             </Col>
             <Col md={2}>
+
+              {/* ------------------------------------- Upload Post -------------------------------- */}
             <div>
       {btn}
       <Modal isOpen={modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}

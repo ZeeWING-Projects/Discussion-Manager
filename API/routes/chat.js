@@ -82,7 +82,7 @@ module.exports={
     ,
     loadAllNewFrndsListRouter:
     loadAllNewFrndsListRouter.post("/loadAllNewFrndsList",function(req,res){
-        connectionToMySql.query(`SELECT * FROM contactslist WHERE contactUserUid = '${req.body.userUid}' and status='Not Approved'`, function (err, result) {
+        connectionToMySql.query(`SELECT * FROM contactslist WHERE userUid = '${req.body.userUid}' and status='Not Approved'`, function (err, result) {
             if (err)
             { 
                 var errorCode = err.code;
@@ -164,7 +164,7 @@ module.exports={
     ,
     acceptFrndRequestRouter:
     acceptFrndRequestRouter.post("/acceptFrndRequest",function(req,res){
-        var sql =  `UPDATE contactslist SET status = 'Approved' WHERE contactUserUid = '${req.body.userUid}' and contactUserUid= '${req.body.contactUserUid}'`;
+        var sql =  `UPDATE contactslist SET status = 'Approved' WHERE userUid = '${req.body.userUid}' and contactUserUid= '${req.body.contactUserUid}'`;
         connectionToMySql.query(sql, function (err, result) {
           if (err){
             var errorCode = err.code;
