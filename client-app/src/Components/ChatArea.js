@@ -20,6 +20,7 @@ const ChatArea = props => {
     const [messages,setMessages]=useState([])
     const [selectedUserUid,setUserUid]=useState(props.selectedUserUid)
     useEffect(()=>{
+        // setMessages([])
         //here we will load initial chat
         console.log("Contact uid "+props.selectedUserUid+" User uid "+localStorage.getItem("userUid"))
         loadMessagesFromServer(localStorage.getItem("userUid"),props.selectedUserUid,30,0)
@@ -34,10 +35,12 @@ const ChatArea = props => {
     useEffect(()=>{
 
         //Now checking contineosly about new messages..
-        setInterval(()=>{
+      let  id = setInterval(()=>{
             loadMessagesFromServer(localStorage.getItem("userUid"),props.selectedUserUid,30,0)
         },2000)
-
+      return ()=>{
+          clearInterval(id)
+      }  
     },[])
 
     function loadMessagesFromServer(userUid,recieverUid,numberOfMessages,messageOffset){
