@@ -129,7 +129,7 @@ const People = props => {
      let rec =
 
      <div>  
-            <Card className="shadow ">
+            <Card className="shadow mt-2">
             {/* <Card.Header>Featured</Card.Header> */}
             <Card.Body>
                 <Row>
@@ -139,16 +139,16 @@ const People = props => {
                     <Col md={8}>
                         <div className={styles.peopleCardContent}>
                                 <h2>{record.userName}</h2>
-                                <p>{record.userEmail}</p>
+                                <p>{record.statusStatement}</p>
                                 <Row>
                                     <Col md={3}>
-                                    {/* <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span> */}
+                                    <FontAwesomeIcon icon="thumbs-up" size="2x"/> <span>6</span>
                                     </Col>
                                     <Col md={3}>
-                                    {/* <FontAwesomeIcon icon="comments" size="2x"/> 34 */}
+                                    <FontAwesomeIcon icon="comments" size="2x"/> 34
                                     </Col>
                                     <Col md={3}>
-                                        {/* <span><Button variant="success">Profile</Button></span> */}
+                                        <span><Button variant="success">Profile</Button></span>
                                     </Col>
                                     <Col md={3}>
                                         <span>

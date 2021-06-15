@@ -14,10 +14,10 @@ export default function SetStatus(props){
     function changeToggle()
     {
         if(onlineStatus){
-            sendResponseToServer("Offline")
+            sendResponseToServer("offline")
         }
         else{
-            sendResponseToServer("Online")
+            sendResponseToServer("online")
         }
         setonlinestatus(!onlineStatus)
         

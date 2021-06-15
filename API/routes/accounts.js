@@ -52,7 +52,7 @@ module.exports = {
 
                //Here we will create account in mysql local datbase aswell.
 
-               var sql = `INSERT INTO users (userUid,userName,userEmail,userMobileNumber,profileImage,statusStatement,onlineStatus) VALUES ('${user.uid}', '${req.body.displayName}','${req.body.email}','${req.body.phoneNumber}','${defaultProfile}','Hello i am a new user','Online')`;
+               var sql = `INSERT INTO users (userUid,userName,userEmail,userMobileNumber,profileImage,statusStatement) VALUES ('${user.uid}', '${req.body.displayName}','${req.body.email}','${req.body.phoneNumber}','${defaultProfile}','Hello i am a new user')`;
                connectionToMySql.query(sql, function (error, result) {
                     if (error) 
                     {

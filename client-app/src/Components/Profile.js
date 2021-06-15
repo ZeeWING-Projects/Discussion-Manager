@@ -144,9 +144,9 @@ console.log("loadProfile "+data)
     setVariableScreen(<DeleteAccount />)
    }
    function setStatus(){
-     if(ON_status==="Online"){
+     if(ON_status==="online"){
       setVariableScreen(<SetStatus profile_onlineStatus={true}/>)
-     }else if(ON_status==="Offline"){
+     }else if(ON_status==="offline"){
       setVariableScreen(<SetStatus profile_onlineStatus={false}/>)
      }
    

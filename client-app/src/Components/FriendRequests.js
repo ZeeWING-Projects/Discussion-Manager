@@ -142,7 +142,7 @@ const FirendRequests = props => {
                                 <Row>
                                     
                                     <Col md={4}>
-                                        {/* <span><Button variant="success">Profile</Button></span> */}
+                                        <span><Button variant="success">Profile</Button></span>
                                     </Col>
                                     <Col md={4}>
                                         <span>
