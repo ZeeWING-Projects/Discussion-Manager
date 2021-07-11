@@ -194,11 +194,26 @@ module.exports = {
           }  
           else
           {
-            console.log("account deleted"); 
-            res.status(200).send({
+            admin
+             .auth()
+             .deleteUser(req.body.userUid)
+             .then(() => {
+                    console.log('Successfully deleted user');
+                    console.log("account deleted"); 
+                res.status(200).send({
                 responseMessage:"deleted",
-                responseCode:5
-            })  
+                responseCode:7
+                })
+
+             })
+             .catch((error) => {
+             console.log('Error deleting user:', error);
+             res.status(400).send({
+                responseMessage:"Error deleting user:"+error,
+                responseCode:8
+                })
+             });  
+              
           }
           
         });

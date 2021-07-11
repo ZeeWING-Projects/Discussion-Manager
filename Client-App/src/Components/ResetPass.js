@@ -11,8 +11,7 @@ export default function ResetPass(){
   
   
     let data ={
-      email:"tubarajput92@gmail.com"
-      
+      email:localStorage.getItem("userEmail")
    }
 
 console.log(data)

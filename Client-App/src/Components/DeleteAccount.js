@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { Router,Link } from "react-router";
+import { Router,Link,useHistory } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container,Row,Col,Card,Button,Form,FormControl,Image} from 'react-bootstrap'
 import styles from './mystyle.module.css'; 
@@ -9,11 +9,12 @@ export default function DeleteAccount(){
      
     const [enableButton,setenableButton]=useState(true)
     const [passText,setPassText]=useState()
-
+    const [serverResponse,setServerResponse]=useState("")
+    const history = useHistory();
     function setAuthetication(){
-
+   
         let data ={
-          email:localStorage.getItem("email"),
+          email:localStorage.getItem("userEmail"),
           password: passText
         }
     
@@ -46,7 +47,7 @@ export default function DeleteAccount(){
                 setenableButton(false)
             }
            else{
-            setenableButton(true)
+                setenableButton(true)
            }
            
         })
@@ -88,7 +89,17 @@ export default function DeleteAccount(){
     
         ).then(data=>{
             console.log(data)
-          
+            if(data.responseCode=="7")
+            {
+              localStorage.removeItem("userUid")
+              localStorage.setItem("isLogedIn",false)
+              history.push('/');
+              window.location.reload(); 
+            }
+            else
+            {
+              setServerResponse(data.responseMessage)
+            }
            
         })
     
@@ -161,6 +172,7 @@ export default function DeleteAccount(){
         }} onClick={deleteAccount}>
     Delete Account
   </Button>
+  {serverResponse}
   </Col>
 </Row>
 
